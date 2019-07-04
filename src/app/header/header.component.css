@@ -1,0 +1,10 @@
+h1{
+    color:rgb(232, 248, 11);
+    font-size: 100px;
+    text-align: center;
+    background-color: rgb(21, 83, 252);
+    margin: 8px 8px 50px 8px;
+
+    box-shadow: 5px 5px 5px 5px gray;
+
+}
