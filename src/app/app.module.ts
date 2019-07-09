@@ -7,13 +7,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
-import { HelloComponent } from './hello/hello.component';
 import { HomeComponent } from './home/home.component';
 import { AdminComponent } from './admin/admin.component';
 import { CompComponent } from './comp/comp.component';
 import { CustComponent } from './cust/cust.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { from } from 'rxjs';
+import { FooterComponent } from './footer/footer.component';
 
 const appRoutes : Routes = [
 {path: '', component: AppComponent },
@@ -28,12 +28,12 @@ const appRoutes : Routes = [
     AppComponent,
     HeaderComponent,
     LoginComponent,
-    HelloComponent,
     HomeComponent,
     AdminComponent,
     CompComponent,
     CustComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
