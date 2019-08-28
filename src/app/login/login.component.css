@@ -15,3 +15,7 @@ margin-top: 25px;
     font-size: 50px;
     color:rgba(34, 4, 116, 0.973);
 }
+select{
+    margin-top: 20px;
+    inline-size: 435px;
+}
