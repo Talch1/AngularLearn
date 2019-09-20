@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NotFoundComponent } from './not-found.component';
+import { LeyoutComponent } from './leyout.component';
 
-describe('NotFoundComponent', () => {
-  let component: NotFoundComponent;
-  let fixture: ComponentFixture<NotFoundComponent>;
+describe('LeyoutComponent', () => {
+  let component: LeyoutComponent;
+  let fixture: ComponentFixture<LeyoutComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NotFoundComponent ]
+      declarations: [ LeyoutComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NotFoundComponent);
+    fixture = TestBed.createComponent(LeyoutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

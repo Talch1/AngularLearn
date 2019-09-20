@@ -1,25 +1,20 @@
-
 <div class="row">
-
   <div class="col">
-    <h1>Hello!<br>      Plase Sing In</h1>
+    <h1>Hello!<br> Please Sign In</h1>
   </div>
-   
-  
-    <form (onSubmit) = 'submitForm()'>
-    <input type="text" class="form-control" placeholder="Login" ngModel name=  "userName">
-    <input type="password" class="form-control" placeholder="Password"  ngModel name ="password">
-        <select  class="form-control" ngModel name ="facade" [(ngModel)]="defaultValue" >
-      <option value = "admin" > Admin </option>
-      <option value = "company"> Company </option>
-      <option value = "customer"> Customer </option>
-    </select>
-    <button type="submit" class="btn btn-primary" >Sign in</button>
-
-
-</form>
-
-
+  <form >
+    <div>
+      <input type="text" class="form-control" placeholder="User Name"  name="userName" [(ngModel)]="credentials.userName">
+      <input type="password" class="form-control" placeholder="Password" name="pass" [(ngModel)]="credentials.password">
+      <select class="form-control"  name="facade" [(ngModel)]="credentials.type">
+          <option selected disabled> Select Type </option>
+        <option value="admin" > Admin </option>
+        <option value="company"> Company </option>
+        <option value="customer"> Customer </option>
+      </select>
+    </div>
+    <button  type="submit" class="btn btn-primary" (click)="login()">Sign in</button>
+  </form>
   <div class="col">
     <img src="./assets/img/coupon.gif">
   </div>

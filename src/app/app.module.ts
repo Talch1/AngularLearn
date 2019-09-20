@@ -1,39 +1,36 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, Component } from '@angular/core';
-import { Routes ,RouterModule } from '@angular/router';
-import { FormsModule} from '@angular/forms';
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/home.component';
 import { AdminComponent } from './admin/admin.component';
 import { CompComponent } from './comp/comp.component';
 import { CustComponent } from './cust/cust.component';
-import { NotFoundComponent } from './not-found/not-found.component';
 import { from } from 'rxjs';
 import { FooterComponent } from './footer/footer.component';
+import { LeyoutComponent } from './leyout/leyout.component';
+import { HomeComponent } from './home/home.component';
 
-const appRoutes : Routes = [
-{path: '', component: AppComponent },
-{path: 'admin', component :AdminComponent},
-{path: 'comp', component :CompComponent},
-{path: 'cust', component: CustComponent},
-{path: '**', component:NotFoundComponent}
 
-] 
+
+const appRoutes: Routes = [
+]
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     LoginComponent,
-    HomeComponent,
     AdminComponent,
     CompComponent,
     CustComponent,
-    NotFoundComponent,
     FooterComponent,
+    LeyoutComponent,
+    HomeComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -44,6 +41,6 @@ const appRoutes : Routes = [
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { 
+export class AppModule {
 
 }
