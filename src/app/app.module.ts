@@ -14,6 +14,8 @@ import { from } from 'rxjs';
 import { FooterComponent } from './footer/footer.component';
 import { LeyoutComponent } from './leyout/leyout.component';
 import { HomeComponent } from './home/home.component';
+import { HttpClientModule } from '@angular/common/http'
+
 
 
 
@@ -30,7 +32,9 @@ const appRoutes: Routes = [
     FooterComponent,
     LeyoutComponent,
     HomeComponent,
-    
+    HttpClientModule,
+
+
   ],
   imports: [
     BrowserModule,
