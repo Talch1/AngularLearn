@@ -5,9 +5,9 @@ import { LogginService } from './loggin.service';
 @Injectable({
   providedIn: 'root'
 })
-export class CustomerGuardService implements CanActivate {
+export class CompanyGuardService implements CanActivate {
   public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if(this.logginService.type === 'customer'&& this.logginService.inLoggedIn){
+    if(this.logginService.type === 'company'&& this.logginService.inLoggedIn){
     return true
 
     }

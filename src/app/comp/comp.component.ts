@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { LogginService } from '../services/loggin.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-comp',
@@ -7,8 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CompComponent implements OnInit {
 
-  constructor() { }
+  constructor(private logginService :LogginService,private router:Router) { }
 
+  public logout() : void{
+    this.logginService.logout;
+    this.router.navigate(['/login'])
+  }
   ngOnInit() {
   }
 

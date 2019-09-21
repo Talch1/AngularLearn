@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
 
 
   login(): void {
-    if(this.LogginService.ifExist(this.credentials)){
+    if(this.LogginService.ifExistDemo(this.credentials)){
       if (this.credentials.type === 'customer'){
         this.router.navigate(["/cust"]);
       }
