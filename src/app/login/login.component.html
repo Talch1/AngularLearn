@@ -8,12 +8,12 @@
       <input type="password" class="form-control" placeholder="Password" name="pass" [(ngModel)]="credentials.password">
       <select class="form-control"  name="facade" [(ngModel)]="credentials.type">
           <option selected disabled> Select Type </option>
-        <option value="admin" > Admin </option>
-        <option value="company"> Company </option>
-        <option value="customer"> Customer </option>
+        <option value="Admin" > Admin </option>
+        <option value="Company"> Company </option>
+        <option value="Customer"> Customer </option>
       </select>
     </div>
-    <button  type="submit" class="btn btn-primary" (click)="login()">Sign in</button>
+    <button  type="button" class="btn btn-primary" (click)="login()">Sign in</button>
   </form>
   <div class="col">
     <img src="./assets/img/coupon.gif">

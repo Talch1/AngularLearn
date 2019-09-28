@@ -32,7 +32,7 @@ const appRoutes: Routes = [
     FooterComponent,
     LeyoutComponent,
     HomeComponent,
-    HttpClientModule,
+ 
 
 
   ],
@@ -40,7 +40,8 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

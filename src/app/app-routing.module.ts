@@ -16,7 +16,7 @@ const routes: Routes = [
 {path : "home",component:HomeComponent},
 {path : "admin",canActivate:[AdminGuardService],component:AdminComponent},
 {path : "cust",canActivate:[CustomerGuardService], component:CustComponent},
-{path : "comp",canActivate:[CompanyGuardService],component:CompComponent},
+{path : "comp",component:CompComponent},
 {path : "login",component:LoginComponent},
 
 ];

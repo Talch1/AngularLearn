@@ -1,4 +1,52 @@
 <nav>
-    <a (click)="logout()" >Logout</a>
+    <a (click)="logout()">Logout</a>
 </nav>
-<h1>Comp</h1>
+
+<br>
+<div class="btn-group">
+
+    <button type="button" class="btn btn-secondary" (click)="AddCouponOpen()">Add Coupon </button>
+
+    <button type="button" (click)="AddNewCouponOpen()" class="btn btn-secondary">Create Coupon</button>
+
+    <button type="button" class="btn btn-secondary">Get Company By Id</button>
+    <button type="button" class="btn btn-secondary">Delete Company</button>
+    <button type="button" class="btn btn-secondary"></button>
+    <button type="button" class="btn btn-secondary">Get Company By Id</button>
+
+
+</div>
+
+<input *ngIf="AddCouponOpenFlag" type="text" class="form-control" placeholder="Please enter Company id"
+    [(ngModel)]="compId">
+<input *ngIf="AddCouponOpenFlag" type="text" class="form-control" placeholder="Please enter Coupon id"
+    [(ngModel)]="coupId">
+<button *ngIf="AddCouponOpenFlag" type="button">Add this Coupon </button>
+
+<input *ngIf="CreateCouponFlag" type="number" class="form-control" placeholder="Please enter Coupon id"
+    [(ngModel)]="this.coupon.id">
+<input *ngIf="CreateCouponFlag" type="text" class="form-control" placeholder="Please enter Coupon title"
+    [(ngModel)]="this.coupon.title">
+<input *ngIf="CreateCouponFlag" type="date" class="form-control" placeholder="Please enter Coupon start date"
+    [(ngModel)]="this.coupon.startDate">
+<input *ngIf="CreateCouponFlag" type="date" class="form-control" placeholder="Please enter Coupon end date"
+    [(ngModel)]="this.coupon.endDate">
+<input *ngIf="CreateCouponFlag" type="number" class="form-control" placeholder="Please enter Coupon amount"
+    [(ngModel)]="this.coupon.amount">
+<select  *ngIf="CreateCouponFlag" class="form-control" name="type" [(ngModel)]="coupon.type">
+    <option selected disabled> Select Type </option>
+    <option value="RESTURANS"> RESTURANS </option>
+    <option value="ELECTRICITY"> ELECTRICITY </option>
+    <option value="FOOD"> FOOD </option>
+    <option value="HEALTH"> HEALTH </option>
+    <option value="SPORTS"> SPORTS </option>
+    <option value="CAMPING"> CAMPING </option>
+    <option value="TRAVELLING"> TRAVELLING </option>
+</select>
+<input *ngIf="CreateCouponFlag" type="text" class="form-control" placeholder="Please enter Coupon message"
+    [(ngModel)]="this.coupon.message">
+<input *ngIf="CreateCouponFlag" type="number" class="form-control" placeholder="Please enter Coupon price"
+    [(ngModel)]="this.coupon.price">
+<input *ngIf="CreateCouponFlag" type="text" class="form-control" placeholder="Please enter Coupon image"
+    [(ngModel)]="this.coupon.image">
+<button *ngIf="CreateCouponFlag" type="button" (click)="CreateThisCoupon()">Create this Coupon </button>

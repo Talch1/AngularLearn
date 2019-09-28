@@ -21,14 +21,16 @@ export class LoginComponent implements OnInit {
 
 
   login(): void {
-    if(this.LogginService.ifExistDemo(this.credentials)){
-      if (this.credentials.type === 'customer'){
+ //   if(this.LogginService.ifExistDemo(this.credentials)){
+   
+  if(this.LogginService.auth(this.credentials).subscribe()){
+      if (this.credentials.type === 'Customer'){
         this.router.navigate(["/cust"]);
       }
-      else if (this.credentials.type === 'company'){
+      else if (this.credentials.type === 'Company'){
         this.router.navigate(["/comp"]);
       }
-      else if (this.credentials.type === 'admin'){
+      else if (this.credentials.type === 'Admin'){
         this.router.navigate(["/admin"]);
       }
     }else{
