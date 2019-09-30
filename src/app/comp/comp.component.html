@@ -13,9 +13,9 @@
 
     <button type="button" (click)="DeleteCoponByIDOpen()" class="btn btn-secondary">Delete Coupon</button>
 
-    <button type="button" (click)="GetAllCouponsOPen()" class="btn btn-secondary">Get All Coupons</button>
+    <button type="button" (click)="GetAllCoupons()" class="btn btn-secondary">Get All Coupons</button>
 
-    <button type="button" (click)="DeleteAllCouponsOPen()" class="btn btn-secondary">Delete All Coupons</button>
+    <button type="button" (click)="DeleteAllCoupons()" class="btn btn-secondary">Delete All Coupons</button>
 
     <button type="button" (click)="UpdateCoponOpen()" class="btn btn-secondary">Update Coupon</button>
 
@@ -27,9 +27,7 @@
 </div>
 
 
-<h1 *ngIf="CouponAddedFlag">Cooupns Added</h1>
 <div *ngIf="AddCouponOpenFlag">
-    <input type="number" class="form-control" placeholder="Please enter Company id" [(ngModel)]="compId">
     <input type="number" class="form-control" placeholder="Please enter Coupon id" [(ngModel)]="coupId">
     <button (click)="AddCouponToCompany()" type="button">Add this Coupon </button>
 </div>
@@ -57,29 +55,19 @@
     <input type="text" class="form-control" placeholder="Please enter Coupon image" [(ngModel)]="this.coupon.image">
     <button type="button" (click)="CreateThisCoupon()">Create this Coupon </button>
 </div>
+
 <div *ngIf="GetCuponFlag">
     <input type="number" class="form-control" placeholder="Please enter Coupon id" [(ngModel)]="coupId">
-    <button type="button" (click)="AddCoupon()">Get Coupon </button>
+    <button type="button" (click)="GetCoupon()">Get Coupon </button>
 </div>
 
 <div *ngIf="DeleteCouponFlag">
     <input type="number" class="form-control" placeholder="Please enter Coupon id" [(ngModel)]="coupId">
-    <button type="button" (click)="GetCoupon()"> Delete Coupon </button>
+    <button type="button" (click)="DeleteCouponById()"> Delete Coupon </button>
 </div>
-
-<div *ngIf="GetAllCouponsFlag">
-    <input type="number" class="form-control" placeholder="Please enter Company id" [(ngModel)]="compId">
-    <button type="button" (click)="GetAllCoupons()"> Get All Coupons </button>
-</div>
-
-<div *ngIf="DeleteAllCouponFlag">
-    <input type="number" class="form-control" placeholder="Please enter Company id" [(ngModel)]="coupId">
-    <button type="button" (click)="DeleteAllCoupons()"> Get All Coupons </button>
-</div>
-
 
 <div *ngIf="UpdateCoponFlag">
-    <input type="number" class="form-control" placeholder="Please enter Coupon id" [(ngModel)]="this.coupon.id">
+    <input type="number" class="form-control" placeholder="Please enter Coupon id" [(ngModel)]="coupId">
     <input type="date" class="form-control" placeholder="Please enter Coupon end date"
         [(ngModel)]="this.coupon.endDate">
     <input type="number" class="form-control" placeholder="Please enter Coupon price" [(ngModel)]="this.coupon.price">

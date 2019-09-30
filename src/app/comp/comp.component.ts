@@ -3,6 +3,8 @@ import { LogginService } from '../services/loggin.service';
 import { Router } from '@angular/router';
 import { CompanyService } from '../services/company-service';
 import { Coupon } from '../beans/Coupon';
+import { from } from 'rxjs';
+import { HttpResponse } from '@angular/common/http';
 
 
 
@@ -15,12 +17,12 @@ export class CompComponent implements OnInit {
 
   constructor(private logginService: LogginService, private router: Router, private companyService: CompanyService) { }
   coupon: Coupon = new Coupon();
-  coupons : Coupon [] =  [];
-  massage:string;
+  coupons: Coupon[];
+  massage: string;
 
-  compId: string;
+  compId: string = '201';
   coupId: string;
-  
+
   couponType: string;
   date: Date;
   price: number;
@@ -29,51 +31,88 @@ export class CompComponent implements OnInit {
   CreateCouponFlag = false;
   GetCuponFlag = false;
   DeleteCouponFlag = false;
-  GetAllCouponsFlag = false;
-  DeleteAllCouponFlag = false;
   UpdateCoponFlag = false;
   CouponByTypeFlag = false;
   CouponByDateFlag = false;
   CouponByPriceFlag = false;
-  
+
   AddCouponToCompany() {
 
     // work but throw ERROR
 
-    this.companyService.addCouponToCompany(this.compId,this.coupId).subscribe()
-    this.compId="";
-    this.coupId="";
+    this.companyService.addCouponToCompany(this.compId, this.coupId).subscribe(response => {
+console.log(response);
+      }
+    )
+    this.coupId = "";
+    this.AddCouponOpenFlag = false;
   }
-  CreateThisCoupon(coupon:Coupon) {
-    ///////////////////////////////////////////////
+  CreateThisCoupon(coupon: Coupon) {
 
-    this.companyService.addCoupon(this.coupon,this.compId).subscribe(coupons =>{
-      coupons = this.coupons;
-      console.log(coupons); 
-      this.coupon= null;
-  },)
-}
+    this.companyService.addCoupon(this.coupon, this.compId).subscribe(response => {
+      this.coupons = response;
+      console.log(this.coupons);
+    })
+    this.coupon.amount = 0;
+    this.coupon.endDate = null;
+    this.coupon.id = "";
+    this.coupon.image = "";
+    this.coupon.message = "";
+    this.coupon.price = 0;
+    this.coupon.startDate = null;
+    this.coupon.title = "";
+    this.coupon.type = "";
+    this.CreateCouponFlag = false;
+  }
   GetCoupon() {
-    //////////////////////////////////////////
-  }  
+    this.companyService.getCoupon(this.coupId).subscribe(response => {
+      this.coupon = response;
+      console.log(this.coupon);
+
+    }
+    )
+    this.coupId = "";
+    this.GetCuponFlag = false;
+  }
   GetAllCoupons() {
-    ///////////////////////////////////????????????????????????????????????????????????????????????????????????????????????
-  
-     this.companyService.getAllCoupons(this.compId).subscribe(coupons =>{
-        coupons = this.coupons;
-        console.log(coupons); 
-      },)
-      this.compId="";
+
+    this.companyService.getAllCoupons(this.compId).subscribe(response => {
+      this.coupons = response;
+      console.log(this.coupons);
+    })
+  }
+  DeleteCouponById(){
+    this.companyService.delete(this.coupId).subscribe( response=>{
+      console.log(response);
+    }
+
+      )
+      this.coupId = "";
+      this.DeleteCouponFlag = false;
   }
   DeleteAllCoupons() {
-    ////////////////////////////////////////////////////
+    this.companyService.deleteAll(this.compId).subscribe( response=>{
+      console.log(response);
+    }
+
+      )
   }
 
   UpdateCopon() {
-    //////////////////////////////////////////////
+    this.companyService.updateCoupon(this.coupon,this.coupId).subscribe(
+      response =>
+      {
+        this.coupon = response;
+        console.log(this.coupon);
+      }
+    )
+    this.coupId = "";
+    this.coupon.endDate = null;
+    this.coupon.price = 0;
+    this.UpdateCoponFlag = false;
   }
   FindCpouponByType() {
-    /////////////////////////////////////////
+    
   }
 
   FindCpouponByDate() {
@@ -95,8 +134,6 @@ export class CompComponent implements OnInit {
     this.CreateCouponFlag = false;
     this.GetCuponFlag = false;
     this.DeleteCouponFlag = false;
-    this.GetAllCouponsFlag = false;
-    this.DeleteAllCouponFlag = false;
     this.UpdateCoponFlag = false;
     this.CouponByTypeFlag = false;
     this.CouponByDateFlag = false;
@@ -107,8 +144,6 @@ export class CompComponent implements OnInit {
     this.AddCouponOpenFlag = false;
     this.GetCuponFlag = false;
     this.DeleteCouponFlag = false;
-    this.GetAllCouponsFlag = false;
-    this.DeleteAllCouponFlag = false;
     this.UpdateCoponFlag = false;
     this.CouponByTypeFlag = false;
     this.CouponByDateFlag = false;
@@ -119,8 +154,6 @@ export class CompComponent implements OnInit {
     this.AddCouponOpenFlag = false;
     this.GetCuponFlag = true;
     this.DeleteCouponFlag = false;
-    this.GetAllCouponsFlag = false;
-    this.DeleteAllCouponFlag = false;
     this.UpdateCoponFlag = false;
     this.CouponByTypeFlag = false;
     this.CouponByDateFlag = false;
@@ -131,8 +164,6 @@ export class CompComponent implements OnInit {
     this.AddCouponOpenFlag = false;
     this.GetCuponFlag = false;
     this.DeleteCouponFlag = true;
-    this.GetAllCouponsFlag = false;
-    this.DeleteAllCouponFlag = false;
     this.UpdateCoponFlag = false;
     this.CouponByTypeFlag = false;
     this.CouponByDateFlag = false;
@@ -143,8 +174,6 @@ export class CompComponent implements OnInit {
     this.AddCouponOpenFlag = false;
     this.GetCuponFlag = false;
     this.DeleteCouponFlag = false;
-    this.GetAllCouponsFlag = true;
-    this.DeleteAllCouponFlag = false;
     this.UpdateCoponFlag = false;
     this.CouponByTypeFlag = false;
     this.CouponByDateFlag = false;
@@ -155,8 +184,6 @@ export class CompComponent implements OnInit {
     this.AddCouponOpenFlag = false;
     this.GetCuponFlag = false;
     this.DeleteCouponFlag = false;
-    this.GetAllCouponsFlag = false;
-    this.DeleteAllCouponFlag = true;
     this.UpdateCoponFlag = false;
     this.CouponByTypeFlag = false;
     this.CouponByDateFlag = false;
@@ -167,8 +194,6 @@ export class CompComponent implements OnInit {
     this.AddCouponOpenFlag = false;
     this.GetCuponFlag = false;
     this.DeleteCouponFlag = false;
-    this.GetAllCouponsFlag = false;
-    this.DeleteAllCouponFlag = false;
     this.UpdateCoponFlag = true;
     this.CouponByTypeFlag = false;
     this.CouponByDateFlag = false;
@@ -179,8 +204,6 @@ export class CompComponent implements OnInit {
     this.AddCouponOpenFlag = false;
     this.GetCuponFlag = false;
     this.DeleteCouponFlag = false;
-    this.GetAllCouponsFlag = false;
-    this.DeleteAllCouponFlag = false;
     this.UpdateCoponFlag = false;
     this.CouponByTypeFlag = true;
     this.CouponByDateFlag = false;
@@ -191,8 +214,7 @@ export class CompComponent implements OnInit {
     this.AddCouponOpenFlag = false;
     this.GetCuponFlag = false;
     this.DeleteCouponFlag = false;
-    this.GetAllCouponsFlag = false;
-    this.DeleteAllCouponFlag = false;
+
     this.UpdateCoponFlag = false;
     this.CouponByTypeFlag = false;
     this.CouponByDateFlag = true;
@@ -203,8 +225,6 @@ export class CompComponent implements OnInit {
     this.AddCouponOpenFlag = false;
     this.GetCuponFlag = false;
     this.DeleteCouponFlag = false;
-    this.GetAllCouponsFlag = false;
-    this.DeleteAllCouponFlag = false;
     this.UpdateCoponFlag = false;
     this.CouponByTypeFlag = false;
     this.CouponByDateFlag = false;
