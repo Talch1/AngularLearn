@@ -11,20 +11,14 @@ table,th,td{
     background-color: azure;
 }
 button{
-margin:  20px;
-inline-size: 15%;
+    margin: 15px;
 }
 input{
-    margin-left:  20px;
-    margin-bottom: 20px;
-    inline-size: 25%;
+ inline-size: 250px;
+ margin: 15px;
 }
 select{
-    margin-left:  20px;
-    margin-bottom: 20px;
-    inline-size: 25%;
+    inline-size: 250px;   
+    margin-left: 15px;
+}
 
-}
-a{
-    font-size: 25px;
-}

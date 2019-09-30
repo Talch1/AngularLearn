@@ -15,10 +15,15 @@ export class CompComponent implements OnInit {
 
   constructor(private logginService: LogginService, private router: Router, private companyService: CompanyService) { }
   coupon: Coupon = new Coupon();
+  coupons : Coupon [] =  [];
+  massage:string;
 
-  compId: number;
-  coupId: number;
-  public flags: boolean[] = [];
+  compId: string;
+  coupId: string;
+  
+  couponType: string;
+  date: Date;
+  price: number;
 
   AddCouponOpenFlag = false;
   CreateCouponFlag = false;
@@ -26,15 +31,76 @@ export class CompComponent implements OnInit {
   DeleteCouponFlag = false;
   GetAllCouponsFlag = false;
   DeleteAllCouponFlag = false;
+  UpdateCoponFlag = false;
+  CouponByTypeFlag = false;
+  CouponByDateFlag = false;
+  CouponByPriceFlag = false;
+  
+  AddCouponToCompany() {
 
+    // work but throw ERROR
+
+    this.companyService.addCouponToCompany(this.compId,this.coupId).subscribe()
+    this.compId="";
+    this.coupId="";
+  }
+  CreateThisCoupon(coupon:Coupon) {
+    ///////////////////////////////////////////////
+
+    this.companyService.addCoupon(this.coupon,this.compId).subscribe(coupons =>{
+      coupons = this.coupons;
+      console.log(coupons); 
+      this.coupon= null;
+  },)
+}
+  GetCoupon() {
+    //////////////////////////////////////////
+  }  
+  GetAllCoupons() {
+    ///////////////////////////////////????????????????????????????????????????????????????????????????????????????????????
+  
+     this.companyService.getAllCoupons(this.compId).subscribe(coupons =>{
+        coupons = this.coupons;
+        console.log(coupons); 
+      },)
+      this.compId="";
+  }
+  DeleteAllCoupons() {
+    ////////////////////////////////////////////////////
+  }
+
+  UpdateCopon() {
+    //////////////////////////////////////////////
+  }
+  FindCpouponByType() {
+    /////////////////////////////////////////
+  }
+
+  FindCpouponByDate() {
+    ////////////////////////////////////////////////
+  }
+
+  FindCpouponByPrice() {
+    ///////////////////////////////////////////
+  }
+  public logout(): void {
+    this.logginService.logout;
+    this.router.navigate(['/login'])
+  }
+  ngOnInit() {
+  }
   AddCouponOpen() {
-    
+
     this.AddCouponOpenFlag = true;
     this.CreateCouponFlag = false;
     this.GetCuponFlag = false;
     this.DeleteCouponFlag = false;
     this.GetAllCouponsFlag = false;
     this.DeleteAllCouponFlag = false;
+    this.UpdateCoponFlag = false;
+    this.CouponByTypeFlag = false;
+    this.CouponByDateFlag = false;
+    this.CouponByPriceFlag = false;
   }
   AddNewCouponOpen() {
     this.CreateCouponFlag = true;
@@ -43,6 +109,10 @@ export class CompComponent implements OnInit {
     this.DeleteCouponFlag = false;
     this.GetAllCouponsFlag = false;
     this.DeleteAllCouponFlag = false;
+    this.UpdateCoponFlag = false;
+    this.CouponByTypeFlag = false;
+    this.CouponByDateFlag = false;
+    this.CouponByPriceFlag = false;
   }
   GetCoponByIDOpen() {
     this.CreateCouponFlag = false;
@@ -51,6 +121,10 @@ export class CompComponent implements OnInit {
     this.DeleteCouponFlag = false;
     this.GetAllCouponsFlag = false;
     this.DeleteAllCouponFlag = false;
+    this.UpdateCoponFlag = false;
+    this.CouponByTypeFlag = false;
+    this.CouponByDateFlag = false;
+    this.CouponByPriceFlag = false;
   }
   DeleteCoponByIDOpen() {
     this.CreateCouponFlag = false;
@@ -59,6 +133,10 @@ export class CompComponent implements OnInit {
     this.DeleteCouponFlag = true;
     this.GetAllCouponsFlag = false;
     this.DeleteAllCouponFlag = false;
+    this.UpdateCoponFlag = false;
+    this.CouponByTypeFlag = false;
+    this.CouponByDateFlag = false;
+    this.CouponByPriceFlag = false;
   }
   GetAllCouponsOPen() {
     this.CreateCouponFlag = false;
@@ -67,6 +145,10 @@ export class CompComponent implements OnInit {
     this.DeleteCouponFlag = false;
     this.GetAllCouponsFlag = true;
     this.DeleteAllCouponFlag = false;
+    this.UpdateCoponFlag = false;
+    this.CouponByTypeFlag = false;
+    this.CouponByDateFlag = false;
+    this.CouponByPriceFlag = false;
   }
   DeleteAllCouponsOPen() {
     this.CreateCouponFlag = false;
@@ -75,40 +157,57 @@ export class CompComponent implements OnInit {
     this.DeleteCouponFlag = false;
     this.GetAllCouponsFlag = false;
     this.DeleteAllCouponFlag = true;
+    this.UpdateCoponFlag = false;
+    this.CouponByTypeFlag = false;
+    this.CouponByDateFlag = false;
+    this.CouponByPriceFlag = false;
   }
-
-  CreateThisCoupon() {
-    ///////////////////////////////////////////////
+  UpdateCoponOpen() {
+    this.CreateCouponFlag = false;
+    this.AddCouponOpenFlag = false;
+    this.GetCuponFlag = false;
+    this.DeleteCouponFlag = false;
+    this.GetAllCouponsFlag = false;
+    this.DeleteAllCouponFlag = false;
+    this.UpdateCoponFlag = true;
+    this.CouponByTypeFlag = false;
+    this.CouponByDateFlag = false;
+    this.CouponByPriceFlag = false;
   }
-  GetCoupon() {
-    //////////////////////////////////////////
+  GetCouponsByTypeOPen() {
+    this.CreateCouponFlag = false;
+    this.AddCouponOpenFlag = false;
+    this.GetCuponFlag = false;
+    this.DeleteCouponFlag = false;
+    this.GetAllCouponsFlag = false;
+    this.DeleteAllCouponFlag = false;
+    this.UpdateCoponFlag = false;
+    this.CouponByTypeFlag = true;
+    this.CouponByDateFlag = false;
+    this.CouponByPriceFlag = false;
   }
-
-  AddCouponToCompany() {
-    ///////////////////////////////////////////////////
+  GetCouponsByDateOPen() {
+    this.CreateCouponFlag = false;
+    this.AddCouponOpenFlag = false;
+    this.GetCuponFlag = false;
+    this.DeleteCouponFlag = false;
+    this.GetAllCouponsFlag = false;
+    this.DeleteAllCouponFlag = false;
+    this.UpdateCoponFlag = false;
+    this.CouponByTypeFlag = false;
+    this.CouponByDateFlag = true;
+    this.CouponByPriceFlag = false;
   }
-  GetAllCoupons() {
-    ///////////////////////////////////
+  GetCouponsByPriceOPen() {
+    this.CreateCouponFlag = false;
+    this.AddCouponOpenFlag = false;
+    this.GetCuponFlag = false;
+    this.DeleteCouponFlag = false;
+    this.GetAllCouponsFlag = false;
+    this.DeleteAllCouponFlag = false;
+    this.UpdateCoponFlag = false;
+    this.CouponByTypeFlag = false;
+    this.CouponByDateFlag = false;
+    this.CouponByPriceFlag = true;
   }
-  DeleteAllCoupons(){
-    ////////////////////////////////////////////////////
-  }
-
-  public logout(): void {
-    this.logginService.logout;
-    this.router.navigate(['/login'])
-  }
-
-  ngOnInit() {
-    this.flags.push(
-      this.AddCouponOpenFlag = false, 
-      this.CreateCouponFlag = false,
-      this.GetCuponFlag = false,
-      this.DeleteCouponFlag = false,
-      this.GetAllCouponsFlag = false,
-    )
-  }
-
-
-
 }

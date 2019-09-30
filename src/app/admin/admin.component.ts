@@ -21,10 +21,5 @@ export class AdminComponent implements OnInit {
   ngOnInit() {
   }
 
-  // getAllCompanys(){
-  //   this.companyService.getAllCompanys().subscribe(companys =>{
-  //     this.companys = companys;
-  //     console.log(companys);
-  //     this.compExist= true;
-  //   },)
+  
 }

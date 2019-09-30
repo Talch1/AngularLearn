@@ -16,55 +16,97 @@
     <button type="button" (click)="GetAllCouponsOPen()" class="btn btn-secondary">Get All Coupons</button>
 
     <button type="button" (click)="DeleteAllCouponsOPen()" class="btn btn-secondary">Delete All Coupons</button>
+
+    <button type="button" (click)="UpdateCoponOpen()" class="btn btn-secondary">Update Coupon</button>
+
+    <button type="button" (click)="GetCouponsByTypeOPen()" class="btn btn-secondary">Get Coupon By Type</button>
+
+    <button type="button" (click)="GetCouponsByDateOPen()" class="btn btn-secondary">Get Coupon By Date</button>
+
+    <button type="button" (click)="GetCouponsByPriceOPen()" class="btn btn-secondary">Get Coupon By Price</button>
 </div>
 
-<input *ngIf="AddCouponOpenFlag" type="number" class="form-control" placeholder="Please enter Company id"
-    [(ngModel)]="compId">
-<input *ngIf="AddCouponOpenFlag" type="number" class="form-control" placeholder="Please enter Coupon id"
-    [(ngModel)]="coupId">
-<button *ngIf="AddCouponOpenFlag" (click)="AddCouponToCompany()" type="button">Add this Coupon </button>
 
-<input *ngIf="CreateCouponFlag" type="number" class="form-control" placeholder="Please enter Coupon id"
-    [(ngModel)]="this.coupon.id">
-<input *ngIf="CreateCouponFlag" type="text" class="form-control" placeholder="Please enter Coupon title"
-    [(ngModel)]="this.coupon.title">
-<input *ngIf="CreateCouponFlag" type="date" class="form-control" placeholder="Please enter Coupon start date"
-    [(ngModel)]="this.coupon.startDate">
-<input *ngIf="CreateCouponFlag" type="date" class="form-control" placeholder="Please enter Coupon end date"
-    [(ngModel)]="this.coupon.endDate">
-<input *ngIf="CreateCouponFlag" type="number" class="form-control" placeholder="Please enter Coupon amount"
-    [(ngModel)]="this.coupon.amount">
-<select *ngIf="CreateCouponFlag" class="form-control" name="type" [(ngModel)]="coupon.type">
-    <option selected disabled> Select Type </option>
-    <option value="RESTURANS"> RESTURANS </option>
-    <option value="ELECTRICITY"> ELECTRICITY </option>
-    <option value="FOOD"> FOOD </option>
-    <option value="HEALTH"> HEALTH </option>
-    <option value="SPORTS"> SPORTS </option>
-    <option value="CAMPING"> CAMPING </option>
-    <option value="TRAVELLING"> TRAVELLING </option>
-</select>
-<input *ngIf="CreateCouponFlag" type="text" class="form-control" placeholder="Please enter Coupon message"
-    [(ngModel)]="this.coupon.message">
-<input *ngIf="CreateCouponFlag" type="number" class="form-control" placeholder="Please enter Coupon price"
-    [(ngModel)]="this.coupon.price">
-<input *ngIf="CreateCouponFlag" type="text" class="form-control" placeholder="Please enter Coupon image"
-    [(ngModel)]="this.coupon.image">
-<button *ngIf="CreateCouponFlag" type="button" (click)="CreateThisCoupon()">Create this Coupon </button>
+<h1 *ngIf="CouponAddedFlag">Cooupns Added</h1>
+<div *ngIf="AddCouponOpenFlag">
+    <input type="number" class="form-control" placeholder="Please enter Company id" [(ngModel)]="compId">
+    <input type="number" class="form-control" placeholder="Please enter Coupon id" [(ngModel)]="coupId">
+    <button (click)="AddCouponToCompany()" type="button">Add this Coupon </button>
+</div>
 
-<input *ngIf="GetCuponFlag" type="number" class="form-control" placeholder="Please enter Coupon id"
-    [(ngModel)]="coupId">
-<button *ngIf="GetCuponFlag" type="button" (click)="GetCoupon()">Get Coupon </button>
+<div *ngIf="CreateCouponFlag">
+    <input type="number" class="form-control" placeholder="Please enter Coupon id" [(ngModel)]="this.coupon.id">
+    <input type="text" class="form-control" placeholder="Please enter Coupon title" [(ngModel)]="this.coupon.title">
+    <input type="date" class="form-control" placeholder="Please enter Coupon start date"
+        [(ngModel)]="this.coupon.startDate">
+    <input type="date" class="form-control" placeholder="Please enter Coupon end date"
+        [(ngModel)]="this.coupon.endDate">
+    <input type="number" class="form-control" placeholder="Please enter Coupon amount" [(ngModel)]="this.coupon.amount">
+    <select class="form-control" name="type" [(ngModel)]="coupon.type">
+        <option selected disabled> Select Type </option>
+        <option value="RESTURANS"> RESTURANS </option>
+        <option value="ELECTRICITY"> ELECTRICITY </option>
+        <option value="FOOD"> FOOD </option>
+        <option value="HEALTH"> HEALTH </option>
+        <option value="SPORTS"> SPORTS </option>
+        <option value="CAMPING"> CAMPING </option>
+        <option value="TRAVELLING"> TRAVELLING </option>
+    </select>
+    <input type="text" class="form-control" placeholder="Please enter Coupon message" [(ngModel)]="this.coupon.message">
+    <input type="number" class="form-control" placeholder="Please enter Coupon price" [(ngModel)]="this.coupon.price">
+    <input type="text" class="form-control" placeholder="Please enter Coupon image" [(ngModel)]="this.coupon.image">
+    <button type="button" (click)="CreateThisCoupon()">Create this Coupon </button>
+</div>
+<div *ngIf="GetCuponFlag">
+    <input type="number" class="form-control" placeholder="Please enter Coupon id" [(ngModel)]="coupId">
+    <button type="button" (click)="AddCoupon()">Get Coupon </button>
+</div>
 
-<input *ngIf="DeleteCouponFlag" type="number" class="form-control" placeholder="Please enter Coupon id"
-    [(ngModel)]="coupId">
-<button *ngIf="DeleteCouponFlag" type="button" (click)="GetCoupon()"> Delete Coupon </button>
+<div *ngIf="DeleteCouponFlag">
+    <input type="number" class="form-control" placeholder="Please enter Coupon id" [(ngModel)]="coupId">
+    <button type="button" (click)="GetCoupon()"> Delete Coupon </button>
+</div>
 
-<input *ngIf="GetAllCouponsFlag" type="number" class="form-control" placeholder="Please enter Company id"
-    [(ngModel)]="coupId">
-<button *ngIf="GetAllCouponsFlag" type="button" (click)="GetAllCoupons()"> Get All Coupons </button>
+<div *ngIf="GetAllCouponsFlag">
+    <input type="number" class="form-control" placeholder="Please enter Company id" [(ngModel)]="compId">
+    <button type="button" (click)="GetAllCoupons()"> Get All Coupons </button>
+</div>
+
+<div *ngIf="DeleteAllCouponFlag">
+    <input type="number" class="form-control" placeholder="Please enter Company id" [(ngModel)]="coupId">
+    <button type="button" (click)="DeleteAllCoupons()"> Get All Coupons </button>
+</div>
 
 
-<input *ngIf="DeleteAllCouponFlag" type="number" class="form-control" placeholder="Please enter Company id"
-    [(ngModel)]="coupId">
-<button *ngIf="DeleteAllCouponFlag" type="button" (click)="DeleteAllCoupons()"> Get All Coupons </button>
+<div *ngIf="UpdateCoponFlag">
+    <input type="number" class="form-control" placeholder="Please enter Coupon id" [(ngModel)]="this.coupon.id">
+    <input type="date" class="form-control" placeholder="Please enter Coupon end date"
+        [(ngModel)]="this.coupon.endDate">
+    <input type="number" class="form-control" placeholder="Please enter Coupon price" [(ngModel)]="this.coupon.price">
+    <button type="button" (click)="UpdateCopon()"> Update this Coupon </button>
+</div>
+
+<div *ngIf="CouponByTypeFlag">
+    <select class="form-control" name="type" [(ngModel)]="couponType">
+        <option selected disabled> Select Type </option>
+        <option value="RESTURANS"> RESTURANS </option>
+        <option value="ELECTRICITY"> ELECTRICITY </option>
+        <option value="FOOD"> FOOD </option>
+        <option value="HEALTH"> HEALTH </option>
+        <option value="SPORTS"> SPORTS </option>
+        <option value="CAMPING"> CAMPING </option>
+        <option value="TRAVELLING"> TRAVELLING </option>
+    </select>
+    <button type="button" (click)="FindCpouponByType()"> Find Coupon By Type </button>
+</div>
+
+<div *ngIf="CouponByDateFlag">
+    <input type="date" class="form-control" placeholder="Please enter Coupon end date" [(ngModel)]="date">
+    <button type="button" (click)="FindCpouponByDate()"> Find Coupon By End Date </button>
+</div>
+
+
+<div *ngIf="CouponByPriceFlag">
+    <input type="number" class="form-control" placeholder="Please enter Coupon  price" [(ngModel)]="price">
+    <button type="button" (click)="FindCpouponByPrice()"> Find Coupon By Price Before </button>
+</div>
