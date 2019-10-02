@@ -36,3 +36,90 @@
     <input type="email" class="form-control" placeholder="Please enter Company email" [(ngModel)]="this.company.email">
     <button type="button" (click)="CreateCompany()">Create this Company </button>
 </div>
+<div *ngIf="DeleteCustomerFlag">
+    <input type="number" class="form-control" placeholder="Please enter Customer id" [(ngModel)]="custId">
+    <button type="button" (click)="DeleteCustomerById()"> Delete Customer </button>
+</div>
+<div *ngIf="DeleteCompanyFlag">
+    <input type="number" class="form-control" placeholder="Please enter Company id" [(ngModel)]="compId">
+    <button type="button" (click)="DeleteCompanyById()"> Delete Company </button>
+</div>
+
+<div *ngIf="UpdateCustomerFlag">
+        <input type="number" class="form-control" placeholder="Please enter Customer id" [(ngModel)]="custId">
+        <input type="text" class="form-control" placeholder="Please enter Customer name"
+            [(ngModel)]="this.customer.custName">
+        <input type="text" class="form-control" placeholder="Please enter Customer password" [(ngModel)]="this.customer.password">
+        <button type="button" (click)="UpdateCustomer()"> Update Customer </button>
+    </div>
+
+<div *ngIf="UpdateCompanyFlag">
+        <input type="number" class="form-control" placeholder="Please enter Comany id" [(ngModel)]="compId">
+        <input type="text" class="form-control" placeholder="Please enter Comany name"
+            [(ngModel)]="this.company.compName">
+        <input type="text" class="form-control" placeholder="Please enter Comany password" [(ngModel)]="this.company.password">
+        <input type="text" class="form-control" placeholder="Please enter Comany email" [(ngModel)]="this.company.email">
+        <button type="button" (click)="UpdateCompany()"> Update Comany </button>
+    </div>
+
+
+
+<div *ngIf="CompArrFlag">
+    <table>
+        <tr>   
+        <th>Id</th>
+        <th>Comany Name</th>
+        <th>Password</th>
+        <th>Email</th>
+      </tr>
+        <tr *ngFor="let company of companys">
+         <td>{{company.id}}</td>
+        <td>{{company.compName}}</td>
+        <td>{{company.password}}</td>
+        <td>{{company.email}}</td>        
+    </table>
+
+</div>
+<div *ngIf="OneCompFlag">
+        <table>
+            <tr>  
+             <th>Id</th>
+            <th>Company Name</th>
+            <th>Password</th>
+            <th>Email</th>
+          </tr>
+            <tr>
+             <td>{{this.company.id}}</td>
+            <td>{{this.company.compName}}</td>
+            <td>{{this.company.password}}</td>
+            <td>{{this.company.email}}</td>
+        </table>
+</div>
+<div *ngIf="CustArrFlag">
+        <table>
+            <tr>   
+            <th>Id</th>
+            <th>Customer Name</th>
+            <th>Password</th>
+          </tr>
+            <tr *ngFor="let customer of customers">
+             <td>{{customer.id}}</td>
+            <td>{{customer.custName}}</td>
+            <td>{{customer.password}}</td>    
+        </table>
+    
+    </div>
+    <div *ngIf="OneCustFlag">
+            <table>
+                <tr>  
+                 <th>Id</th>
+                <th>Company Name</th>
+                <th>Password</th>
+              </tr>
+                <tr>
+                 <td>{{this.customer.id}}</td>
+                <td>{{this.customer.custName}}</td>
+                <td>{{this.customer.password}}</td>
+            </table>
+    </div>
+        

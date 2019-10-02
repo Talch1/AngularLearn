@@ -12,13 +12,25 @@ export class AdminService {
 
   constructor(private httpClient: HttpClient) { }
 
- public createCustomer(customer:Customer): Observable<Customer>{
-  return this.httpClient.post<Customer>(this.baseUrl +"customerCreate",customer );
+ public createCustomer(customer:Customer): Observable<Customer[]>{
+  return this.httpClient.post<Customer[]>(this.baseUrl +"customerCreate",customer );
  }
 
-  public createCompany(company: Company ): Observable<Company> {
-    return this.httpClient.post<Company>(this.baseUrl + "compnyCreate/",company );
+  public createCompany(company: Company ): Observable<Company[]> {
+    return this.httpClient.post<Company[]>(this.baseUrl + "compnyCreate/",company );
   }
-
+  public deleteCustomer(custId: number ): Observable<Customer[]> {
+    return this.httpClient.delete<Customer[]>(this.baseUrl + "deleteCust/"+custId );
+  }
+  public deleteCompany(compId: number ): Observable<Company[]> {
+    return this.httpClient.delete<Company[]>(this.baseUrl + "deleteComp/"+compId );
+  }
   
+
+  public updateCustomer(custId: number,customer:Customer ): Observable<Customer> {
+    return this.httpClient.put<Customer>(this.baseUrl + "custUpdate/"+custId,customer );
+  }
+  public updateCompany(compId: number ,company:Company): Observable<Company> {
+    return this.httpClient.put<Company>(this.baseUrl + "companyUpdate/"+compId,company );
+  }
 }
