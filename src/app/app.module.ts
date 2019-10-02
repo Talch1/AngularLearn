@@ -14,7 +14,10 @@ import { from } from 'rxjs';
 import { FooterComponent } from './footer/footer.component';
 import { LeyoutComponent } from './leyout/leyout.component';
 import { HomeComponent } from './home/home.component';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
+import { AdminFacadeComponent } from './admin-facade/admin-facade.component';
+import { CompanyFacadeComponent } from './company-facade/company-facade.component';
+import { CustomerFacadeComponent } from './customer-facade/customer-facade.component'
 
 
 
@@ -32,6 +35,9 @@ const appRoutes: Routes = [
     FooterComponent,
     LeyoutComponent,
     HomeComponent,
+    AdminFacadeComponent,
+    CompanyFacadeComponent,
+    CustomerFacadeComponent,
  
 
 

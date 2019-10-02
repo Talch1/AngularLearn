@@ -1,6 +1,27 @@
 nav{
     color: red;
     margin-top: 10px;
-    margin-left: 10px;
-
+        margin-left: 10px;
+        font-size: 30px;
 }
+table {
+    margin: auto;
+}
+table,th,td{
+    border: solid 1px red;
+    background-color: azure;
+    font-size: 20px;
+    text-align: center;
+}
+button{
+    margin: 15px;
+}
+input{
+ inline-size: 250px;
+ margin: 15px;
+}
+select{
+    inline-size: 250px;   
+    margin-left: 15px;
+}
+

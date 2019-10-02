@@ -4,16 +4,21 @@ import { Router } from '@angular/router';
 import { CompanyService } from '../services/company-service';
 import { Coupon } from '../beans/Coupon';
 
-
-
 @Component({
-  selector: 'app-comp',
-  templateUrl: './comp.component.html',
-  styleUrls: ['./comp.component.css']
+  selector: 'app-company-facade',
+  templateUrl: './company-facade.component.html',
+  styleUrls: ['./company-facade.component.css']
 })
-export class CompComponent implements OnInit {
+export class CompanyFacadeComponent implements OnInit {
 
   constructor(private logginService: LogginService, private router: Router, private companyService: CompanyService) { }
+
+  public logout(): void {
+    this.logginService.logout;
+    this.router.navigate(['/login'])
+  }
+  ngOnInit() {
+  }
   coupon: Coupon = new Coupon();
   coupons: Coupon[];
   massage: string;
@@ -36,17 +41,17 @@ export class CompComponent implements OnInit {
   CouponArrFlag = false;
   OneCouponFlag = false;
 
-  allFallse(){
- this.AddCouponOpenFlag = false;
- this.CreateCouponFlag = false;
- this.GetCuponFlag = false;
- this.DeleteCouponFlag = false;
- this.UpdateCoponFlag = false;
- this.CouponByTypeFlag = false;
- this. CouponByDateFlag = false;
- this. CouponByPriceFlag = false;
- this. CouponArrFlag = false;
- this. OneCouponFlag = false;
+  allFallse() {
+    this.AddCouponOpenFlag = false;
+    this.CreateCouponFlag = false;
+    this.GetCuponFlag = false;
+    this.DeleteCouponFlag = false;
+    this.UpdateCoponFlag = false;
+    this.CouponByTypeFlag = false;
+    this.CouponByDateFlag = false;
+    this.CouponByPriceFlag = false;
+    this.CouponArrFlag = false;
+    this.OneCouponFlag = false;
   }
   AddCouponToCompany() {
 
@@ -57,7 +62,7 @@ export class CompComponent implements OnInit {
     }, err => {
       alert("Error " + err.massage)
     })
-    
+
     alert('This coupon added')
     this.AddCouponOpenFlag = false;
   }
@@ -83,7 +88,7 @@ export class CompComponent implements OnInit {
     }
     )
 
-    this.OneCouponFlag= true;
+    this.OneCouponFlag = true;
     this.GetCuponFlag = false;
   }
   GetAllCoupons() {
@@ -94,7 +99,7 @@ export class CompComponent implements OnInit {
     }, err => {
       alert("Error " + err.massage)
     })
-   this.allFallse();
+    this.allFallse();
     this.CouponArrFlag = true;
 
   }
@@ -118,7 +123,7 @@ export class CompComponent implements OnInit {
       alert("Error " + err.massage)
     }
     )
-   this.allFallse();
+    this.allFallse();
   }
 
   UpdateCopon() {
@@ -134,7 +139,7 @@ export class CompComponent implements OnInit {
     this.UpdateCoponFlag = false;
   }
   FindCpouponByType() {
-    this.companyService.getCouponByType(this.couponType,this.compId).subscribe(
+    this.companyService.getCouponByType(this.couponType, this.compId).subscribe(
       responce => {
         this.coupons = responce;
         console.log(this.coupons);
@@ -147,7 +152,7 @@ export class CompComponent implements OnInit {
   }
 
   FindCpouponByDate() {
-    this.companyService.getCouponByDate(this.date,this.compId).subscribe(
+    this.companyService.getCouponByDate(this.date, this.compId).subscribe(
       responce => {
         this.coupons = responce;
         console.log(this.coupons);
@@ -160,7 +165,7 @@ export class CompComponent implements OnInit {
   }
 
   FindCpouponByPrice() {
-    this.companyService.getCouponByPrice(this.price,this.compId).subscribe(
+    this.companyService.getCouponByPrice(this.price, this.compId).subscribe(
       (response) => {
         this.coupons = response;
         console.log(this.coupons);
@@ -171,16 +176,11 @@ export class CompComponent implements OnInit {
     )
     this.CouponArrFlag = true;
   }
-  public logout(): void {
-    this.logginService.logout;
-    this.router.navigate(['/login'])
-  }
-  ngOnInit() {
-  }
+
   AddCouponOpen() {
     this.allFallse();
     this.AddCouponOpenFlag = true;
-    
+
   }
   AddNewCouponOpen() {
     this.allFallse();
@@ -188,12 +188,12 @@ export class CompComponent implements OnInit {
   }
   GetCoponByIDOpen() {
     this.allFallse();
-    this.GetCuponFlag = true;    
+    this.GetCuponFlag = true;
   }
   DeleteCoponByIDOpen() {
     this.allFallse();
     this.DeleteCouponFlag = true;
-   
+
   }
   GetAllCouponsOPen() {
     this.allFallse();
@@ -212,12 +212,12 @@ export class CompComponent implements OnInit {
   GetCouponsByDateOPen() {
     this.allFallse();
     this.CouponByDateFlag = true;
- 
+
   }
   GetCouponsByPriceOPen() {
     this.allFallse();
     this.CouponByPriceFlag = true;
-    
+
   }
 
 }

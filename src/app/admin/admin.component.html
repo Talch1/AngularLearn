@@ -1,31 +1,7 @@
 <nav>
     <a (click)="logout()" >Logout</a>
 </nav>
-<h1>admin</h1>
-<div class="btn-group-vertical" >
-          
-        <button type="button" class="btn btn-secondary">Create New Companys</button>
-        <button type="button" (click)="getAllCompanys()" class="btn btn-secondary">Get all companys</button>
-        <button type="button" class="btn btn-secondary">Get Company By Id</button>
-        <input *ngIf="ByIdFlag" type="text" class="form-control" placeholder="Please enter id"  [(ngModel)]="id">
-        <button type="button" class="btn btn-secondary">Delete Company</button>
-        <input *ngIf="ByIdFlag1" type="text" class="form-control" placeholder="Please enter id"  [(ngModel)]="id">
-        <button type="button" class="btn btn-secondary">Delete All Companys</button>
-        <button type="button" class="btn btn-secondary">Get Company By Id</button>
-       
 
-        <table ng *ngIf="compExist!=false">
-            <tr>All Companys</tr>
-            <tr>
-                <td>CompName</td>
-                <td>CompEmail</td>
-                <td>CompPass</td>
-            </tr>
-            <tr *ngFor="let comp of companys">
-                <td>{{comp.compName}}</td>
-                <td>{{comp.email}}</td>
-                <td>{{comp.password}}</td>
-            </tr>
-        </table>
-        
-      </div>
+<button (click)="toAdmin()">Admin</button>
+<button (click)="toCompany()">Company</button>
+<button (click)="toCustomer()">Customer</button>

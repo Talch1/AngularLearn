@@ -1,0 +1,38 @@
+<nav>
+    <a (click)="logout()">Logout</a>
+</nav>
+
+<br>
+<div class="btn-group">
+
+    <button type="button" class="btn btn-secondary" (click)="CustCreateOpen()">Create Customer</button>
+
+    <button type="button" class="btn btn-secondary" (click)="CompCreateOpen()">Create Company</button>
+
+    <button type="button" class="btn btn-secondary" (click)="CustDeleteOpen()">Delete Customer</button>
+
+    <button type="button" class="btn btn-secondary" (click)="CompDeleteOpen()">Delete Company</button>
+
+    <button type="button" class="btn btn-secondary" (click)="CustUpdateOpen()">Update Customer</button>
+
+    <button type="button" class="btn btn-secondary" (click)="CompUpdateOpen()">Update Company</button>
+</div>
+
+
+
+<div *ngIf="CreateCustFlag">
+    <input type="number" class="form-control" placeholder="Please enter Customer id" [(ngModel)]="this.customer.id">
+    <input type="text" class="form-control" placeholder="Please enter Customer name"
+        [(ngModel)]="this.customer.custName">
+    <input type="text" class="form-control" placeholder="Please enter Customer password"
+        [(ngModel)]="this.customer.password">
+    <button type="button" (click)="CreateCustomer()">Create this Customer </button>
+</div>
+<div *ngIf="CreateCompFlag">
+    <input type="number" class="form-control" placeholder="Please enter Company id" [(ngModel)]="this.company.id">
+    <input type="text" class="form-control" placeholder="Please enter Company name" [(ngModel)]="this.company.compName">
+    <input type="text" class="form-control" placeholder="Please enter Company password"
+        [(ngModel)]="this.company.password">
+    <input type="email" class="form-control" placeholder="Please enter Company email" [(ngModel)]="this.company.email">
+    <button type="button" (click)="CreateCompany()">Create this Company </button>
+</div>

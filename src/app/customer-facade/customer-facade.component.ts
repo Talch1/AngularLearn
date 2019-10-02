@@ -1,18 +1,20 @@
 import { Component, OnInit } from '@angular/core';
+import { CustomerServiceService } from '../services/customer-service.service';
 import { LogginService } from '../services/loggin.service';
 import { Router } from '@angular/router';
 import { Coupon } from '../beans/Coupon';
-import { CustomerServiceService } from '../services/customer-service.service';
-
 
 @Component({
-  selector: 'app-cust',
-  templateUrl: './cust.component.html',
-  styleUrls: ['./cust.component.css']
+  selector: 'app-customer-facade',
+  templateUrl: './customer-facade.component.html',
+  styleUrls: ['./customer-facade.component.css']
 })
-export class CustComponent implements OnInit {
-  ngOnInit(){}
- 
+export class CustomerFacadeComponent implements OnInit {
+
+
+
+  ngOnInit() {
+  }
 
 
   constructor(private logginService: LogginService, private router: Router, private customerService: CustomerServiceService) { }
@@ -141,3 +143,5 @@ export class CustComponent implements OnInit {
   }
 
 }
+
+
