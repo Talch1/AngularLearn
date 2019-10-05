@@ -12,6 +12,7 @@ export class LogginService {
   constructor(private httpClient:HttpClient){ }
   public inLoggedIn:boolean;
   public type:string;
+  public credentionals:Credentials;
 
   public logout(): void {
     this.inLoggedIn = false;
@@ -21,7 +22,7 @@ export class LogginService {
   public auth(credentials : Credentials):Observable <object>{
     console.log(credentials);
     return this.httpClient.post("http://localhost:8080/login/logging",credentials);
-    
+  
 
     
     

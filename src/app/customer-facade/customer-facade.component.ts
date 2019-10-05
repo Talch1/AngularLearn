@@ -15,57 +15,57 @@ export class CustomerFacadeComponent implements OnInit {
 
   ngOnInit() {
   }
-
-
   constructor(private logginService: LogginService, private router: Router, private customerService: CustomerServiceService) { }
 
   coupon: Coupon = new Coupon();
   coupons: Coupon[];
   massage: string;
 
-  custId: string = '2010';
-  coupId: string;
+  custId: number = 2010;
+  coupId: number ;
 
   couponType: string;
   date: Date;
   price: number;
 
+  onlyNumberKey(event) {
+    return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
+}
 
+  addCouponOpenFlag = false;
+  couponByIdFlag = false;
+  couponByTypeFlag = false;
+  couponByDateFlag = false;
+  couponByPriceFlag = false;
+  couponArrFlag = false;
+  oneCouponFlag = false;
 
-  AddCouponOpenFlag = false;
-  CouponByTypeFlag = false;
-  CouponByDateFlag = false;
-  CouponByPriceFlag = false;
-  CouponArrFlag = false;
-  OneCouponFlag = false;
-
-  allFallse() {
-    this.AddCouponOpenFlag = false;
-    this.CouponByTypeFlag = false;
-    this.CouponByDateFlag = false;
-    this.CouponByPriceFlag = false;
-    this.CouponArrFlag = false;
-    this.OneCouponFlag = false;
+  allFalse() {
+    this.couponByIdFlag = false;
+    this.addCouponOpenFlag = false;
+    this.couponByTypeFlag = false;
+    this.couponByDateFlag = false;
+    this.couponByPriceFlag = false;
+    this.couponArrFlag = false;
+    this.oneCouponFlag = false;
   }
   public logout(): void {
     this.logginService.logout;
     this.router.navigate(['/login'])
   }
-  PurchoiseCoupon() {
+  
+  purchaseCoupon(){
+  this.customerService.addCouponToCustomer(this.custId,this.coupId).subscribe(response => {
+    this.coupons = response;
+    console.log(this.coupons);
+  }, err => {
+    alert("Error " + err.massage)
+  })
+  this.allFalse();
+  this.couponArrFlag = true;
+}
 
-    // work but throw ERROR
-
-    this.customerService.addCouponToCustomer({ custId: this.custId, coupId: this.coupId }).subscribe(response => {
-      console.log(response);
-    }, err => {
-      alert("Error " + err.massage)
-    })
-
-    alert('This coupon added')
-    this.AddCouponOpenFlag = false;
-  }
-
-  GetAllCoupons() {
+  getAllCoupons() {
 
     this.customerService.getAllCoupons(this.custId).subscribe(response => {
       this.coupons = response;
@@ -73,12 +73,35 @@ export class CustomerFacadeComponent implements OnInit {
     }, err => {
       alert("Error " + err.massage)
     })
-    this.allFallse();
-    this.CouponArrFlag = true;
+    this.allFalse();
+    this.couponArrFlag = true;
 
   }
 
-  FindCpouponByType() {
+  findCpouponById(){
+    this.customerService.getCouponById(this.custId,this.coupId).subscribe(
+      responce => {
+        this.coupon = responce;
+        console.log(this.coupon);
+      }, err => {
+        alert("Error " + err.massage)
+      }
+
+    )
+    this.oneCouponFlag = true;
+  }
+  adminfindCpouponById(){
+    this.customerService.adminGetCouponById(this.coupId).subscribe(
+      responce => {
+        this.coupon = responce;
+        console.log(this.coupon);
+      }, err => {
+        alert("Error " + err.massage)
+      }
+
+    )
+  }
+  findCpouponByType() {
     this.customerService.getCouponByType(this.couponType, this.custId).subscribe(
       responce => {
         this.coupons = responce;
@@ -88,10 +111,10 @@ export class CustomerFacadeComponent implements OnInit {
       }
 
     )
-    this.CouponArrFlag = true;
+    this.couponArrFlag = true;
   }
 
-  FindCpouponByDate() {
+  findCpouponByDate() {
     this.customerService.getCouponByDate(this.date, this.custId).subscribe(
       responce => {
         this.coupons = responce;
@@ -101,10 +124,10 @@ export class CustomerFacadeComponent implements OnInit {
       }
 
     )
-    this.CouponArrFlag = true;
+    this.couponArrFlag = true;
   }
 
-  FindCpouponByPrice() {
+  findCpouponByPrice() {
     this.customerService.getCouponByPrice(this.price, this.custId).subscribe(
       (response) => {
         this.coupons = response;
@@ -114,34 +137,36 @@ export class CustomerFacadeComponent implements OnInit {
       }
 
     )
-    this.CouponArrFlag = true;
+    this.couponArrFlag = true;
   }
 
-  AddCouponOpen() {
-    this.allFallse();
-    this.AddCouponOpenFlag = true;
+  addCouponOpen() {
+    this.allFalse();
+    this.addCouponOpenFlag = true;
 
   }
 
-  GetAllCouponsOPen() {
-    this.allFallse();
+  getAllCouponsOPen() {
+    this.allFalse();
   }
 
-  GetCouponsByTypeOPen() {
-    this.allFallse();
-    this.CouponByTypeFlag = true;
+  getCouponsByTypeOPen() {
+    this.allFalse();
+    this.couponByTypeFlag = true;
   }
-  GetCouponsByDateOPen() {
-    this.allFallse();
-    this.CouponByDateFlag = true;
+  getCouponsByDateOPen() {
+    this.allFalse();
+    this.couponByDateFlag = true;
 
   }
-  GetCouponsByPriceOPen() {
-    this.allFallse();
-    this.CouponByPriceFlag = true;
+  getCouponsByPriceOPen() {
+    this.allFalse();
+    this.couponByPriceFlag = true;
 
+  }
+  getCouponsByIdOPen(){
+    this.allFalse();
+    this.couponByIdFlag = true; 
   }
 
 }
-
-

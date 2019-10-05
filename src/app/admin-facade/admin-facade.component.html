@@ -1,3 +1,9 @@
+
+
+
+
+
+
 <nav>
     <a (click)="logout()">Logout</a>
 </nav>
@@ -5,63 +11,76 @@
 <br>
 <div class="btn-group">
 
-    <button type="button" class="btn btn-secondary" (click)="CustCreateOpen()">Create Customer</button>
+    <button type="button" class="btn btn-secondary" (click)="custCreateOpen()">Create Customer</button>
 
-    <button type="button" class="btn btn-secondary" (click)="CompCreateOpen()">Create Company</button>
+    <button type="button" class="btn btn-secondary" (click)="compCreateOpen()">Create Company</button>
 
-    <button type="button" class="btn btn-secondary" (click)="CustDeleteOpen()">Delete Customer</button>
+    <button type="button" class="btn btn-secondary" (click)="custDeleteOpen()">Delete Customer</button>
 
-    <button type="button" class="btn btn-secondary" (click)="CompDeleteOpen()">Delete Company</button>
+    <button type="button" class="btn btn-secondary" (click)="compDeleteOpen()">Delete Company</button>
 
-    <button type="button" class="btn btn-secondary" (click)="CustUpdateOpen()">Update Customer</button>
+    <button type="button" class="btn btn-secondary" (click)="custUpdateOpen()">Update Customer</button>
 
-    <button type="button" class="btn btn-secondary" (click)="CompUpdateOpen()">Update Company</button>
+    <button type="button" class="btn btn-secondary" (click)="compUpdateOpen()">Update Company</button>
+    
+    <button type="button" class="btn btn-secondary" (click)="getCastOpen()">Get Customer</button>
+
+    <button type="button" class="btn btn-secondary" (click)="getCompOpen()">Get Company</button>
+
+    <button type="button" class="btn btn-secondary" (click)="getAllCustomers()">Get All  Customers</button>
+
+    <button type="button" class="btn btn-secondary" (click)="getAllCompanys()">Get All Companys</button>
 </div>
 
-
-
 <div *ngIf="CreateCustFlag">
-    <input type="number" class="form-control" placeholder="Please enter Customer id" [(ngModel)]="this.customer.id">
+    <input type="number"  pInputText (keypress)="onlyNumberKey($event)" maxlength="4" min=1 class="form-control" placeholder="Please enter Customer id" [(ngModel)]="this.customer.id">
     <input type="text" class="form-control" placeholder="Please enter Customer name"
         [(ngModel)]="this.customer.custName">
     <input type="text" class="form-control" placeholder="Please enter Customer password"
         [(ngModel)]="this.customer.password">
-    <button type="button" (click)="CreateCustomer()">Create this Customer </button>
+    <button type="button" (click)="createCustomer()">Create this Customer </button>
 </div>
 <div *ngIf="CreateCompFlag">
-    <input type="number" class="form-control" placeholder="Please enter Company id" [(ngModel)]="this.company.id">
+    <input type="number" pInputText (keypress)="onlyNumberKey($event)" maxlength="4" min=1 class="form-control" placeholder="Please enter Company id" [(ngModel)]="this.company.id">
     <input type="text" class="form-control" placeholder="Please enter Company name" [(ngModel)]="this.company.compName">
     <input type="text" class="form-control" placeholder="Please enter Company password"
         [(ngModel)]="this.company.password">
     <input type="email" class="form-control" placeholder="Please enter Company email" [(ngModel)]="this.company.email">
-    <button type="button" (click)="CreateCompany()">Create this Company </button>
+    <button type="button" (click)="createCompany()">Create this Company </button>
 </div>
 <div *ngIf="DeleteCustomerFlag">
-    <input type="number" class="form-control" placeholder="Please enter Customer id" [(ngModel)]="custId">
-    <button type="button" (click)="DeleteCustomerById()"> Delete Customer </button>
+    <input type="number" pInputText (keypress)="onlyNumberKey($event)" maxlength="4" min=1 class="form-control" placeholder="Please enter Customer id" [(ngModel)]="custId">
+    <button type="button" (click)="deleteCustomerById()"> Delete Customer </button>
 </div>
 <div *ngIf="DeleteCompanyFlag">
-    <input type="number" class="form-control" placeholder="Please enter Company id" [(ngModel)]="compId">
-    <button type="button" (click)="DeleteCompanyById()"> Delete Company </button>
+    <input type="number" pInputText (keypress)="onlyNumberKey($event)" maxlength="4" min=1 class="form-control" placeholder="Please enter Company id" [(ngModel)]="compId">
+    <button type="button" (click)="deleteCompanyById()"> Delete Company </button>
 </div>
 
 <div *ngIf="UpdateCustomerFlag">
-        <input type="number" class="form-control" placeholder="Please enter Customer id" [(ngModel)]="custId">
+        <input type="number" pInputText (keypress)="onlyNumberKey($event)" maxlength="4" min=1 class="form-control" placeholder="Please enter Customer id" [(ngModel)]="custId">
         <input type="text" class="form-control" placeholder="Please enter Customer name"
             [(ngModel)]="this.customer.custName">
         <input type="text" class="form-control" placeholder="Please enter Customer password" [(ngModel)]="this.customer.password">
-        <button type="button" (click)="UpdateCustomer()"> Update Customer </button>
+        <button type="button" (click)="updateCustomer()"> Update Customer </button>
     </div>
 
 <div *ngIf="UpdateCompanyFlag">
-        <input type="number" class="form-control" placeholder="Please enter Comany id" [(ngModel)]="compId">
+        <input type="number" pInputText (keypress)="onlyNumberKey($event)" maxlength="4" min=1 class="form-control" placeholder="Please enter Comany id" [(ngModel)]="compId">
         <input type="text" class="form-control" placeholder="Please enter Comany name"
             [(ngModel)]="this.company.compName">
         <input type="text" class="form-control" placeholder="Please enter Comany password" [(ngModel)]="this.company.password">
         <input type="text" class="form-control" placeholder="Please enter Comany email" [(ngModel)]="this.company.email">
-        <button type="button" (click)="UpdateCompany()"> Update Comany </button>
+        <button type="button" (click)="updateCompany()"> Update Comany </button>
     </div>
-
+    <div *ngIf="GetCustFlag">
+        <input type="number" pInputText (keypress)="onlyNumberKey($event)" maxlength="4" min=1  class="form-control" placeholder="Please enter Customer id" [(ngModel)]="custId">
+        <button type="button" (click)="getCompany()"> Get this Customer </button>
+    </div>
+    <div *ngIf="GetCompFlag">
+        <input type="number" pInputText (keypress)="onlyNumberKey($event)" maxlength="4"  min=1 class="form-control" placeholder="Please enter Company id" [(ngModel)]="compId">
+        <button type="button" (click)="getCustomer()"> Get this Company </button>
+    </div>
 
 
 <div *ngIf="CompArrFlag">

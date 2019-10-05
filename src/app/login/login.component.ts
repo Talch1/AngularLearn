@@ -14,6 +14,9 @@ import { Router } from '@angular/router';
   providers: []
 })
 export class LoginComponent implements OnInit {
+  ngOnInit(): void {
+    throw new Error("Method not implemented.");
+  }
 
 
   public credentials = new Credentials;
@@ -23,27 +26,29 @@ export class LoginComponent implements OnInit {
   login(): void {
  //   if(this.LogginService.ifExistDemo(this.credentials)){
    
-  if(this.LogginService.auth(this.credentials).subscribe()){
-      if (this.credentials.type === 'Customer'){
-        this.router.navigate(["/cust"]);
-      }
-      else if (this.credentials.type === 'Company'){
-        this.router.navigate(["/comp"]);
-      }
-      else if (this.credentials.type === 'Admin'){
-        this.router.navigate(["/admin"]);
-      }
-    }else{
-      alert("Incorrect password or login")
-    }
+//   if(this.LogginService.auth(this.credentials).subscribe()){
+//       if (this.credentials.type === 'Customer' && ){
+//         this.router.navigate(["/cust"]);
+//       }
+//       else if (this.credentials.type === 'Company'){
+//         this.router.navigate(["/comp"]);
+//       }
+//       else if (this.credentials.type === 'Admin'){
+//         this.router.navigate(["/admin"]);
+//       }
+//     }else{
+//       alert("Incorrect password or login")
+//     }
 
     
+//   }
+
+//   constructor(private LogginService : LogginService,private router :Router) { }
+
+//   ngOnInit() {
+//   }
+
+
+// }
   }
-
-  constructor(private LogginService : LogginService,private router :Router) { }
-
-  ngOnInit() {
-  }
-
-
 }

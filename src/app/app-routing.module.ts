@@ -19,16 +19,17 @@ const routes: Routes = [
 {path : "home",component:HomeComponent},
  //{path : "admin",canActivate:[AdminGuardService],component:AdminComponent},
 {path : "admin",component:AdminComponent},
-{path : "cust",canActivate:[CustomerGuardService], component:CustComponent},
-//{path : "cust", component:CustComponent},
+//{path : "cust",canActivate:[CustomerGuardService], component:CustComponent},
+{path : "cust", component:CustComponent},
 //{path : "comp",canActivate:[CompanyGuardService],component:CompComponent},
 {path : "comp",component:CompComponent},
 {path : "login",component:LoginComponent},
 // {path : "AdminFacade",canActivate:[AdminGuardService],component:AdminFacadeComponent},
- {path : "CompanyFacade",canActivate:[AdminGuardService],component:CompanyFacadeComponent},
+ //{path : "CompanyFacade",canActivate:[AdminGuardService],component:CompanyFacadeComponent},
 // {path : "CustomerFacade",canActivate:[AdminGuardService],component:CustomerFacadeComponent},
 {path : "AdminFacade",component:AdminFacadeComponent},
 {path : "CustomerFacade",component:CustomerFacadeComponent},
+{path : "CompanyFacade",component:CompanyFacadeComponent},
 
 ];
 

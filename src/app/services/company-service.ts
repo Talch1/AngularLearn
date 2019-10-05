@@ -16,8 +16,8 @@ export class CompanyService {
   public getAllCoupons(compId: number): Observable<Coupon[]> {
 
     return this.httpClient.get<Coupon[]>(this.baseURL + "getAllCoupons/" + compId);  }
-  public addCouponToCompany(compId: number, coupId: number): Observable<Coupon> {
-    return this.httpClient.post<Coupon>(this.baseURL + "addCouponToComp/" + compId + "/" + coupId, null);
+  public addCouponToCompany(compId: number, coupId: number): Observable<Coupon[]> {
+    return this.httpClient.put<Coupon[]>(this.baseURL + "addCouponToComp/" + compId , coupId);
   }
   public addCoupon(coupon: Coupon, compId: number): Observable<Coupon> {
     return this.httpClient.post<Coupon>(this.baseURL + "createCoupon/" + compId, coupon);
@@ -31,8 +31,8 @@ export class CompanyService {
   public deleteAll(compId: number): Observable<string> {
     return this.httpClient.delete<string>(this.baseURL + "deleteCoupon/All/" + compId);
   }
-  public updateCoupon(coupon: Coupon,coupId:number) : Observable<Coupon> {
-return this.httpClient.put<Coupon>(this.baseURL + "couponUpdate/"+ coupId,coupon);
+  public updateCoupon(coupon: Coupon) : Observable<Coupon> {
+return this.httpClient.put<Coupon>(this.baseURL + "couponUpdate/",coupon);
   }
   public getCouponByType(type: string,compId: number): Observable<Coupon[]> {
     return this.httpClient.get<Coupon[]>(this.baseURL + "getAllCouponByType/"+compId +"/"+ type);

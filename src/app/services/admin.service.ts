@@ -25,12 +25,22 @@ export class AdminService {
   public deleteCompany(compId: number ): Observable<Company[]> {
     return this.httpClient.delete<Company[]>(this.baseUrl + "deleteComp/"+compId );
   }
-  
-
   public updateCustomer(custId: number,customer:Customer ): Observable<Customer> {
     return this.httpClient.put<Customer>(this.baseUrl + "custUpdate/"+custId,customer );
   }
   public updateCompany(compId: number ,company:Company): Observable<Company> {
     return this.httpClient.put<Company>(this.baseUrl + "companyUpdate/"+compId,company );
+  }
+  public getCustomer(custId: number): Observable<Customer> {
+    return this.httpClient.get<Customer>(this.baseUrl + "getCustByID/"+custId );
+  }
+  public getCompany(compId: number): Observable<Company> {
+    return this.httpClient.get<Company>(this.baseUrl + "getCompByID/"+compId);
+  }
+  public getAllCustomers(): Observable<Customer[]> {
+    return this.httpClient.get<Customer[]>(this.baseUrl + "getCustomers/");
+  }
+  public getAllCompanys(): Observable<Company[]> {
+    return this.httpClient.get<Company[]>(this.baseUrl + "getCompanys/");
   }
 }

@@ -24,55 +24,57 @@ export class CompComponent implements OnInit {
   couponType: string;
   date: Date;
   price: number;
+  
+  onlyNumberKey(event) {
+    return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
+}
+  addCouponOpenFlag = false;
+  createCouponFlag = false;
+  getCuponFlag = false;
+  deleteCouponFlag = false;
+  updateCoponFlag = false;
+  couponByTypeFlag = false;
+  couponByDateFlag = false;
+  couponByPriceFlag = false;
+  couponArrFlag = false;
+  oneCouponFlag = false;
 
-  AddCouponOpenFlag = false;
-  CreateCouponFlag = false;
-  GetCuponFlag = false;
-  DeleteCouponFlag = false;
-  UpdateCoponFlag = false;
-  CouponByTypeFlag = false;
-  CouponByDateFlag = false;
-  CouponByPriceFlag = false;
-  CouponArrFlag = false;
-  OneCouponFlag = false;
-
-  allFallse(){
- this.AddCouponOpenFlag = false;
- this.CreateCouponFlag = false;
- this.GetCuponFlag = false;
- this.DeleteCouponFlag = false;
- this.UpdateCoponFlag = false;
- this.CouponByTypeFlag = false;
- this. CouponByDateFlag = false;
- this. CouponByPriceFlag = false;
- this. CouponArrFlag = false;
- this. OneCouponFlag = false;
+  allFalse(){
+ this.addCouponOpenFlag = false;
+ this.createCouponFlag = false;
+ this.getCuponFlag = false;
+ this.deleteCouponFlag = false;
+ this.updateCoponFlag = false;
+ this.couponByTypeFlag = false;
+ this. couponByDateFlag = false;
+ this. couponByPriceFlag = false;
+ this. couponArrFlag = false;
+ this. oneCouponFlag = false;
   }
-  AddCouponToCompany() {
-
-    // work but throw ERROR
+  addCouponToCompany() {
 
     this.companyService.addCouponToCompany(this.compId, this.coupId).subscribe(response => {
-      console.log(response);
+      this.coupons = response;
+      console.log(this.coupons);
     }, err => {
       alert("Error " + err.massage)
     })
-    
-    alert('This coupon added')
-    this.AddCouponOpenFlag = false;
+   this.allFalse();
+    this.couponArrFlag = true;
   }
-  CreateThisCoupon() {
 
-    this.OneCouponFlag = true;
+  createThisCoupon() {
+
+    this.oneCouponFlag = true;
     this.companyService.addCoupon(this.coupon, this.compId).subscribe(response => {
       this.coupon = response;
       console.log(this.coupon);
     }, err => {
       alert("Error " + err.massage)
     })
-    this.CreateCouponFlag = false;
+    this.createCouponFlag = false;
   }
-  GetCoupon() {
+  getCoupon() {
     this.companyService.getCoupon(this.coupId).subscribe(response => {
       this.coupon = response;
 
@@ -83,10 +85,10 @@ export class CompComponent implements OnInit {
     }
     )
 
-    this.OneCouponFlag= true;
-    this.GetCuponFlag = false;
+    this.oneCouponFlag= true;
+    this.getCuponFlag = false;
   }
-  GetAllCoupons() {
+  getAllCoupons() {
 
     this.companyService.getAllCoupons(this.compId).subscribe(response => {
       this.coupons = response;
@@ -94,11 +96,11 @@ export class CompComponent implements OnInit {
     }, err => {
       alert("Error " + err.massage)
     })
-   this.allFallse();
-    this.CouponArrFlag = true;
+   this.allFalse();
+    this.couponArrFlag = true;
 
   }
-  DeleteCouponById() {
+  deleteCouponById() {
     this.companyService.delete(this.coupId).subscribe(response => {
       console.log(response);
       this.coupons = response;
@@ -107,10 +109,10 @@ export class CompComponent implements OnInit {
     }
     )
     this.coupId = 0;
-    this.DeleteCouponFlag = false;
-    this.CouponArrFlag = true;
+    this.deleteCouponFlag = false;
+    this.couponArrFlag = true;
   }
-  DeleteAllCoupons() {
+  deleteAllCoupons() {
     this.companyService.deleteAll(this.compId).subscribe(response => {
       console.log(response);
       alert('Coupons Deleted')
@@ -118,22 +120,22 @@ export class CompComponent implements OnInit {
       alert("Error " + err.massage)
     }
     )
-   this.allFallse();
+   this.allFalse();
   }
 
-  UpdateCopon() {
-    this.companyService.updateCoupon(this.coupon, this.coupId).subscribe(
+  updateCopon() {
+    this.companyService.updateCoupon(this.coupon).subscribe(
       response => {
         this.coupon = response;
         console.log(this.coupon);
-        alert("Coupon Updated")
       }, err => {
         alert("Error " + err.massage)
       }
     )
-    this.UpdateCoponFlag = false;
+    this.allFalse();
+    this.oneCouponFlag = true;
   }
-  FindCpouponByType() {
+  findCpouponByType() {
     this.companyService.getCouponByType(this.couponType,this.compId).subscribe(
       responce => {
         this.coupons = responce;
@@ -143,10 +145,10 @@ export class CompComponent implements OnInit {
       }
 
     )
-    this.CouponArrFlag = true;
+    this.couponArrFlag = true;
   }
 
-  FindCpouponByDate() {
+  findCpouponByDate() {
     this.companyService.getCouponByDate(this.date,this.compId).subscribe(
       responce => {
         this.coupons = responce;
@@ -156,10 +158,10 @@ export class CompComponent implements OnInit {
       }
 
     )
-    this.CouponArrFlag = true;
+    this.couponArrFlag = true;
   }
 
-  FindCpouponByPrice() {
+  findCpouponByPrice() {
     this.companyService.getCouponByPrice(this.price,this.compId).subscribe(
       (response) => {
         this.coupons = response;
@@ -169,7 +171,7 @@ export class CompComponent implements OnInit {
       }
 
     )
-    this.CouponArrFlag = true;
+    this.couponArrFlag = true;
   }
   public logout(): void {
     this.logginService.logout;
@@ -177,46 +179,46 @@ export class CompComponent implements OnInit {
   }
   ngOnInit() {
   }
-  AddCouponOpen() {
-    this.allFallse();
-    this.AddCouponOpenFlag = true;
+  addCouponOpen() {
+    this.allFalse();
+    this.addCouponOpenFlag = true;
     
   }
-  AddNewCouponOpen() {
-    this.allFallse();
-    this.CreateCouponFlag = true;
+  addNewCouponOpen() {
+    this.allFalse();
+    this.createCouponFlag = true;
   }
-  GetCoponByIDOpen() {
-    this.allFallse();
-    this.GetCuponFlag = true;    
+  getCoponByIDOpen() {
+    this.allFalse();
+    this.getCuponFlag = true;    
   }
-  DeleteCoponByIDOpen() {
-    this.allFallse();
-    this.DeleteCouponFlag = true;
+  deleteCoponByIDOpen() {
+    this.allFalse();
+    this.deleteCouponFlag = true;
    
   }
-  GetAllCouponsOPen() {
-    this.allFallse();
+  getAllCouponsOPen() {
+    this.allFalse();
   }
-  DeleteAllCouponsOPen() {
-    this.allFallse();
+  deleteAllCouponsOPen() {
+    this.allFalse();
   }
-  UpdateCoponOpen() {
-    this.allFallse();
-    this.UpdateCoponFlag = true;
+  updateCoponOpen() {
+    this.allFalse();
+    this.updateCoponFlag = true;
   }
-  GetCouponsByTypeOPen() {
-    this.allFallse();
-    this.CouponByTypeFlag = true;
+  getCouponsByTypeOPen() {
+    this.allFalse();
+    this.couponByTypeFlag = true;
   }
-  GetCouponsByDateOPen() {
-    this.allFallse();
-    this.CouponByDateFlag = true;
+  getCouponsByDateOPen() {
+    this.allFalse();
+    this.couponByDateFlag = true;
  
   }
-  GetCouponsByPriceOPen() {
-    this.allFallse();
-    this.CouponByPriceFlag = true;
+  getCouponsByPriceOPen() {
+    this.allFalse();
+    this.couponByPriceFlag = true;
     
   }
 

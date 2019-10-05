@@ -21,12 +21,19 @@ export class AdminFacadeComponent implements OnInit {
   custId: number = 2010;
   compId: number = 201;
 
+  onlyNumberKey(event) {
+    return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
+} 
+
   CreateCustFlag = false;
   CreateCompFlag = false;
   DeleteCustomerFlag = false;
   DeleteCompanyFlag = false;
   UpdateCustomerFlag = false;
   UpdateCompanyFlag = false;
+  GetCompFlag = false;
+  GetCustFlag = false;
+
 
   CompArrFlag = false;
   OneCompFlag = false;
@@ -45,6 +52,8 @@ export class AdminFacadeComponent implements OnInit {
     this.OneCustFlag = false;
     this.UpdateCustomerFlag = false;
     this.UpdateCompanyFlag = false;
+    this.GetCompFlag = false;
+    this.GetCustFlag = false;
   }
 
 
@@ -56,7 +65,9 @@ export class AdminFacadeComponent implements OnInit {
     this.logginService.logout;
     this.router.navigate(['/login'])
   }
-  CreateCustomer() {
+
+  //********************************************************************************************************************************* */
+  createCustomer() {
     this.adminService.createCustomer(this.customer).subscribe(response => {
       this.customers = response;
       console.log(this.customers);
@@ -67,7 +78,7 @@ export class AdminFacadeComponent implements OnInit {
     this.CustArrFlag = true;
 
   }
-  CreateCompany() {
+  createCompany() {
     this.adminService.createCompany(this.company).subscribe(response => {
       this.companys = response;
       console.log(this.companys);
@@ -77,7 +88,7 @@ export class AdminFacadeComponent implements OnInit {
     this.allFalse();
     this.CompArrFlag = true;
   }
-  DeleteCustomerById() {
+  deleteCustomerById() {
     this.adminService.deleteCustomer(this.custId).subscribe(response => {
       this.customers = response;
       console.log(this.customers);
@@ -88,7 +99,7 @@ export class AdminFacadeComponent implements OnInit {
     this.CustArrFlag = true;
   }
 
-  DeleteCompanyById() {
+  deleteCompanyById() {
     this.adminService.deleteCompany(this.compId).subscribe(response => {
       this.companys = response;
       console.log(this.companys);
@@ -98,7 +109,7 @@ export class AdminFacadeComponent implements OnInit {
     this.allFalse();
     this.CompArrFlag = true;
   }
-  UpdateCustomer() {
+  updateCustomer() {
     this.adminService.updateCustomer(this.custId,this.customer).subscribe(response => {
       this.customer = response;
       console.log(this.customer);
@@ -109,7 +120,7 @@ export class AdminFacadeComponent implements OnInit {
     this.allFalse();
     this.OneCustFlag = true;
   }
-  UpdateCompany() {
+  updateCompany() {
     this.adminService.updateCompany(this.compId,this.company).subscribe(response => {
       this.company = response;
       console.log(this.company);
@@ -117,35 +128,91 @@ export class AdminFacadeComponent implements OnInit {
     }, err => {
       alert("Error " + err.massage)
     })
-
+    this.allFalse();
+    this.OneCompFlag = true;
+  }
+  getCompany(){
+    this.adminService.getCompany(this.compId).subscribe(response => {
+      this.company = response;
+      console.log(this.company);
+      this.company.id = this.compId;
+    }, err => {
+      alert("Error " + err.massage)
+    })
     this.allFalse();
     this.OneCompFlag = true;
   }
   
-
-  CustCreateOpen() {
+  getCustomer(){
+    this.adminService.getCustomer(this.custId).subscribe(response => {
+      this.customer = response;
+      console.log(this.customer);
+      this.customer.id = this.custId;
+    }, err => {
+      alert("Error " + err.massage)
+    })
+    this.allFalse();
+    this.OneCustFlag = true;
+  }
+  
+  getAllCustomers() {
+    this.adminService.getAllCustomers().subscribe(response => {
+      this.customers = response;
+      console.log(this.customers);
+    }, err => {
+      alert("Error " + err.massage)
+    })
+    this.allFalse();
+    this.CustArrFlag = true;
+  }
+  getAllCompanys() {
+    this.adminService.getAllCompanys().subscribe(response => {
+      this.companys = response;
+      console.log(this.companys);
+    }, err => {
+      alert("Error " + err.massage)
+    })
+    this.allFalse();
+    this.CompArrFlag = true;
+  }
+  
+//***************************************************************************************************************************** */
+  custCreateOpen() {
     this.allFalse();
     this.CreateCustFlag = true;
   }
-  CompCreateOpen() {
+  compCreateOpen() {
     this.allFalse();
     this.CreateCompFlag = true;
   }
-  CustDeleteOpen() {
+  custDeleteOpen() {
     this.allFalse();
     this.DeleteCustomerFlag = true;
   }
-  CompDeleteOpen() {
+  compDeleteOpen() {
     this.allFalse();
     this.DeleteCompanyFlag = true;
   }
-  CustUpdateOpen() {
+  custUpdateOpen() {
     this.allFalse();
     this.UpdateCustomerFlag = true;
   }
-  CompUpdateOpen() {
+  compUpdateOpen() {
     this.allFalse();
     this.UpdateCompanyFlag = true;
   }
-
+  getCastOpen(){
+    this.allFalse();
+    this.GetCustFlag = true;
+  }
+  getCompOpen(){
+    this.allFalse();
+    this.GetCompFlag = true;
+  }
+  getAllCastOpen(){
+    this.allFalse();
+  }
+  getAllCompOpen(){
+    this.allFalse();
+  }
 }
