@@ -7,7 +7,7 @@ import { LogginService } from './loggin.service';
 })
 export class CustomerGuardService implements CanActivate {
   public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if(this.logginService.type === 'customer'&& this.logginService.inLoggedIn){
+    if(this.logginService.type === 'Customer'&& this.logginService.inLoggedIn){
     return true
 
     }

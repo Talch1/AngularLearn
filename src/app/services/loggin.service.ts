@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class LogginService {
+  [x: string]: any;
 
   constructor(private httpClient:HttpClient){ }
   public inLoggedIn:boolean;
@@ -19,30 +20,10 @@ export class LogginService {
     this.type = "";
 
   }
-  public auth(credentials : Credentials):Observable <object>{
+  public auth(credentials : Credentials):Observable <boolean>{
     console.log(credentials);
-    return this.httpClient.post("http://localhost:8080/login/logging",credentials);
-  
+    this.type = credentials.type;
+    return this.httpClient.post<boolean>("http://localhost:8080/login/logging",credentials);
 
-    
-    
   }
-
-  /* ifExistDemo(credentials:Credentials){
-    if(credentials.type === 'customer'&& credentials.password ==='1' && credentials.userName ==='1'){
-      this.inLoggedIn =true;
-      this.type = credentials.type;
-      return true;
-    }
-    if(credentials.type === 'company'&& credentials.password ==='2' && credentials.userName ==='2'){
-      this.inLoggedIn =true;
-      this.type = credentials.type;
-      return true;
-    }
-    if(credentials.type === 'admin'&& credentials.password ==='3' && credentials.userName ==='3'){
-      this.inLoggedIn =true;
-      this.type = credentials.type;
-      return true;
-    } */
- // }
-}
+  }

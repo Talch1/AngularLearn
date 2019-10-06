@@ -7,7 +7,7 @@ import { LogginService } from './loggin.service';
 })
 export class CompanyGuardService implements CanActivate {
   public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if(this.logginService.type === 'company'&& this.logginService.inLoggedIn){
+    if(this.logginService.type === 'Company'&& this.logginService.inLoggedIn){
     return true
 
     }
