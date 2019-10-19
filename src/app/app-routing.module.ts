@@ -17,7 +17,7 @@ import { CustomerFacadeComponent } from './customer-facade/customer-facade.compo
 const routes: Routes = [
 {path : "",component:LeyoutComponent},
 {path : "home",component:HomeComponent},
- {path : "admin",canActivate:[AdminGuardService],component:AdminComponent},
+{path : "admin",canActivate:[AdminGuardService],component:AdminComponent},
 //{path : "admin",component:AdminComponent},
 {path : "cust",canActivate:[CustomerGuardService], component:CustComponent},
 //{path : "cust", component:CustComponent},

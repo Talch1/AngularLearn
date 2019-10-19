@@ -17,16 +17,16 @@ export class CompanyFacadeComponent implements OnInit {
   coupons: Coupon[];
   massage: string;
 
-  compId: number = 1;
+  compId: number = 201;
   coupId: number;
 
   couponType: string;
   date: Date;
   price: number;
-
+  
   onlyNumberKey(event) {
     return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
-} 
+}
   addCouponOpenFlag = false;
   createCouponFlag = false;
   getCuponFlag = false;
@@ -37,6 +37,8 @@ export class CompanyFacadeComponent implements OnInit {
   couponByPriceFlag = false;
   couponArrFlag = false;
   oneCouponFlag = false;
+  couponExist = false;
+  couponExist1=false;
 
   allFalse(){
  this.addCouponOpenFlag = false;
@@ -49,16 +51,21 @@ export class CompanyFacadeComponent implements OnInit {
  this. couponByPriceFlag = false;
  this. couponArrFlag = false;
  this. oneCouponFlag = false;
+ this.couponExist = false;
+ this.couponExist1=false;
   }
   addCouponToCompany() {
-
     this.companyService.addCouponToCompany(this.compId, this.coupId).subscribe(response => {
-      console.log(response);
+      this.coupons = response;
+      console.log(this.coupons);
+      this.allFalse();
+      this.couponArrFlag = true;
     }, err => {
-      alert("Error " + err.massage)
+   //   alert("Error " + err.massage)
+   this.couponExist = true;
     })
-    this.allFalse();
-    this.couponArrFlag = true;
+  
+
   }
 
   createThisCoupon() {
@@ -77,14 +84,15 @@ export class CompanyFacadeComponent implements OnInit {
       this.coupon = response;
 
       console.log(this.coupon);
+this.allFalse();
+this.oneCouponFlag= true;
 
     }, err => {
-      alert("Error " + err.massage)
+     // alert("Error " + err.massage)
+     this.allFalse();
+     this.couponExist1=true;
     }
-    )
-
-    this.oneCouponFlag= true;
-    this.getCuponFlag = false;
+    )    
   }
   getAllCoupons() {
 
@@ -102,11 +110,15 @@ export class CompanyFacadeComponent implements OnInit {
     this.companyService.delete(this.coupId).subscribe(response => {
       console.log(response);
       this.coupons = response;
+      this.deleteCouponFlag = false;
+      this.couponArrFlag = true;
     }, err => {
-      alert("Error " + err.massage)
+     // alert("Error " + err.massage)
+     this.allFalse();
+     this.couponExist1=true;
     }
     )
-    this.coupId = 0;
+
     this.deleteCouponFlag = false;
     this.couponArrFlag = true;
   }
@@ -126,24 +138,28 @@ export class CompanyFacadeComponent implements OnInit {
       response => {
         this.coupon = response;
         console.log(this.coupon);
-        alert("Coupon Updated")
+        this.allFalse();
+    this.oneCouponFlag = true;
       }, err => {
-        alert("Error " + err.massage)
+        this.allFalse();
+        this.couponExist1=true;
       }
     )
-    this.updateCoponFlag = false;
+    
   }
   findCpouponByType() {
     this.companyService.getCouponByType(this.couponType,this.compId).subscribe(
       responce => {
         this.coupons = responce;
         console.log(this.coupons);
+        this.couponArrFlag = true;
       }, err => {
-        alert("Error " + err.massage)
+        this.allFalse();
+        this.couponExist1=true;
       }
 
     )
-    this.couponArrFlag = true;
+
   }
 
   findCpouponByDate() {
@@ -151,12 +167,14 @@ export class CompanyFacadeComponent implements OnInit {
       responce => {
         this.coupons = responce;
         console.log(this.coupons);
+        this.couponArrFlag = true;
       }, err => {
-        alert("Error " + err.massage)
+        this.allFalse();
+        this.couponExist1=true;
       }
 
     )
-    this.couponArrFlag = true;
+    
   }
 
   findCpouponByPrice() {
@@ -164,12 +182,14 @@ export class CompanyFacadeComponent implements OnInit {
       (response) => {
         this.coupons = response;
         console.log(this.coupons);
+        this.couponArrFlag = true;
       }, err => {
-        alert("Error " + err.massage)
+        this.allFalse();
+        this.couponExist1=true;
       }
 
     )
-    this.couponArrFlag = true;
+
   }
   public logout(): void {
     this.logginService.logout;

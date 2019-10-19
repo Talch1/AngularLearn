@@ -1,10 +1,7 @@
 <div class="row">
   <div class="col">
-    
     <h1>Hello!<br> Please Sign In</h1>
-    <div style=color:red;margin-left:20px; *ngIf="inncorrect">
-        <h2>Password or Login is inncorrect</h2>
-      </div>
+    <h2 *ngIf="incorrect" style= color:red;margin-left:20px;>Password or loggin is incorrect</h2>
   </div>
   <form >
     <div>

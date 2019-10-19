@@ -1,6 +1,5 @@
 <nav>
     <a (click)="logout()">Logout</a>
-    
 </nav>
 
 <br>
@@ -116,7 +115,12 @@
     <input type="number" pInputText (keypress)="onlyNumberKey($event)" maxlength="4"  min=1 class="form-control" placeholder="Please enter Coupon  price" [(ngModel)]="price">
     <button type="button" (click)="findCpouponByPrice()"> Find Coupon By Price Less Than </button>
 </div>
-
+<div *ngIf="couponExist">
+    <h1 style=color:red>This coupon is not exist or you have this coupon </h1>
+</div>
+<div *ngIf="couponExist1">
+        <h1 style=color:red>This coupon is not exist </h1>
+    </div>
 <div *ngIf="couponArrFlag">
     <table>
         <tr>   <th>Id</th>

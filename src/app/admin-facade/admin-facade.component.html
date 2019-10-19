@@ -34,16 +34,17 @@
 
 <div *ngIf="CreateCustFlag">
     <input type="number"  pInputText (keypress)="onlyNumberKey($event)" maxlength="4" min=1 class="form-control" placeholder="Please enter Customer id" [(ngModel)]="this.customer.id">
-    <input type="text" class="form-control" placeholder="Please enter Customer name"  [(ngModel)]="this.customer.user.name">
+    <input type="text" class="form-control" placeholder="Please enter Customer name"
+        [(ngModel)]="this.customer.custName">
     <input type="text" class="form-control" placeholder="Please enter Customer password"
-        [(ngModel)]="this.customer.user.password">
+        [(ngModel)]="this.customer.password">
     <button type="button" (click)="createCustomer()">Create this Customer </button>
 </div>
 <div *ngIf="CreateCompFlag">
     <input type="number" pInputText (keypress)="onlyNumberKey($event)" maxlength="4" min=1 class="form-control" placeholder="Please enter Company id" [(ngModel)]="this.company.id">
-    <input type="text" class="form-control" placeholder="Please enter Company name" [(ngModel)]="this.company.user.name">
+    <input type="text" class="form-control" placeholder="Please enter Company name" [(ngModel)]="this.company.compName">
     <input type="text" class="form-control" placeholder="Please enter Company password"
-        [(ngModel)]="this.company.user.password">
+        [(ngModel)]="this.company.password">
     <input type="email" class="form-control" placeholder="Please enter Company email" [(ngModel)]="this.company.email">
     <button type="button" (click)="createCompany()">Create this Company </button>
 </div>
@@ -59,16 +60,16 @@
 <div *ngIf="UpdateCustomerFlag">
         <input type="number" pInputText (keypress)="onlyNumberKey($event)" maxlength="4" min=1 class="form-control" placeholder="Please enter Customer id" [(ngModel)]="custId">
         <input type="text" class="form-control" placeholder="Please enter Customer name"
-            [(ngModel)]="this.customer.user.name">
-        <input type="text" class="form-control" placeholder="Please enter Customer password" [(ngModel)]="this.customer.user.password">
+            [(ngModel)]="this.customer.custName">
+        <input type="text" class="form-control" placeholder="Please enter Customer password" [(ngModel)]="this.customer.password">
         <button type="button" (click)="updateCustomer()"> Update Customer </button>
     </div>
 
 <div *ngIf="UpdateCompanyFlag">
         <input type="number" pInputText (keypress)="onlyNumberKey($event)" maxlength="4" min=1 class="form-control" placeholder="Please enter Comany id" [(ngModel)]="compId">
         <input type="text" class="form-control" placeholder="Please enter Comany name"
-            [(ngModel)]="this.company.user.name">
-        <input type="text" class="form-control" placeholder="Please enter Comany password" [(ngModel)]="this.company.user.password">
+            [(ngModel)]="this.company.compName">
+        <input type="text" class="form-control" placeholder="Please enter Comany password" [(ngModel)]="this.company.password">
         <input type="text" class="form-control" placeholder="Please enter Comany email" [(ngModel)]="this.company.email">
         <button type="button" (click)="updateCompany()"> Update Comany </button>
     </div>
@@ -87,11 +88,13 @@
         <tr>   
         <th>Id</th>
         <th>Comany Name</th>
+        <th>Password</th>
         <th>Email</th>
       </tr>
         <tr *ngFor="let company of companys">
          <td>{{company.id}}</td>
-        <td>{{company.user.name}}</td>
+        <td>{{company.compName}}</td>
+        <td>{{company.password}}</td>
         <td>{{company.email}}</td>        
     </table>
 
@@ -101,11 +104,13 @@
             <tr>  
              <th>Id</th>
             <th>Company Name</th>
+            <th>Password</th>
             <th>Email</th>
           </tr>
             <tr>
              <td>{{this.company.id}}</td>
-            <td>{{this.company.user.name}}</td>
+            <td>{{this.company.compName}}</td>
+            <td>{{this.company.password}}</td>
             <td>{{this.company.email}}</td>
         </table>
 </div>
@@ -114,10 +119,12 @@
             <tr>   
             <th>Id</th>
             <th>Customer Name</th>
+            <th>Password</th>
           </tr>
             <tr *ngFor="let customer of customers">
              <td>{{customer.id}}</td>
-            <td>{{customer.user.name}}</td>  
+            <td>{{customer.custName}}</td>
+            <td>{{customer.password}}</td>    
         </table>
     
     </div>
@@ -126,11 +133,12 @@
                 <tr>  
                  <th>Id</th>
                 <th>Company Name</th>
+                <th>Password</th>
               </tr>
                 <tr>
                  <td>{{this.customer.id}}</td>
-                <td>{{this.customer.user.name}}</td>
-                
+                <td>{{this.customer.custName}}</td>
+                <td>{{this.customer.password}}</td>
             </table>
     </div>
         

@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { LogginService } from '../services/loggin.service';
 import { Router } from '@angular/router';
 import { CompanyService } from '../services/company-service';
-import { Customer } from '../beans/Customet';
+
 import { Company } from '../beans/Company';
 import { AdminService } from '../services/admin.service';
+import { Customer } from '../beans/Customer';
 
 @Component({
   selector: 'app-admin-facade',
@@ -18,8 +19,8 @@ export class AdminFacadeComponent implements OnInit {
   company: Company = new Company();
   customers: Customer[] = [];
   companys: Company[] = [];
-  custId: number = 6;
-  compId: number = 1;
+  custId: number = 2010;
+  compId: number = 201;
 
   onlyNumberKey(event) {
     return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;

@@ -23,7 +23,6 @@ export class LogginService {
   public auth(credentials : Credentials):Observable <boolean>{
     console.log(credentials);
     this.type = credentials.type;
-    
     return this.httpClient.post<boolean>("http://localhost:8080/login/logging",credentials);
 
   }
