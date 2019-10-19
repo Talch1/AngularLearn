@@ -18,8 +18,8 @@ export class AdminFacadeComponent implements OnInit {
   company: Company = new Company();
   customers: Customer[] = [];
   companys: Company[] = [];
-  custId: number = 2010;
-  compId: number = 201;
+  custId: number = 6;
+  compId: number = 1;
 
   onlyNumberKey(event) {
     return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;

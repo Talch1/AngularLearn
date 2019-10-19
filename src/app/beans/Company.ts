@@ -1,6 +1,7 @@
+import { User } from './User';
+
 export class Company {
 
-
-constructor( public id?: number,public compName?: string, public password?: string,public email?: string){
+constructor( public id?: number,public user ?:User,public email?: string){
 }
 }

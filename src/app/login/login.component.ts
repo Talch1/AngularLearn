@@ -18,6 +18,7 @@ export class LoginComponent {
 
   public credentials = new Credentials;
 ifLogintrue = false;
+inncorrect = false;
 
 constructor(private LogginService : LogginService,private router :Router) { }  
 
@@ -38,7 +39,7 @@ constructor(private LogginService : LogginService,private router :Router) { }
           this.router.navigate(["/admin"]);
   } 
       }, err => {
-        alert("Error " + err.massage)
+        this.inncorrect= true;
       })
     
 }

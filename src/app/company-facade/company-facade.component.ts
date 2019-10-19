@@ -17,7 +17,7 @@ export class CompanyFacadeComponent implements OnInit {
   coupons: Coupon[];
   massage: string;
 
-  compId: number = 201;
+  compId: number = 1;
   coupId: number;
 
   couponType: string;

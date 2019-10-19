@@ -18,7 +18,7 @@ export class CompComponent implements OnInit {
   coupons: Coupon[];
   massage: string;
 
-  compId: number = 201;
+  compId: number = 2;
   coupId: number;
 
   couponType: string;
