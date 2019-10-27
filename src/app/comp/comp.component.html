@@ -115,6 +115,14 @@
     <input type="number" pInputText (keypress)="onlyNumberKey($event)" maxlength="4"  min=1 class="form-control" placeholder="Please enter Coupon  price" [(ngModel)]="price">
     <button type="button" (click)="findCpouponByPrice()"> Find Coupon By Price Less Than </button>
 </div>
+<div *ngIf="exist" style="color:red">
+    <h2>This coupon is not exist or you have one licke this</h2>
+    
+    </div>
+    <div *ngIf="wasDeleted" style="color:red">
+        <h2>All coupons deleted</h2>
+        
+        </div>
 
 <div *ngIf="couponArrFlag">
     <table>
@@ -166,4 +174,5 @@
             
         </table>
 </div>
+
     

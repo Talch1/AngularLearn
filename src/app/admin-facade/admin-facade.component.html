@@ -91,11 +91,11 @@
         <th>Password</th>
         <th>Email</th>
       </tr>
-        <tr *ngFor="let company of companys">
-         <td>{{company.id}}</td>
-        <td>{{company.compName}}</td>
-        <td>{{company.password}}</td>
-        <td>{{company.email}}</td>        
+        <tr *ngFor="let user of users">
+         <td>{{user.id}}</td>
+        <td>{{user.userName}}</td>
+        <td>{{user.password}}</td>
+        <td>{{user.email}}</td>        
     </table>
 
 </div>
@@ -108,10 +108,10 @@
             <th>Email</th>
           </tr>
             <tr>
-             <td>{{this.company.id}}</td>
-            <td>{{this.company.compName}}</td>
-            <td>{{this.company.password}}</td>
-            <td>{{this.company.email}}</td>
+             <td>{{this.user.id}}</td>
+            <td>{{this.user.userName}}</td>
+            <td>{{this.user.password}}</td>
+            <td>{{this.user.email}}</td>
         </table>
 </div>
 <div *ngIf="CustArrFlag">
@@ -121,10 +121,10 @@
             <th>Customer Name</th>
             <th>Password</th>
           </tr>
-            <tr *ngFor="let customer of customers">
-             <td>{{customer.id}}</td>
-            <td>{{customer.custName}}</td>
-            <td>{{customer.password}}</td>    
+            <tr *ngFor="let user of users">
+             <td>{{user.id}}</td>
+            <td>{{user.userName}}</td>
+            <td>{{user.password}}</td>    
         </table>
     
     </div>
@@ -136,9 +136,8 @@
                 <th>Password</th>
               </tr>
                 <tr>
-                 <td>{{this.customer.id}}</td>
-                <td>{{this.customer.custName}}</td>
-                <td>{{this.customer.password}}</td>
+                 <td>{{this.user.id}}</td>
+                <td>{{this.user.userName}}</td>
+                <td>{{this.user.password}}</td>
             </table>
     </div>
-        

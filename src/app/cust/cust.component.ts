@@ -12,8 +12,8 @@ import { timeout } from 'q';
   styleUrls: ['./cust.component.css']
 })
 export class CustComponent implements OnInit {
-  ngOnInit(){}
- 
+  ngOnInit() { }
+
 
 
   constructor(private logginService: LogginService, private router: Router, private customerService: CustomerServiceService) { }
@@ -23,7 +23,7 @@ export class CustComponent implements OnInit {
   massage: string;
 
   custId: number = 2010;
-  coupId: number ;
+  coupId: number;
 
   couponType: string;
   date: Date;
@@ -31,7 +31,7 @@ export class CustComponent implements OnInit {
 
   onlyNumberKey(event) {
     return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
-}
+  }
 
   addCouponOpenFlag = false;
   couponByIdFlag = false;
@@ -40,7 +40,7 @@ export class CustComponent implements OnInit {
   couponByPriceFlag = false;
   couponArrFlag = false;
   oneCouponFlag = false;
-
+  exist = false;
   allFalse() {
     this.couponByIdFlag = false;
     this.addCouponOpenFlag = false;
@@ -49,49 +49,56 @@ export class CustComponent implements OnInit {
     this.couponByPriceFlag = false;
     this.couponArrFlag = false;
     this.oneCouponFlag = false;
+    this.exist = false;
   }
   public logout(): void {
     this.logginService.logout;
     this.router.navigate(['/login'])
   }
-  
-  purchaseCoupon(){
-  this.customerService.addCouponToCustomer(this.custId,this.coupId).subscribe(response => {
-    this.coupons = response;
-    console.log(this.coupons);
-  }, err => {
-    alert("Error " + err.massage)
-  })
-  this.allFalse();
-  this.couponArrFlag = true;
-}
+
+  purchaseCoupon() {
+    this.customerService.addCouponToCustomer(this.custId, this.coupId).subscribe(response => {
+      this.coupons = response;
+      console.log(this.coupons); 
+       this.allFalse();
+      this.couponArrFlag = true;
+    }, err => {
+      this.exist = true;
+    })
+    this.allFalse();
+    this.couponArrFlag = true;
+  }
 
   getAllCoupons() {
 
     this.customerService.getAllCoupons(this.custId).subscribe(response => {
       this.coupons = response;
       console.log(this.coupons);
+      this.allFalse();
+    this.couponArrFlag = true;
     }, err => {
       alert("Error " + err.massage)
     })
-    this.allFalse();
-    this.couponArrFlag = true;
+    
 
   }
 
-  findCpouponById(){
-    this.customerService.getCouponById(this.custId,this.coupId).subscribe(
+  findCpouponById() {
+    this.customerService.getCouponById(this.custId, this.coupId).subscribe(
       responce => {
         this.coupon = responce;
         console.log(this.coupon);
+        this.allFalse();
+        this.oneCouponFlag = true;
       }, err => {
-        alert("Error " + err.massage)
+        this.allFalse();
+        this.exist=true;
       }
 
     )
-    this.oneCouponFlag = true;
+    
   }
-  adminfindCpouponById(){
+  adminfindCpouponById() {
     this.customerService.adminGetCouponById(this.coupId).subscribe(
       responce => {
         this.coupon = responce;
@@ -165,9 +172,9 @@ export class CustComponent implements OnInit {
     this.couponByPriceFlag = true;
 
   }
-  getCouponsByIdOPen(){
+  getCouponsByIdOPen() {
     this.allFalse();
-    this.couponByIdFlag = true; 
+    this.couponByIdFlag = true;
   }
 
 }

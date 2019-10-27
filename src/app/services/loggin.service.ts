@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { from, Observable, observable } from 'rxjs';
-import { Credentials } from '../beans/Credentials';
+import { User } from '../beans/User';
 import { HttpClient } from '@angular/common/http';
 
 
@@ -13,17 +13,18 @@ export class LogginService {
   constructor(private httpClient:HttpClient){ }
   public inLoggedIn:boolean;
   public type:string;
-  public credentionals:Credentials;
+  public user:User;
 
   public logout(): void {
     this.inLoggedIn = false;
     this.type = "";
 
   }
-  public auth(credentials : Credentials):Observable <boolean>{
-    console.log(credentials);
-    this.type = credentials.type;
-    return this.httpClient.post<boolean>("http://localhost:8080/login/logging",credentials);
+  public auth(user : User):Observable <boolean>{
+    console.log(user);
+    this.type = user.role;
+    return this.httpClient.post<boolean>("http://localhost:8080/login/logging",user
+    );
 
   }
   }

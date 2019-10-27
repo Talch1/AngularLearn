@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { LogginService } from '../services/loggin.service';
 import { Router } from '@angular/router';
-import { CompanyService } from '../services/company-service';
-import { Customer } from '../beans/Customet';
-import { Company } from '../beans/Company';
 import { AdminService } from '../services/admin.service';
+import { User } from '../beans/User';
+
 
 @Component({
   selector: 'app-admin-facade',
@@ -14,17 +13,14 @@ import { AdminService } from '../services/admin.service';
 export class AdminFacadeComponent implements OnInit {
 
   constructor(private logginService: LogginService, private router: Router, private adminService: AdminService) { }
-  customer: Customer = new Customer();
-  company: Company = new Company();
-  customers: Customer[] = [];
-  companys: Company[] = [];
+  user: User = new User();
+  users: User[] = [];
   custId: number = 2010;
   compId: number = 201;
 
   onlyNumberKey(event) {
     return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
 } 
-
   CreateCustFlag = false;
   CreateCompFlag = false;
   DeleteCustomerFlag = false;
@@ -68,9 +64,9 @@ export class AdminFacadeComponent implements OnInit {
 
   //********************************************************************************************************************************* */
   createCustomer() {
-    this.adminService.createCustomer(this.customer).subscribe(response => {
-      this.customers = response;
-      console.log(this.customers);
+    this.adminService.createCustomer(this.user).subscribe(response => {
+      this.users = response;
+      console.log(this.users);
     }, err => {
       alert("Error " + err.massage)
     })
@@ -79,9 +75,9 @@ export class AdminFacadeComponent implements OnInit {
 
   }
   createCompany() {
-    this.adminService.createCompany(this.company).subscribe(response => {
-      this.companys = response;
-      console.log(this.companys);
+    this.adminService.createCompany(this.user).subscribe(response => {
+      this.users = response;
+      console.log(this.users);
     }, err => {
       alert("Error " + err.massage)
     })
@@ -90,8 +86,8 @@ export class AdminFacadeComponent implements OnInit {
   }
   deleteCustomerById() {
     this.adminService.deleteCustomer(this.custId).subscribe(response => {
-      this.customers = response;
-      console.log(this.customers);
+      this.users = response;
+      console.log(this.users);
     }, err => {
       alert("Error " + err.massage)
     })
@@ -101,8 +97,8 @@ export class AdminFacadeComponent implements OnInit {
 
   deleteCompanyById() {
     this.adminService.deleteCompany(this.compId).subscribe(response => {
-      this.companys = response;
-      console.log(this.companys);
+      this.users = response;
+      console.log(this.users);
     }, err => {
       alert("Error " + err.massage)
     })
@@ -110,10 +106,10 @@ export class AdminFacadeComponent implements OnInit {
     this.CompArrFlag = true;
   }
   updateCustomer() {
-    this.adminService.updateCustomer(this.custId,this.customer).subscribe(response => {
-      this.customer = response;
-      console.log(this.customer);
-      this.customer.id = this.custId;
+    this.adminService.updateCustomer(this.custId,this.user).subscribe(response => {
+      this.user = response;
+      console.log(this.user);
+      this.user.id = this.custId;
     }, err => {
       alert("Error " + err.massage)
     })
@@ -121,10 +117,10 @@ export class AdminFacadeComponent implements OnInit {
     this.OneCustFlag = true;
   }
   updateCompany() {
-    this.adminService.updateCompany(this.compId,this.company).subscribe(response => {
-      this.company = response;
-      console.log(this.company);
-      this.company.id = this.compId;
+    this.adminService.updateCompany(this.compId,this.user).subscribe(response => {
+      this.user = response;
+      console.log(this.user);
+      this.user.id = this.compId;
     }, err => {
       alert("Error " + err.massage)
     })
@@ -133,9 +129,9 @@ export class AdminFacadeComponent implements OnInit {
   }
   getCompany(){
     this.adminService.getCompany(this.compId).subscribe(response => {
-      this.company = response;
-      console.log(this.company);
-      this.company.id = this.compId;
+      this.user = response;
+      console.log(this.user);
+      this.user.id = this.compId;
     }, err => {
       alert("Error " + err.massage)
     })
@@ -145,9 +141,9 @@ export class AdminFacadeComponent implements OnInit {
   
   getCustomer(){
     this.adminService.getCustomer(this.custId).subscribe(response => {
-      this.customer = response;
-      console.log(this.customer);
-      this.customer.id = this.custId;
+      this.user = response;
+      console.log(this.user);
+      this.user.id = this.custId;
     }, err => {
       alert("Error " + err.massage)
     })
@@ -157,8 +153,8 @@ export class AdminFacadeComponent implements OnInit {
   
   getAllCustomers() {
     this.adminService.getAllCustomers().subscribe(response => {
-      this.customers = response;
-      console.log(this.customers);
+      this.users = response;
+      console.log(this.users);
     }, err => {
       alert("Error " + err.massage)
     })
@@ -167,8 +163,8 @@ export class AdminFacadeComponent implements OnInit {
   }
   getAllCompanys() {
     this.adminService.getAllCompanys().subscribe(response => {
-      this.companys = response;
-      console.log(this.companys);
+      this.users = response;
+      console.log(this.users);
     }, err => {
       alert("Error " + err.massage)
     })

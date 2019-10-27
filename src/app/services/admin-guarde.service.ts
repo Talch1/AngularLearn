@@ -13,8 +13,6 @@ export class AdminGuardService implements CanActivate {
     }
     this.router.navigate(['/login']);
     return false;
-    
-    
 
   }
 

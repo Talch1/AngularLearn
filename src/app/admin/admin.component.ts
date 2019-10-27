@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LogginService } from '../services/loggin.service';
 import { Router } from '@angular/router';
-import { Company } from '../beans/Company';
+
 
 
 @Component({
@@ -12,7 +12,6 @@ import { Company } from '../beans/Company';
 export class AdminComponent implements OnInit {
   constructor(private logginService: LogginService,private router:Router,) { }
 
-  companys: Company[];
   
  public logout() : void{
    this.logginService.logout;

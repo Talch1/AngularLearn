@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Credentials } from '../beans/Credentials';
+import { User } from '../beans/User';
 import { from } from 'rxjs';
 import { logging } from 'protractor';
 import { LogginService } from '../services/loggin.service';
@@ -16,29 +16,29 @@ import { Router } from '@angular/router';
 export class LoginComponent {
 
 
-  public credentials = new Credentials;
+public user = new User;
 ifLogintrue = false;
-
+incorrect = false;
 constructor(private LogginService : LogginService,private router :Router) { }  
 
     logging(){
-      this.LogginService.auth(this.credentials).subscribe(response => {
+      this.LogginService.auth(this.user).subscribe(response => {
         this.ifLogintrue = response;
         console.log(this.ifLogintrue);
-        if (this.credentials.type === 'Customer' && this.ifLogintrue ==true ){
+        if (this.user.role === 'Customer' && this.ifLogintrue ==true ){
           this.LogginService.inLoggedIn = true;
           this.router.navigate(["/cust"]);
         }
-        else if (this.credentials.type === 'Company' && this.ifLogintrue ==true){
+        else if (this.user.role === 'Company' && this.ifLogintrue ==true){
           this.LogginService.inLoggedIn = true;
           this.router.navigate(["/comp"]);
         }
-        else if (this.credentials.type === 'Admin' && this.ifLogintrue ==true ){
+        else if (this.user.role === 'Admin' && this.ifLogintrue ==true ){
           this.LogginService.inLoggedIn = true;
           this.router.navigate(["/admin"]);
   } 
       }, err => {
-        alert("Error " + err.massage)
+        this.incorrect = true;
       })
     
 }
