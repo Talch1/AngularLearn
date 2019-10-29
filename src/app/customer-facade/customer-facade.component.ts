@@ -91,7 +91,7 @@ export class CustomerFacadeComponent implements OnInit {
     this.oneCouponFlag = true;
   }
   adminfindCpouponById(){
-    this.customerService.adminGetCouponById(this.coupId).subscribe(
+    this.customerService.getCouponById(this.coupId,this.custId).subscribe(
       responce => {
         this.coupon = responce;
         console.log(this.coupon);

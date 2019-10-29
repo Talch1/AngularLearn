@@ -115,10 +115,24 @@
     <input type="number" pInputText (keypress)="onlyNumberKey($event)" maxlength="4"  min=1 class="form-control" placeholder="Please enter Coupon  price" [(ngModel)]="price">
     <button type="button" (click)="findCpouponByPrice()"> Find Coupon By Price Less Than </button>
 </div>
-<div *ngIf="exist" style="color:red">
-    <h2>This coupon is not exist or you have one licke this</h2>
+<div *ngIf="youCouponIsnotExist" style="color:red">
+    <h2>You don't have this coupon,if you want add this coupon to you company please prees Add Coupon
+    </h2>
     
     </div>
+<div *ngIf="exist" style="color:red">
+    <h2>This coupon is not exist or you have one licke this</h2>
+    </div>
+
+
+<div *ngIf="existA" style="color:red">
+    <h2>This coupon is not exist</h2>
+    </div>
+    
+<div *ngIf="existA" style="color:red">
+    <h2> Coupon whis this Type is not exist</h2>
+    </div>
+
     <div *ngIf="wasDeleted" style="color:red">
         <h2>All coupons deleted</h2>
         
@@ -138,9 +152,9 @@
       </tr>
         <tr *ngFor="let coupon of coupons">
             <td>{{coupon.id}}</td>
-        <td>{{coupon.title}}</td>
-        <td>{{coupon.startDate}}</td>
-        <td>{{coupon.endDate}}</td>
+            <td>{{coupon.title}}</td>
+            <td>{{coupon.startDate|date:small}}</td>
+        <td>{{coupon.endDate|date:small}}</td>
         <td>{{coupon.amount}}</td>
         <td>{{coupon.type}}</td>
         <td>{{coupon.message}}</td>
@@ -164,8 +178,8 @@
             <tr>
                 <td>{{this.coupon.id}}</td>
             <td>{{this.coupon.title}}</td>
-            <td>{{this.coupon.startDate}}</td>
-            <td>{{this.coupon.endDate}}</td>
+            <td>{{this.coupon.startDate|date:small}}</td>
+            <td>{{this.coupon.endDate|date:small}}</td>
             <td>{{this.coupon.amount}}</td>
             <td>{{this.coupon.type}}</td>
             <td>{{this.coupon.message}}</td>

@@ -39,6 +39,9 @@ export class CompComponent implements OnInit {
   oneCouponFlag = false;
   exist = false;
   wasDeleted = false;
+  youCouponIsnotExist = false;
+  existA = false;
+  existB = false;
 
   allFalse(){
  this.addCouponOpenFlag = false;
@@ -53,19 +56,21 @@ export class CompComponent implements OnInit {
  this. oneCouponFlag = false;
  this.exist = false;
  this.wasDeleted = false;
+ this.youCouponIsnotExist = false;
+ this.existA = false;
+ this.existB = false;
   }
   addCouponToCompany() {
-
     this.companyService.addCouponToCompany(this.compId, this.coupId).subscribe(response => {
       this.coupons = response;
       console.log(this.coupons);
+      this.allFalse();
+      this.couponArrFlag = true;
     }, err => {
+      this.allFalse();
       this.exist = true;
     })
-   this.allFalse();
-    this.couponArrFlag = true;
   }
-
   createThisCoupon() {
     this.companyService.addCoupon(this.coupon).subscribe(response => {
       this.coupons = response;
@@ -82,8 +87,12 @@ export class CompComponent implements OnInit {
       console.log(this.coupon);
       this.allFalse();
       this.oneCouponFlag= true;
+      if(this.coupon===null){
+        this.allFalse();
+       this.youCouponIsnotExist = true;
+      }
     }, err => {
-      alert("Error " + err.massage)
+     // alert("Error " + err.massage)
     }
     )
   }
@@ -106,7 +115,8 @@ export class CompComponent implements OnInit {
       this.allFalse();
       this.couponArrFlag = true;
     }, err => {
-      alert("Error " + err.massage)
+      this.allFalse();
+      this.existA = true;
     }
     );
   }
@@ -126,24 +136,29 @@ export class CompComponent implements OnInit {
       response => {
         this.coupon = response;
         console.log(this.coupon);
+        this.allFalse();
+    this.oneCouponFlag = true;
       }, err => {
         alert("Error " + err.massage)
       }
     )
-    this.allFalse();
-    this.oneCouponFlag = true;
+    
   }
   findCpouponByType() {
     this.companyService.getCouponByType(this.couponType,this.compId).subscribe(
       responce => {
         this.coupons = responce;
         console.log(this.coupons);
+        this.couponArrFlag = true;
+        if(this.coupons.length==0){
+          this.allFalse();
+        this.existB = true;
+        }
       }, err => {
-        alert("Error " + err.massage)
+        this.allFalse();
+        this.existB = true;
       }
-
     )
-    this.couponArrFlag = true;
   }
 
   findCpouponByDate() {

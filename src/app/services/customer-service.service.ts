@@ -30,7 +30,5 @@ export class CustomerServiceService {
   public getCouponByPrice(price: number, custId: number): Observable<Coupon[]> {
     return this.httpClient.get<Coupon[]>(this.baseURL + "getAllCouponByPrice/" + custId + "/" + price);
   }
-  public adminGetCouponById(id: number): Observable<Coupon> {
-    return this.httpClient.get<Coupon>("http://localhost:8080/customer/getCoupByID/" + id);
-  }
+ 
 }

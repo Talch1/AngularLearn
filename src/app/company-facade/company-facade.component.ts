@@ -37,6 +37,8 @@ export class CompanyFacadeComponent implements OnInit {
   oneCouponFlag = false;
   exist = false;
   wasDeleted = false;
+  youCouponIsnotExist = false;
+  existDelete = false;
 
   allFalse(){
  this.addCouponOpenFlag = false;
@@ -51,19 +53,20 @@ export class CompanyFacadeComponent implements OnInit {
  this. oneCouponFlag = false;
  this.exist = false;
  this.wasDeleted = false;
+ this.youCouponIsnotExist = false;
+ this.existDelete = false;
   }
   addCouponToCompany() {
-
     this.companyService.addCouponToCompany(this.compId, this.coupId).subscribe(response => {
       this.coupons = response;
       console.log(this.coupons);
+      this.allFalse();
+      this.couponArrFlag = true;
     }, err => {
+      this.allFalse();
       this.exist = true;
     })
-   this.allFalse();
-    this.couponArrFlag = true;
   }
-
   createThisCoupon() {
     this.companyService.addCoupon(this.coupon).subscribe(response => {
       this.coupons = response;
@@ -80,8 +83,12 @@ export class CompanyFacadeComponent implements OnInit {
       console.log(this.coupon);
       this.allFalse();
       this.oneCouponFlag= true;
+      if(this.coupon===null){
+        this.allFalse();
+       this.youCouponIsnotExist = true;
+      }
     }, err => {
-      alert("Error " + err.massage)
+     // alert("Error " + err.massage)
     }
     )
   }
@@ -104,7 +111,8 @@ export class CompanyFacadeComponent implements OnInit {
       this.allFalse();
       this.couponArrFlag = true;
     }, err => {
-      alert("Error " + err.massage)
+      this.allFalse();
+      this.existDelete = true;
     }
     );
   }

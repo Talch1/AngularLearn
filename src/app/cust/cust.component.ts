@@ -59,8 +59,8 @@ export class CustComponent implements OnInit {
   purchaseCoupon() {
     this.customerService.addCouponToCustomer(this.custId, this.coupId).subscribe(response => {
       this.coupons = response;
-      console.log(this.coupons); 
-       this.allFalse();
+      console.log(this.coupons);
+      this.allFalse();
       this.couponArrFlag = true;
     }, err => {
       this.exist = true;
@@ -75,14 +75,11 @@ export class CustComponent implements OnInit {
       this.coupons = response;
       console.log(this.coupons);
       this.allFalse();
-    this.couponArrFlag = true;
+      this.couponArrFlag = true;
     }, err => {
       alert("Error " + err.massage)
     })
-    
-
   }
-
   findCpouponById() {
     this.customerService.getCouponById(this.custId, this.coupId).subscribe(
       responce => {
@@ -92,34 +89,22 @@ export class CustComponent implements OnInit {
         this.oneCouponFlag = true;
       }, err => {
         this.allFalse();
-        this.exist=true;
+        // this.exist=true;
       }
-
-    )
-    
-  }
-  adminfindCpouponById() {
-    this.customerService.adminGetCouponById(this.coupId).subscribe(
-      responce => {
-        this.coupon = responce;
-        console.log(this.coupon);
-      }, err => {
-        alert("Error " + err.massage)
-      }
-
     )
   }
+
   findCpouponByType() {
     this.customerService.getCouponByType(this.couponType, this.custId).subscribe(
       responce => {
         this.coupons = responce;
         console.log(this.coupons);
+        this.couponArrFlag = true;
       }, err => {
         alert("Error " + err.massage)
       }
-
     )
-    this.couponArrFlag = true;
+
   }
 
   findCpouponByDate() {
@@ -127,12 +112,12 @@ export class CustComponent implements OnInit {
       responce => {
         this.coupons = responce;
         console.log(this.coupons);
+        this.couponArrFlag = true;
       }, err => {
         alert("Error " + err.massage)
       }
 
     )
-    this.couponArrFlag = true;
   }
 
   findCpouponByPrice() {
@@ -140,20 +125,17 @@ export class CustComponent implements OnInit {
       (response) => {
         this.coupons = response;
         console.log(this.coupons);
+        this.couponArrFlag = true;
       }, err => {
         alert("Error " + err.massage)
       }
-
     )
-    this.couponArrFlag = true;
   }
 
   addCouponOpen() {
     this.allFalse();
     this.addCouponOpenFlag = true;
-
   }
-
   getAllCouponsOPen() {
     this.allFalse();
   }
