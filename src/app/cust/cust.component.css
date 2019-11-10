@@ -18,10 +18,15 @@ button{
 }
 input{
  inline-size: 250px;
- margin: 15px;
+
 }
 select{
     inline-size: 250px;   
-    margin-left: 15px;
+    
 }
-
+.form-group{
+    margin-left: 50px;
+}
+h2{
+    margin-left: 150px;
+}

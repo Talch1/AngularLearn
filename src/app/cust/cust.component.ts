@@ -40,7 +40,13 @@ export class CustComponent implements OnInit {
   couponByPriceFlag = false;
   couponArrFlag = false;
   oneCouponFlag = false;
-  exist = false;
+  existPurchoise = false;
+  existAllCoupon = false;
+  existId = false;
+  existType = false;
+  existDate =false;
+  existPrice = false;
+
   allFalse() {
     this.couponByIdFlag = false;
     this.addCouponOpenFlag = false;
@@ -49,7 +55,12 @@ export class CustComponent implements OnInit {
     this.couponByPriceFlag = false;
     this.couponArrFlag = false;
     this.oneCouponFlag = false;
-    this.exist = false;
+    this.existPurchoise = false;
+    this.existAllCoupon = false;
+    this.existId = false;
+    this.existType = false;
+    this.existDate = false;
+    this.existPrice=false;
   }
   public logout(): void {
     this.logginService.logout;
@@ -63,21 +74,23 @@ export class CustComponent implements OnInit {
       this.allFalse();
       this.couponArrFlag = true;
     }, err => {
-      this.exist = true;
+      this.allFalse();
+      this.existPurchoise = true;
     })
-    this.allFalse();
-    this.couponArrFlag = true;
   }
-
   getAllCoupons() {
-
     this.customerService.getAllCoupons(this.custId).subscribe(response => {
       this.coupons = response;
       console.log(this.coupons);
       this.allFalse();
       this.couponArrFlag = true;
+      if (this.coupons.length == 0) {
+        this.allFalse();
+        this.existAllCoupon = true;
+      }
     }, err => {
-      alert("Error " + err.massage)
+      this.allFalse();
+      this.existAllCoupon = true;
     })
   }
   findCpouponById() {
@@ -87,9 +100,13 @@ export class CustComponent implements OnInit {
         console.log(this.coupon);
         this.allFalse();
         this.oneCouponFlag = true;
+        if (this.coupon.id == 0) {
+          this.allFalse();
+          this.existId = true;
+        }
       }, err => {
         this.allFalse();
-        // this.exist=true;
+        this.existId = true;
       }
     )
   }
@@ -99,39 +116,50 @@ export class CustComponent implements OnInit {
       responce => {
         this.coupons = responce;
         console.log(this.coupons);
+        this.allFalse();
         this.couponArrFlag = true;
       }, err => {
-        alert("Error " + err.massage)
+        this.allFalse();
+        this.existType = true;
       }
     )
 
   }
-
   findCpouponByDate() {
     this.customerService.getCouponByDate(this.date, this.custId).subscribe(
       responce => {
         this.coupons = responce;
         console.log(this.coupons);
+        this.allFalse();
         this.couponArrFlag = true;
+        if (this.coupons.length == 0) {
+          this.allFalse();
+          this.existDate = true;
+        }
       }, err => {
-        alert("Error " + err.massage)
+        this.allFalse();
+        this.existDate = true;
       }
 
     )
   }
-
   findCpouponByPrice() {
     this.customerService.getCouponByPrice(this.price, this.custId).subscribe(
       (response) => {
         this.coupons = response;
         console.log(this.coupons);
+        this.allFalse();
         this.couponArrFlag = true;
+        if (this.coupons.length == 0) {
+          this.allFalse();
+          this.existPrice = true;
+        }
       }, err => {
-        alert("Error " + err.massage)
+        this.allFalse();
+        this.existPrice = true;
       }
     )
   }
-
   addCouponOpen() {
     this.allFalse();
     this.addCouponOpenFlag = true;

@@ -19,7 +19,8 @@ export class CustomerServiceService {
     return this.httpClient.get<Coupon[]>(this.baseURL + "getCustCoup/" + custId);
   }
   public getCouponById( custId: number,coupId: number): Observable<Coupon> {
-    return this.httpClient.get<Coupon>(this.baseURL + "getCustCoupByID/" + custId + "/" + coupId);
+    return this.httpClient.get<Coupon>(this.baseURL + "getCoupByID/" + custId + "/" + coupId);
+    
   }
   public getCouponByType(type: string, custId: number): Observable<Coupon[]> {
     return this.httpClient.get<Coupon[]>(this.baseURL + "findCustCoupByType/" + custId + "/" + type);
@@ -28,7 +29,7 @@ export class CustomerServiceService {
     return this.httpClient.get<Coupon[]>(this.baseURL + "findCustCoupByDate/" + custId + "/" + date);
   }
   public getCouponByPrice(price: number, custId: number): Observable<Coupon[]> {
-    return this.httpClient.get<Coupon[]>(this.baseURL + "getAllCouponByPrice/" + custId + "/" + price);
+    return this.httpClient.get<Coupon[]>(this.baseURL + "findCustCoupByPrice/" + custId + "/" + price);
   }
  
 }
