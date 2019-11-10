@@ -11,12 +11,12 @@ export class AdminService {
 
   constructor(private httpClient: HttpClient) { }
 
- public createCustomer(customer:User): Observable<User[]>{
-  return this.httpClient.post<User[]>(this.baseUrl +"customerCreate",customer );
+ public createCustomer(customer:User): Observable<User>{
+  return this.httpClient.post<User>(this.baseUrl +"customerCreate",customer );
  }
 
-  public createCompany(company: User ): Observable<User[]> {
-    return this.httpClient.post<User[]>(this.baseUrl + "compnyCreate/",company );
+  public createCompany(company: User ): Observable<User> {
+    return this.httpClient.post<User>(this.baseUrl + "compnyCreate/",company );
   }
   public deleteCustomer(custId: number ): Observable<User[]> {
     return this.httpClient.delete<User[]>(this.baseUrl + "deleteCust/"+custId );

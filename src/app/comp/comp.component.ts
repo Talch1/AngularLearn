@@ -23,10 +23,10 @@ export class CompComponent implements OnInit {
   couponType: string;
   date: Date;
   price: number;
-  
+
   onlyNumberKey(event) {
     return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
-}
+  }
   addCouponOpenFlag = false;
   createCouponFlag = false;
   getCuponFlag = false;
@@ -39,26 +39,30 @@ export class CompComponent implements OnInit {
   oneCouponFlag = false;
   exist = false;
   wasDeleted = false;
-  youCouponIsnotExist = false;
+  couponEmpty = false;
   existA = false;
   existB = false;
+  existC = false;
+  existD =false;
 
-  allFalse(){
- this.addCouponOpenFlag = false;
- this.createCouponFlag = false;
- this.getCuponFlag = false;
- this.deleteCouponFlag = false;
- this.updateCoponFlag = false;
- this.couponByTypeFlag = false;
- this. couponByDateFlag = false;
- this. couponByPriceFlag = false;
- this. couponArrFlag = false;
- this. oneCouponFlag = false;
- this.exist = false;
- this.wasDeleted = false;
- this.youCouponIsnotExist = false;
- this.existA = false;
- this.existB = false;
+  allFalse() {
+    this.addCouponOpenFlag = false;
+    this.createCouponFlag = false;
+    this.getCuponFlag = false;
+    this.deleteCouponFlag = false;
+    this.updateCoponFlag = false;
+    this.couponByTypeFlag = false;
+    this.couponByDateFlag = false;
+    this.couponByPriceFlag = false;
+    this.couponArrFlag = false;
+    this.oneCouponFlag = false;
+    this.exist = false;
+    this.wasDeleted = false;
+    this.couponEmpty = false;
+    this.existA = false;
+    this.existB = false;
+    this.existC= false;
+    this.existD= false;
   }
   addCouponToCompany() {
     this.companyService.addCouponToCompany(this.compId, this.coupId).subscribe(response => {
@@ -72,87 +76,96 @@ export class CompComponent implements OnInit {
     })
   }
   createThisCoupon() {
-    this.companyService.addCoupon(this.coupon).subscribe(response => {
+    this.companyService.addCoupon(this.coupon, this.compId).subscribe(response => {
       this.coupons = response;
       console.log(this.coupons);
       this.allFalse();
-    this.couponArrFlag = true;
+      this.couponArrFlag = true;
     }, err => {
-      alert("This id is exist" )
+      alert("This id is exist")
     })
   }
   getCoupon() {
-    this.companyService.getCoupon(this.coupId).subscribe(response => {
+    this.companyService.getCoupon(this.compId, this.coupId).subscribe(response => {
       this.coupon = response;
       console.log(this.coupon);
       this.allFalse();
-      this.oneCouponFlag= true;
-      if(this.coupon===null){
+      this.oneCouponFlag = true;
+      if (this.coupon.id === 0) {
         this.allFalse();
-       this.youCouponIsnotExist = true;
+        this.existA = true;
       }
     }, err => {
-     // alert("Error " + err.massage)
+      alert("Error " + err.massage)
     }
     )
   }
   getAllCoupons() {
 
-    this.companyService.getAllCoupons().subscribe(response => {
+    this.companyService.getAllCoupons(this.compId).subscribe(response => {
       this.coupons = response;
       console.log(this.coupons);
+      this.allFalse();
+      this.couponArrFlag = true;
+      if (this.coupons.length === 0) {
+        this.allFalse();
+        this.couponEmpty = true;
+      }
     }, err => {
       alert("Error " + err.massage)
     })
-   this.allFalse();
-    this.couponArrFlag = true;
+
 
   }
   deleteCouponById() {
-    this.companyService.delete(this.coupId).subscribe(response => {
+    this.companyService.delete(this.compId, this.coupId).subscribe(response => {
       console.log(response);
       this.coupons = response;
       this.allFalse();
       this.couponArrFlag = true;
+      if (this.coupons.length == 0) {
+        this.allFalse();
+        this.existA = true;
+      }
     }, err => {
       this.allFalse();
       this.existA = true;
     }
-    );
+    )
   }
   deleteAllCoupons() {
     this.companyService.deleteAll(this.compId).subscribe(response => {
       console.log(response);
-   this.wasDeleted = true;
+      this.wasDeleted = true;
     }, err => {
       alert("Error " + err.massage)
     }
     )
-   this.allFalse();
+    this.allFalse();
   }
 
   updateCopon() {
-    this.companyService.updateCoupon(this.coupon).subscribe(
+    this.companyService.updateCoupon(this.coupon, this.compId).subscribe(
       response => {
         this.coupon = response;
         console.log(this.coupon);
         this.allFalse();
-    this.oneCouponFlag = true;
+        this.oneCouponFlag = true;
       }, err => {
         alert("Error " + err.massage)
       }
     )
-    
+
   }
   findCpouponByType() {
-    this.companyService.getCouponByType(this.couponType,this.compId).subscribe(
+    this.companyService.getCouponByType(this.couponType, this.compId).subscribe(
       responce => {
         this.coupons = responce;
         console.log(this.coupons);
         this.couponArrFlag = true;
-        if(this.coupons.length==0){
+        if (this.coupons.length == 0) {
           this.allFalse();
-        this.existB = true;
+          this.existB = true;
         }
       }, err => {
         this.allFalse();
@@ -162,29 +175,38 @@ export class CompComponent implements OnInit {
   }
 
   findCpouponByDate() {
-    this.companyService.getCouponByDate(this.date,this.compId).subscribe(
+    this.companyService.getCouponByDate(this.date, this.compId).subscribe(
       responce => {
         this.coupons = responce;
         console.log(this.coupons);
+        this.couponArrFlag = true;
+        if (this.coupons.length == 0) {
+          this.allFalse();
+          this.existC = true;
+        }
       }, err => {
         alert("Error " + err.massage)
       }
-
     )
-    this.couponArrFlag = true;
+    
   }
 
   findCpouponByPrice() {
-    this.companyService.getCouponByPrice(this.price,this.compId).subscribe(
+    this.companyService.getCouponByPrice(this.price, this.compId).subscribe(
       (response) => {
         this.coupons = response;
         console.log(this.coupons);
+        this.couponArrFlag = true;
+        if (this.coupons.length == 0) {
+          this.allFalse();
+          this.existD = true;
+        }
       }, err => {
         alert("Error " + err.massage)
       }
 
     )
-    this.couponArrFlag = true;
+  
   }
   public logout(): void {
     this.logginService.logout;
@@ -195,7 +217,7 @@ export class CompComponent implements OnInit {
   addCouponOpen() {
     this.allFalse();
     this.addCouponOpenFlag = true;
-    
+
   }
   addNewCouponOpen() {
     this.allFalse();
@@ -203,12 +225,12 @@ export class CompComponent implements OnInit {
   }
   getCoponByIDOpen() {
     this.allFalse();
-    this.getCuponFlag = true;    
+    this.getCuponFlag = true;
   }
   deleteCoponByIDOpen() {
     this.allFalse();
     this.deleteCouponFlag = true;
-   
+
   }
   getAllCouponsOPen() {
     this.allFalse();
@@ -227,12 +249,12 @@ export class CompComponent implements OnInit {
   getCouponsByDateOPen() {
     this.allFalse();
     this.couponByDateFlag = true;
- 
+
   }
   getCouponsByPriceOPen() {
     this.allFalse();
     this.couponByPriceFlag = true;
-    
+
   }
 
 }

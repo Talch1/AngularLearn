@@ -65,24 +65,26 @@ export class AdminFacadeComponent implements OnInit {
   //********************************************************************************************************************************* */
   createCustomer() {
     this.adminService.createCustomer(this.user).subscribe(response => {
-      this.users = response;
-      console.log(this.users);
+      this.user= response;
+      console.log(this.user);  
+       this.allFalse();
+      this.OneCustFlag = true;
     }, err => {
       alert("Error " + err.massage)
     })
-    this.allFalse();
-    this.CustArrFlag = true;
+ 
 
   }
   createCompany() {
     this.adminService.createCompany(this.user).subscribe(response => {
-      this.users = response;
-      console.log(this.users);
+      this.user = response;
+      console.log(this.user);
+      this.allFalse();
+      this.OneCompFlag = true;
     }, err => {
       alert("Error " + err.massage)
     })
-    this.allFalse();
-    this.CompArrFlag = true;
+   
   }
   deleteCustomerById() {
     this.adminService.deleteCustomer(this.custId).subscribe(response => {
