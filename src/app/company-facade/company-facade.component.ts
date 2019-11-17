@@ -105,9 +105,9 @@ export class CompanyFacadeComponent implements OnInit {
       console.log(this.coupons);
       this.allFalse();
       this.couponArrFlag = true;
-      if (this.coupons.length === 0) {
+         if (this.coupon.id === 0) {
         this.allFalse();
-        this.couponEmpty = true;
+        this.existA = true;
       }
     }, err => {
       alert("Error " + err.massage)
@@ -150,7 +150,8 @@ export class CompanyFacadeComponent implements OnInit {
         this.allFalse();
         this.oneCouponFlag = true;
       }, err => {
-        alert("Error " + err.massage)
+        this.allFalse();
+        this.existA = true;
       }
     )
 
@@ -252,6 +253,7 @@ export class CompanyFacadeComponent implements OnInit {
   getCouponsByPriceOPen() {
     this.allFalse();
     this.couponByPriceFlag = true;
+
   }
 
 }

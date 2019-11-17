@@ -20,13 +20,13 @@ export class AdminComponent implements OnInit {
   ngOnInit() {
   }
   toAdmin(){
-    this.router.navigate(['/AdminFacade'])
+    this.router.navigate(['/adminFacade'])
   }
   toCompany(){
-    this.router.navigate(['/CompanyFacade'])
+    this.router.navigate(['/companyFacade'])
   }
   toCustomer(){
-    this.router.navigate(['/CustomerFacade'])
+    this.router.navigate(['/customerFacade'])
   }
   
 }

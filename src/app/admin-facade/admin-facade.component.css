@@ -13,15 +13,20 @@ table,th,td{
     font-size: 20px;
     text-align: center;
 }
-
 button{
     margin: 15px;
 }
 input{
- inline-size: 280px;
- margin: 15px;
+ inline-size: 250px;
+
 }
 select{
     inline-size: 250px;   
-    margin-left: 15px;
+    
+}
+.form-group{
+    margin-left: 50px;
+}
+h2{
+    margin-left: 150px;
 }

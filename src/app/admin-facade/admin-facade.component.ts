@@ -20,36 +20,40 @@ export class AdminFacadeComponent implements OnInit {
 
   onlyNumberKey(event) {
     return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
-} 
-  CreateCustFlag = false;
-  CreateCompFlag = false;
-  DeleteCustomerFlag = false;
-  DeleteCompanyFlag = false;
-  UpdateCustomerFlag = false;
-  UpdateCompanyFlag = false;
-  GetCompFlag = false;
-  GetCustFlag = false;
+  }
+  createCustFlag = false;
+  createCompFlag = false;
+  deleteCustomerFlag = false;
+  deleteCompanyFlag = false;
+  updateCustomerFlag = false;
+  updateCompanyFlag = false;
+  getCompFlag = false;
+  getCustFlag = false;
 
 
-  CompArrFlag = false;
-  OneCompFlag = false;
-  CustArrFlag = false;
-  OneCustFlag = false;
+  compArrFlag = false;
+  oneCompFlag = false;
+  custArrFlag = false;
+  oneCustFlag = false;
 
+  existIdOrName = false;
+  existId= false;
 
   allFalse() {
-    this.CreateCustFlag = false;
-    this.CreateCompFlag = false;
-    this.DeleteCustomerFlag = false;
-    this.DeleteCompanyFlag = false;
-    this.CompArrFlag = false;
-    this.OneCompFlag = false;
-    this.CustArrFlag = false;
-    this.OneCustFlag = false;
-    this.UpdateCustomerFlag = false;
-    this.UpdateCompanyFlag = false;
-    this.GetCompFlag = false;
-    this.GetCustFlag = false;
+    this.createCustFlag = false;
+    this.createCompFlag = false;
+    this.deleteCustomerFlag = false;
+    this.deleteCompanyFlag = false;
+    this.compArrFlag = false;
+    this.oneCompFlag = false;
+    this.custArrFlag = false;
+    this.oneCustFlag = false;
+    this.updateCustomerFlag = false;
+    this.updateCompanyFlag = false;
+    this.getCompFlag = false;
+    this.getCustFlag = false;
+    this.existIdOrName = false;
+    this.existId = false;
   }
 
 
@@ -65,92 +69,109 @@ export class AdminFacadeComponent implements OnInit {
   //********************************************************************************************************************************* */
   createCustomer() {
     this.adminService.createCustomer(this.user).subscribe(response => {
-      this.user= response;
-      console.log(this.user);  
-       this.allFalse();
-      this.OneCustFlag = true;
+      this.user = response;
+      console.log(this.user);
+      this.allFalse();
+      this.oneCustFlag = true;
     }, err => {
-      alert("Error " + err.massage)
+      this.allFalse();
+      this.existIdOrName = true
     })
- 
-
   }
   createCompany() {
     this.adminService.createCompany(this.user).subscribe(response => {
       this.user = response;
       console.log(this.user);
       this.allFalse();
-      this.OneCompFlag = true;
+      this.oneCompFlag = true;
     }, err => {
-      alert("Error " + err.massage)
+      this.allFalse();
+      this.existIdOrName = true
     })
-   
+
   }
   deleteCustomerById() {
     this.adminService.deleteCustomer(this.custId).subscribe(response => {
       this.users = response;
-      console.log(this.users);
+      console.log(this.users);    
+      this.allFalse();
+      this.custArrFlag = true;
+      if(response==null){
+        this.allFalse();
+        this.existId=true;
+      }
     }, err => {
-      alert("Error " + err.massage)
+      this.allFalse();
+      this.existId=true;
     })
-    this.allFalse();
-    this.CustArrFlag = true;
+ 
   }
 
   deleteCompanyById() {
     this.adminService.deleteCompany(this.compId).subscribe(response => {
       this.users = response;
       console.log(this.users);
+      this.allFalse();
+      this.compArrFlag = true;
+      if(response==null){
+        this.allFalse();
+        this.existId=true;
+      }
     }, err => {
-      alert("Error " + err.massage)
+      this.allFalse();
+      this.existId=true;
     })
-    this.allFalse();
-    this.CompArrFlag = true;
+
   }
   updateCustomer() {
-    this.adminService.updateCustomer(this.custId,this.user).subscribe(response => {
+    this.adminService.updateCustomer( this.custId,this.user).subscribe(response => {
       this.user = response;
       console.log(this.user);
-      this.user.id = this.custId;
+      this.user.id =this.custId;
     }, err => {
-      alert("Error " + err.massage)
+      this.allFalse();
+      this.existId=true;
     })
     this.allFalse();
-    this.OneCustFlag = true;
+    this.oneCustFlag = true;
   }
   updateCompany() {
     this.adminService.updateCompany(this.compId,this.user).subscribe(response => {
       this.user = response;
       console.log(this.user);
       this.user.id = this.compId;
+      this.allFalse();
+      this.oneCompFlag = true;
     }, err => {
-      alert("Error " + err.massage)
+      this.allFalse();
+      this.existId=true;
     })
-    this.allFalse();
-    this.OneCompFlag = true;
   }
-  getCompany(){
+
+  getCustomer() {
+    this.adminService.getCustomer(this.custId).subscribe(response => {
+      this.user = response;
+      console.log(this.user);
+      this.user.id = this.custId;
+      this.allFalse();
+      this.oneCustFlag = true;
+    }, err => {
+      this.allFalse();
+      this.existId=true;
+    })
+
+  }
+  getCompany() {
     this.adminService.getCompany(this.compId).subscribe(response => {
       this.user = response;
       console.log(this.user);
       this.user.id = this.compId;
     }, err => {
-      alert("Error " + err.massage)
+      this.allFalse();
+      this.existId=true;
     })
     this.allFalse();
-    this.OneCompFlag = true;
-  }
-  
-  getCustomer(){
-    this.adminService.getCustomer(this.custId).subscribe(response => {
-      this.user = response;
-      console.log(this.user);
-      this.user.id = this.custId;
-    }, err => {
-      alert("Error " + err.massage)
-    })
-    this.allFalse();
-    this.OneCustFlag = true;
+    this.oneCompFlag = true;
   }
   
   getAllCustomers() {
@@ -161,7 +182,7 @@ export class AdminFacadeComponent implements OnInit {
       alert("Error " + err.massage)
     })
     this.allFalse();
-    this.CustArrFlag = true;
+    this.custArrFlag = true;
   }
   getAllCompanys() {
     this.adminService.getAllCompanys().subscribe(response => {
@@ -171,46 +192,64 @@ export class AdminFacadeComponent implements OnInit {
       alert("Error " + err.massage)
     })
     this.allFalse();
-    this.CompArrFlag = true;
+    this.compArrFlag = true;
   }
-  
-//***************************************************************************************************************************** */
+
+  //***************************************************************************************************************************** */
   custCreateOpen() {
     this.allFalse();
-    this.CreateCustFlag = true;
+    this.createCustFlag = true;
+    this.user.id = 0;
+    this.user.userName ="";
+    this.user.password = ""
+    this.user.email = ""
   }
   compCreateOpen() {
     this.allFalse();
-    this.CreateCompFlag = true;
+    this.createCompFlag = true;
+    this.user.id = 0;
+    this.user.userName ="";
+    this.user.password = ""
+    this.user.email = ""
   }
   custDeleteOpen() {
     this.allFalse();
-    this.DeleteCustomerFlag = true;
+    this.deleteCustomerFlag = true;
+    this.custId = 0;
   }
   compDeleteOpen() {
     this.allFalse();
-    this.DeleteCompanyFlag = true;
+    this.deleteCompanyFlag = true;
+    this.compId = 0;
   }
   custUpdateOpen() {
     this.allFalse();
-    this.UpdateCustomerFlag = true;
-  }
+    this.updateCustomerFlag = true;
+    this.custId = 0;
+    this.user.userName ="";
+    this.user.password = ""
+    this.user.email = null;
+    }
   compUpdateOpen() {
     this.allFalse();
-    this.UpdateCompanyFlag = true;
+    this.updateCompanyFlag = true;
+    this.compId = 0;
+    this.user.userName ="";
+    this.user.password = ""
+    this.user.email = ""
   }
-  getCastOpen(){
+  getCastOpen() {
     this.allFalse();
-    this.GetCustFlag = true;
+    this.getCustFlag = true;
   }
-  getCompOpen(){
+  getCompOpen() {
     this.allFalse();
-    this.GetCompFlag = true;
+    this.getCompFlag = true;
   }
-  getAllCastOpen(){
+  getAllCastOpen() {
     this.allFalse();
   }
-  getAllCompOpen(){
+  getAllCompOpen() {
     this.allFalse();
   }
 }
