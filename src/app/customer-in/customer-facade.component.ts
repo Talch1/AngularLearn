@@ -48,6 +48,7 @@ export class CustomerFacadeComponent implements OnInit {
   existType = false;
   existDate =false;
   existPrice = false;
+  incomsArrFlag = false;
 
   allFalse() {
     this.couponByIdFlag = false;
@@ -63,6 +64,7 @@ export class CustomerFacadeComponent implements OnInit {
     this.existType = false;
     this.existDate = false;
     this.existPrice=false;
+    this.incomsArrFlag = false;
   }
   public logout(): void {
     this.logginService.logout;
@@ -162,6 +164,27 @@ export class CustomerFacadeComponent implements OnInit {
       }
     )
   }
+
+  getCustIncome() {
+    // this.customerService.getCouponByPrice(this.price, this.custId).subscribe(
+    //   (response) => {
+    //     this.coupons = response;
+    //     console.log(this.coupons);
+    //     this.allFalse();
+    //     this.couponArrFlag = true;
+    //     if (this.coupons.length == 0) {
+    //       this.allFalse();
+    //       this.existPrice = true;
+    //     }
+    //   }, err => {
+    //     this.allFalse();
+    //     this.existPrice = true;
+    //   }
+    
+  }
+
+
+  //************************************************************************************************************ */
   addCouponOpen() {
     this.allFalse();
     this.addCouponOpenFlag = true;

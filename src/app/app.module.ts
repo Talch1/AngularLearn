@@ -14,9 +14,9 @@ import { FooterComponent } from './footer/footer.component';
 import { LeyoutComponent } from './leyout/leyout.component';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
-import { AdminFacadeComponent } from './admin-facade/admin-facade.component';
-import { CompanyFacadeComponent } from './company-facade/company-facade.component';
-import { CustomerFacadeComponent } from './customer-facade/customer-facade.component'
+import { AdminFacadeComponent } from './admin-in/admin-facade.component';
+import { CompanyFacadeComponent } from './company-in/company-facade.component';
+import { CustomerFacadeComponent } from './customer-in/customer-facade.component'
 
 
 

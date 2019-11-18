@@ -1,5 +1,9 @@
 <nav>
     <a (click)="logout()">Logout</a>
+    <div class="float-right">
+        <button class="btn btn-primary" (click)="getCompIncomes()">Get All Companys incomes</button>
+        <button class="btn btn-primary" (click)="getAllIncome()">Get All Incomes</button>
+    </div>
 </nav>
 
 <br>
@@ -25,8 +29,9 @@
 
     <button type="button" class="btn btn-secondary" (click)="getAllCompanys()">Get All Companys</button>
 </div>
-<br><br><br>
-
+<br>
+<br>
+<br>
 
 <div *ngIf="createCustFlag">
     <div class="form-group row">
@@ -217,6 +222,10 @@
     <h2>This id is not exist</h2>
 </div>
 
+<div *ngIf="incomeNull" style="color:red">
+    <h2>No incomes</h2>
+</div>
+
 <div *ngIf="compArrFlag">
     <table>
         <tr>
@@ -242,10 +251,10 @@
             <th>Email</th>
         </tr>
         <tr>
-            <td>{{this.user.id}}</td>
-            <td>{{this.user.userName}}</td>
-            <td>{{this.user.password}}</td>
-            <td>{{this.user.email}}</td>
+            <td>{{user.id}}</td>
+            <td>{{user.userName}}</td>
+            <td>{{user.password}}</td>
+            <td>{{user.email}}</td>
     </table>
 </div>
 <div *ngIf="custArrFlag">
@@ -270,8 +279,29 @@
             <th>Password</th>
         </tr>
         <tr>
-            <td>{{this.user.id}}</td>
-            <td>{{this.user.userName}}</td>
-            <td>{{this.user.password}}</td>
+            <td>{{user.id}}</td>
+            <td>{{user.userName}}</td>
+            <td>{{user.password}}</td>
     </table>
+</div>
+<div *ngIf="incomsArrFlag">
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>User Name</th>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Role</th>
+        </tr>
+        <tr *ngFor="let income of incomes">
+            <td>{{income.id}}</td>
+            <td>{{income.name}}</td>
+            <td>{{income.date}}</td>
+            <td>{{income.description}}</td>
+            <td>{{income.amount}}</td>
+            <td>{{income.role}}</td>
+
+    </table>
+
 </div>

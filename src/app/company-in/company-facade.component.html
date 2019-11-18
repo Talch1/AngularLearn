@@ -1,5 +1,8 @@
 <nav>
     <a (click)="logout()">Logout</a>
+    <div class="float-right">
+        <button class="btn btn-primary" (click)="getCustIncomes()">Get All Customers incomes</button>
+    </div>
 </nav>
 
 <br>
@@ -26,7 +29,6 @@
     <button type="button" (click)="getCouponsByPriceOPen()" class="btn btn-secondary">Get Coupon By Price</button>
 </div>
 <br><br><br>
-
 
 <div *ngIf="addCouponOpenFlag">
     <div class="form-group row">
@@ -229,16 +231,16 @@
 <div *ngIf="exist" style="color:red">
     <h2>This coupon is not exist or you have one licke this</h2>
 </div>
-<div *ngIf="existA" style="color:red">
+<div *ngIf="existCoupon" style="color:red">
     <h2>This coupon is not exist</h2>
 </div>
-<div *ngIf="existB" style="color:red">
+<div *ngIf="existType" style="color:red">
     <h2> Coupon whis this Type is not exist</h2>
 </div>
-<div *ngIf="existC" style="color:red">
+<div *ngIf="existDate" style="color:red">
     <h2> Coupon before this Date is not exist</h2>
 </div>
-<div *ngIf="existD" style="color:red">
+<div *ngIf="existPrice" style="color:red">
     <h2> Coupon Less that this Price is not exist</h2>
 </div>
 <div *ngIf="wasDeleted" style="color:red">
@@ -246,6 +248,9 @@
 </div>
 <div *ngIf="couponEmpty" style="color:red">
     <h2>You don't have any coupons</h2>
+</div>
+<div *ngIf="incomeNull" style="color:red">
+    <h2>No incomes</h2>
 </div>
 
 
@@ -303,3 +308,23 @@
 
     </table>
 </div>
+
+<div *ngIf="incomsArrFlag">
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>User Name</th>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Role</th>
+        </tr>
+        <tr *ngFor="let income of incomes">
+            <td>{{income.id}}</td>
+            <td>{{income.name}}</td>
+            <td>{{income.date}}</td>
+            <td>{{income.description}}</td>
+            <td>{{income.amount}}</td>
+            <td>{{income.role}}</td>
+
+    </table>

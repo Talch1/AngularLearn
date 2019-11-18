@@ -3,6 +3,7 @@ import { LogginService } from '../services/loggin.service';
 import { Router } from '@angular/router';
 import { CompanyService } from '../services/company-service';
 import { Coupon } from '../beans/Coupon';
+import { Income } from '../beans/Income';
 
 @Component({
   selector: 'app-company-facade',
@@ -21,6 +22,7 @@ export class CompanyFacadeComponent implements OnInit {
   couponType: string;
   date: Date;
   price: number;
+  incomes: Income[] = [];
 
   onlyNumberKey(event) {
     return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
@@ -38,10 +40,13 @@ export class CompanyFacadeComponent implements OnInit {
   exist = false;
   wasDeleted = false;
   couponEmpty = false;
-  existA = false;
-  existB = false;
-  existC = false;
-  existD =false;
+  existCoupon = false;
+  existType = false;
+  existDate = false;
+  existPrice =false;
+  incomsArrFlag = false;
+  incomeNull = false;
+
 
   allFalse() {
     this.addCouponOpenFlag = false;
@@ -57,10 +62,12 @@ export class CompanyFacadeComponent implements OnInit {
     this.exist = false;
     this.wasDeleted = false;
     this.couponEmpty = false;
-    this.existA = false;
-    this.existB = false;
-    this.existC= false;
-    this.existD= false;
+    this.existCoupon = false;
+    this.existType = false;
+    this.existDate = false;
+    this.existPrice =false;
+    this.incomsArrFlag = false;
+    this.incomeNull = false;
   }
   addCouponToCompany() {
     this.companyService.addCouponToCompany(this.compId, this.coupId).subscribe(response => {
@@ -91,7 +98,7 @@ export class CompanyFacadeComponent implements OnInit {
       this.oneCouponFlag = true;
       if (this.coupon.id === 0) {
         this.allFalse();
-        this.existA = true;
+        this.existCoupon = true;
       }
     }, err => {
       alert("Error " + err.massage)
@@ -105,9 +112,9 @@ export class CompanyFacadeComponent implements OnInit {
       console.log(this.coupons);
       this.allFalse();
       this.couponArrFlag = true;
-         if (this.coupon.id === 0) {
+         if (this.coupons.length == 0) {
         this.allFalse();
-        this.existA = true;
+        this.couponEmpty = true;
       }
     }, err => {
       alert("Error " + err.massage)
@@ -123,11 +130,11 @@ export class CompanyFacadeComponent implements OnInit {
       this.couponArrFlag = true;
       if (this.coupons.length == 0) {
         this.allFalse();
-        this.existA = true;
+        this.existCoupon = true;
       }
     }, err => {
       this.allFalse();
-      this.existA = true;
+      this.existCoupon = true;
     }
     )
   }
@@ -151,7 +158,7 @@ export class CompanyFacadeComponent implements OnInit {
         this.oneCouponFlag = true;
       }, err => {
         this.allFalse();
-        this.existA = true;
+        this.existCoupon = true;
       }
     )
 
@@ -164,11 +171,11 @@ export class CompanyFacadeComponent implements OnInit {
         this.couponArrFlag = true;
         if (this.coupons.length == 0) {
           this.allFalse();
-          this.existB = true;
+          this.existType = true;
         }
       }, err => {
         this.allFalse();
-        this.existB = true;
+        this.existType = true;
       }
     )
   }
@@ -181,7 +188,7 @@ export class CompanyFacadeComponent implements OnInit {
         this.couponArrFlag = true;
         if (this.coupons.length == 0) {
           this.allFalse();
-          this.existC = true;
+          this.existDate = true;
         }
       }, err => {
         alert("Error " + err.massage)
@@ -198,15 +205,30 @@ export class CompanyFacadeComponent implements OnInit {
         this.couponArrFlag = true;
         if (this.coupons.length == 0) {
           this.allFalse();
-          this.existD = true;
+          this.existPrice = true;
         }
       }, err => {
         alert("Error " + err.massage)
       }
-
     )
-  
   }
+
+  getCustIncomes() {
+    this.companyService.getCustIncome().subscribe(response => {
+      this.incomes = response;
+      console.log(this.incomes);
+      this.allFalse();
+      this.incomsArrFlag = true;
+      if (this.incomes.length == 0) {
+        this.allFalse();
+        this.incomeNull = true;
+      }
+    }, err => {
+    
+      alert("Error " + err.massage)
+    })
+  }
+
   public logout(): void {
     this.logginService.logout;
     this.router.navigate(['/login'])

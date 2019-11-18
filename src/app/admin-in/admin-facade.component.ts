@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { LogginService } from '../services/loggin.service';
 import { Router } from '@angular/router';
-import { AdminService } from '../services/admin.service';
 import { User } from '../beans/User';
+import { AdminService } from '../services/admin.service';
+import { LogginService } from '../services/loggin.service';
+import { Income } from '../beans/Income';
 
 
 @Component({
@@ -17,6 +18,7 @@ export class AdminFacadeComponent implements OnInit {
   users: User[] = [];
   custId: number = 2010;
   compId: number = 201;
+  incomes: Income[] = [];
 
   onlyNumberKey(event) {
     return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
@@ -29,6 +31,8 @@ export class AdminFacadeComponent implements OnInit {
   updateCompanyFlag = false;
   getCompFlag = false;
   getCustFlag = false;
+  incomsArrFlag = false;
+  incomeNull = false;
 
 
   compArrFlag = false;
@@ -37,7 +41,7 @@ export class AdminFacadeComponent implements OnInit {
   oneCustFlag = false;
 
   existIdOrName = false;
-  existId= false;
+  existId = false;
 
   allFalse() {
     this.createCustFlag = false;
@@ -54,6 +58,8 @@ export class AdminFacadeComponent implements OnInit {
     this.getCustFlag = false;
     this.existIdOrName = false;
     this.existId = false;
+    this.incomsArrFlag = false;
+    this.incomeNull = false;
   }
 
 
@@ -93,18 +99,18 @@ export class AdminFacadeComponent implements OnInit {
   deleteCustomerById() {
     this.adminService.deleteCustomer(this.custId).subscribe(response => {
       this.users = response;
-      console.log(this.users);    
+      console.log(this.users);
       this.allFalse();
       this.custArrFlag = true;
-      if(response==null){
+      if (response == null) {
         this.allFalse();
-        this.existId=true;
+        this.existId = true;
       }
     }, err => {
       this.allFalse();
-      this.existId=true;
+      this.existId = true;
     })
- 
+
   }
 
   deleteCompanyById() {
@@ -113,30 +119,30 @@ export class AdminFacadeComponent implements OnInit {
       console.log(this.users);
       this.allFalse();
       this.compArrFlag = true;
-      if(response==null){
+      if (response == null) {
         this.allFalse();
-        this.existId=true;
+        this.existId = true;
       }
     }, err => {
       this.allFalse();
-      this.existId=true;
+      this.existId = true;
     })
 
   }
   updateCustomer() {
-    this.adminService.updateCustomer( this.custId,this.user).subscribe(response => {
+    this.adminService.updateCustomer(this.custId, this.user).subscribe(response => {
       this.user = response;
       console.log(this.user);
-      this.user.id =this.custId;
+      this.user.id = this.custId;
     }, err => {
       this.allFalse();
-      this.existId=true;
+      this.existId = true;
     })
     this.allFalse();
     this.oneCustFlag = true;
   }
   updateCompany() {
-    this.adminService.updateCompany(this.compId,this.user).subscribe(response => {
+    this.adminService.updateCompany(this.compId, this.user).subscribe(response => {
       this.user = response;
       console.log(this.user);
       this.user.id = this.compId;
@@ -144,7 +150,7 @@ export class AdminFacadeComponent implements OnInit {
       this.oneCompFlag = true;
     }, err => {
       this.allFalse();
-      this.existId=true;
+      this.existId = true;
     })
   }
 
@@ -157,50 +163,85 @@ export class AdminFacadeComponent implements OnInit {
       this.oneCustFlag = true;
     }, err => {
       this.allFalse();
-      this.existId=true;
+      this.existId = true;
     })
 
   }
+
   getCompany() {
     this.adminService.getCompany(this.compId).subscribe(response => {
       this.user = response;
       console.log(this.user);
       this.user.id = this.compId;
+      this.allFalse();
+      this.oneCompFlag = true;
     }, err => {
       this.allFalse();
-      this.existId=true;
+      this.existId = true;
     })
-    this.allFalse();
-    this.oneCompFlag = true;
+
   }
-  
+
   getAllCustomers() {
     this.adminService.getAllCustomers().subscribe(response => {
       this.users = response;
       console.log(this.users);
+      this.allFalse();
+      this.custArrFlag = true;
     }, err => {
       alert("Error " + err.massage)
     })
-    this.allFalse();
-    this.custArrFlag = true;
+
   }
   getAllCompanys() {
     this.adminService.getAllCompanys().subscribe(response => {
       this.users = response;
       console.log(this.users);
+      this.allFalse();
+      this.compArrFlag = true;
     }, err => {
       alert("Error " + err.massage)
     })
-    this.allFalse();
-    this.compArrFlag = true;
+
   }
+  getAllIncome() {
+    this.adminService.getAllIncomes().subscribe(response => {
+      this.incomes = response;
+      console.log(this.incomes);
+      this.allFalse();
+      this.incomsArrFlag = true;
+      if (this.incomes.length == 0) {
+        this.allFalse();
+        this.incomeNull = true;
+      }
+    }, err => {
+      alert("Error " + err.massage)
+    })
+  }
+
+  getCompIncomes() {
+    this.adminService.getCompIncomes().subscribe(response => {
+      this.incomes = response;
+      console.log(this.incomes);
+      this.allFalse();
+      this.incomsArrFlag = true;
+      if (this.incomes.length == 0) {
+        this.allFalse();
+        this.incomeNull = true;
+      }
+    }, err => {
+      console.log(err)
+      alert("Error " + err.massage)
+    })
+  }
+
 
   //***************************************************************************************************************************** */
   custCreateOpen() {
     this.allFalse();
     this.createCustFlag = true;
     this.user.id = 0;
-    this.user.userName ="";
+    this.user.userName = "";
     this.user.password = ""
     this.user.email = ""
   }
@@ -208,7 +249,7 @@ export class AdminFacadeComponent implements OnInit {
     this.allFalse();
     this.createCompFlag = true;
     this.user.id = 0;
-    this.user.userName ="";
+    this.user.userName = "";
     this.user.password = ""
     this.user.email = ""
   }
@@ -226,15 +267,15 @@ export class AdminFacadeComponent implements OnInit {
     this.allFalse();
     this.updateCustomerFlag = true;
     this.custId = 0;
-    this.user.userName ="";
+    this.user.userName = "";
     this.user.password = ""
     this.user.email = null;
-    }
+  }
   compUpdateOpen() {
     this.allFalse();
     this.updateCompanyFlag = true;
     this.compId = 0;
-    this.user.userName ="";
+    this.user.userName = "";
     this.user.password = ""
     this.user.email = ""
   }

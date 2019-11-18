@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Coupon } from '../beans/Coupon';
+import { Income } from '../beans/Income';
 
 
 @Injectable({
@@ -11,7 +12,8 @@ export class CompanyService {
 
 
   constructor(private httpClient: HttpClient) { }
-  baseURL = "http://localhost:8080/company/";
+  private baseURL = "http://localhost:8080/company/";
+  private Url2 = "http://localhost:8080/income/"
 
   public getAllCoupons(compId: number): Observable<Coupon[]> {
 
@@ -40,14 +42,13 @@ export class CompanyService {
     return this.httpClient.get<Coupon[]>(this.baseURL + "findUserCoupByType/" + userId + "/" + type);
   }
   public getCouponByDate(date: Date, userId: number): Observable<Coupon[]> {
-    return this.httpClient.get<Coupon[]>(this.baseURL + "findUserCoupByDate/" + userId + "/"  + date);
+    return this.httpClient.get<Coupon[]>(this.baseURL + "findUserCoupByDate/" + userId + "/" + date);
   }
   public getCouponByPrice(price: number, userId: number): Observable<Coupon[]> {
-    return this.httpClient.get<Coupon[]>(this.baseURL + "findUserCoupByPrice/"  + userId + "/" + price);
+    return this.httpClient.get<Coupon[]>(this.baseURL + "findUserCoupByPrice/" + userId + "/" + price);
   }
-
-
-
-
+  public getCustIncome(): Observable<Income[]> {
+    return this.httpClient.get<Income[]>(this.Url2 + "allCustIncome");
+  }
 
 }

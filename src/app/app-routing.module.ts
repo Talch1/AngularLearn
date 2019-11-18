@@ -10,27 +10,20 @@ import { CustomerGuardService } from './services/customer-guard.service';
 import { LoginComponent } from './login/login.component';
 import { CompanyGuardService } from './services/company-guarde.service';
 import { AdminGuardService } from './services/admin-guarde.service';
-import { AdminFacadeComponent } from './admin-facade/admin-facade.component';
-import { CompanyFacadeComponent } from './company-facade/company-facade.component';
-import { CustomerFacadeComponent } from './customer-facade/customer-facade.component';
+import { AdminFacadeComponent } from './admin-in/admin-facade.component';
+import { CompanyFacadeComponent } from './company-in/company-facade.component';
+import { CustomerFacadeComponent } from './customer-in/customer-facade.component';
 
 const routes: Routes = [
 {path : "",component:LeyoutComponent},
 {path : "home",component:HomeComponent},
 {path : "admin",canActivate:[AdminGuardService],component:AdminComponent},
-//{path : "admin",component:AdminComponent},
 {path : "cust",canActivate:[CustomerGuardService], component:CustComponent},
-//{path : "cust", component:CustComponent},
 {path : "comp",canActivate:[CompanyGuardService],component:CompComponent},
-//{path : "comp",component:CompComponent},
 {path : "login",component:LoginComponent},
-//{path : "adminFacade",canActivate:[AdminGuardService],component:AdminFacadeComponent},
-{path : "companyFacade",canActivate:[AdminGuardService],component:CompanyFacadeComponent},
-{path : "customerFacade",canActivate:[AdminGuardService],component:CustomerFacadeComponent},
-{path : "adminFacade",component:AdminFacadeComponent},
-//{path : "customerFacade",component:CustomerFacadeComponent},
-//{path : "companyFacade",component:CompanyFacadeComponent},
-
+{path : "adminIn",canActivate:[AdminGuardService],component:AdminFacadeComponent},
+{path : "companyIn",canActivate:[AdminGuardService],component:CompanyFacadeComponent},
+{path : "customerIn",canActivate:[AdminGuardService],component:CustomerFacadeComponent},
 ];
 
 @NgModule({
