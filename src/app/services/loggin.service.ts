@@ -14,6 +14,7 @@ export class LogginService {
   public inLoggedIn: boolean;
   public type: string;
   public user: User;
+  public token:string;
 
   public logout(): void {
     this.inLoggedIn = false;

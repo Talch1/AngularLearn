@@ -11,12 +11,11 @@ import { Income } from '../beans/Income';
   styleUrls: ['./company-facade.component.css']
 })
 export class CompanyFacadeComponent implements OnInit {
- 
-  constructor(private logginService: LogginService, private router: Router, private companyService: CompanyService) { }
-  coupon: Coupon = new Coupon();
-  coupons: Coupon[];
-  massage: string;
 
+  constructor(private logginService: LogginService, private router: Router, private companyService: CompanyService) { }
+  coupon: Coupon  = new Coupon(1,"",new Date,new Date,5,"RESTURANS","",10,"");
+  coupons: Coupon[];
+  token: string;
   compId: number = 201;
   coupId: number;
   couponType: string;
@@ -24,6 +23,13 @@ export class CompanyFacadeComponent implements OnInit {
   price: number;
   incomes: Income[] = [];
 
+ 
+  ngOnInit() {
+    this.token = this.logginService.token;
+    console.log(this.token);
+  
+  }
+ 
   onlyNumberKey(event) {
     return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
   }
@@ -43,7 +49,7 @@ export class CompanyFacadeComponent implements OnInit {
   existCoupon = false;
   existType = false;
   existDate = false;
-  existPrice =false;
+  existPrice = false;
   incomsArrFlag = false;
   incomeNull = false;
 
@@ -65,12 +71,12 @@ export class CompanyFacadeComponent implements OnInit {
     this.existCoupon = false;
     this.existType = false;
     this.existDate = false;
-    this.existPrice =false;
+    this.existPrice = false;
     this.incomsArrFlag = false;
     this.incomeNull = false;
   }
   addCouponToCompany() {
-    this.companyService.addCouponToCompany(this.compId, this.coupId).subscribe(response => {
+    this.companyService.addCouponToCompany(this.token, this.coupId).subscribe(response => {
       this.coupons = response;
       console.log(this.coupons);
       this.allFalse();
@@ -81,7 +87,7 @@ export class CompanyFacadeComponent implements OnInit {
     })
   }
   createThisCoupon() {
-    this.companyService.addCoupon(this.coupon, this.compId).subscribe(response => {
+    this.companyService.addCoupon(this.coupon, this.token).subscribe(response => {
       this.coupons = response;
       console.log(this.coupons);
       this.allFalse();
@@ -91,7 +97,7 @@ export class CompanyFacadeComponent implements OnInit {
     })
   }
   getCoupon() {
-    this.companyService.getCoupon(this.compId, this.coupId).subscribe(response => {
+    this.companyService.getCoupon(this.token, this.coupId).subscribe(response => {
       this.coupon = response;
       console.log(this.coupon);
       this.allFalse();
@@ -106,24 +112,21 @@ export class CompanyFacadeComponent implements OnInit {
     )
   }
   getAllCoupons() {
-
-    this.companyService.getAllCoupons(this.compId).subscribe(response => {
+    this.companyService.getAllCoupons(this.token).subscribe(response => {
       this.coupons = response;
       console.log(this.coupons);
       this.allFalse();
       this.couponArrFlag = true;
-         if (this.coupons.length == 0) {
+      if (this.coupons.length == 0) {
         this.allFalse();
         this.couponEmpty = true;
       }
     }, err => {
       alert("Error " + err.massage)
     })
-
-
   }
   deleteCouponById() {
-    this.companyService.delete(this.compId, this.coupId).subscribe(response => {
+    this.companyService.delete(this.token, this.coupId).subscribe(response => {
       console.log(response);
       this.coupons = response;
       this.allFalse();
@@ -139,7 +142,7 @@ export class CompanyFacadeComponent implements OnInit {
     )
   }
   deleteAllCoupons() {
-    this.companyService.deleteAll(this.compId).subscribe(response => {
+    this.companyService.deleteAll(this.token).subscribe(response => {
       console.log(response);
       this.wasDeleted = true;
     }, err => {
@@ -150,7 +153,7 @@ export class CompanyFacadeComponent implements OnInit {
   }
 
   updateCopon() {
-    this.companyService.updateCoupon(this.coupon, this.compId).subscribe(
+    this.companyService.updateCoupon(this.coupon, this.token).subscribe(
       response => {
         this.coupon = response;
         console.log(this.coupon);
@@ -161,10 +164,10 @@ export class CompanyFacadeComponent implements OnInit {
         this.existCoupon = true;
       }
     )
-
   }
+  
   findCpouponByType() {
-    this.companyService.getCouponByType(this.couponType, this.compId).subscribe(
+    this.companyService.getCouponByType(this.couponType, this.token).subscribe(
       responce => {
         this.coupons = responce;
         console.log(this.coupons);
@@ -181,7 +184,7 @@ export class CompanyFacadeComponent implements OnInit {
   }
 
   findCpouponByDate() {
-    this.companyService.getCouponByDate(this.date, this.compId).subscribe(
+    this.companyService.getCouponByDate(this.date, this.token).subscribe(
       responce => {
         this.coupons = responce;
         console.log(this.coupons);
@@ -194,11 +197,10 @@ export class CompanyFacadeComponent implements OnInit {
         alert("Error " + err.massage)
       }
     )
-    
   }
 
   findCpouponByPrice() {
-    this.companyService.getCouponByPrice(this.price, this.compId).subscribe(
+    this.companyService.getCouponByPrice(this.price, this.token).subscribe(
       (response) => {
         this.coupons = response;
         console.log(this.coupons);
@@ -224,7 +226,7 @@ export class CompanyFacadeComponent implements OnInit {
         this.incomeNull = true;
       }
     }, err => {
-    
+
       alert("Error " + err.massage)
     })
   }
@@ -233,8 +235,7 @@ export class CompanyFacadeComponent implements OnInit {
     this.logginService.logout;
     this.router.navigate(['/login'])
   }
-  ngOnInit() {
-  }
+
   addCouponOpen() {
     this.allFalse();
     this.addCouponOpenFlag = true;

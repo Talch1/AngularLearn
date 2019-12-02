@@ -12,24 +12,25 @@ import { Router } from '@angular/router';
 export class LoginComponent {
 
   private user = new User;
-  private message:any;
+  private token:string;
   private incorrect = false;
   constructor(private logginService: LogginService, private router: Router) { }
 
   logging() {
     this.logginService.auth(this.user).subscribe(response => {
-      this.message = response.body;
-      if (this.user.role === 'Customer' && this.message!=null) {
+      this.token = response.body;
+      this.logginService.token = this.token;
+      if (this.user.role === 'Customer' && this.token!=null) {
         this.logginService.type = this.user.role;
         this.logginService.inLoggedIn = true;
         this.router.navigate(["/cust"]);
       }
-      else if (this.user.role === 'Company' && this.message != null) {
+      else if (this.user.role === 'Company' && this.token != null) {
         this.logginService.type = this.user.role;
         this.logginService.inLoggedIn = true;
         this.router.navigate(["/comp"]);
       }
-      else if (this.user.role === 'Admin' && this.message != null) {
+      else if (this.user.role === 'Admin' && this.token != null) {
         this.logginService.type = this.user.role;
         this.logginService.inLoggedIn = true;
         this.router.navigate(["/admin"]);

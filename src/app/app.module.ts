@@ -17,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AdminFacadeComponent } from './admin-in/admin-facade.component';
 import { CompanyFacadeComponent } from './company-in/company-facade.component';
 import { CustomerFacadeComponent } from './customer-in/customer-facade.component'
+import { LogginService } from './services/loggin.service';
 
 
 
@@ -48,7 +49,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
   ],
-  providers: [],
+  providers: [LogginService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

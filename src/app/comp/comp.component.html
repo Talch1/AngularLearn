@@ -186,7 +186,7 @@
     <div class="form-group row">
         <label class="col-2 col-form-label">Coupon Type</label>
         <div class="col-3">
-            <select class="form-control" name="type" [(ngModel)]="coupon.type">
+            <select class="form-control" name="type" [(ngModel)]="this.couponType">
                 <option selected disabled> Select Type </option>
                 <option value="RESTURANS"> RESTURANS </option>
                 <option value="ELECTRICITY"> ELECTRICITY </option>
@@ -224,7 +224,7 @@
             placeholder="Please enter Coupon  price" [(ngModel)]="price">
         </div>
         <div class="col-7">
-            <button type="button" (click)="findCpouponByDate()" class="btn btn-primary" style="margin:0px">Find Coupon By Price Less Than </button>
+            <button type="button" (click)="  findCpouponByPrice()" class="btn btn-primary" style="margin:0px">Find Coupon By Price Less Than </button>
         </div>
     </div>
 </div>
