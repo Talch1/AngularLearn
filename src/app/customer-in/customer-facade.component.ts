@@ -30,6 +30,7 @@ export class CustomerFacadeComponent implements OnInit {
   couponType: string;
   date: Date;
   price: number;
+  token:string;
 
   onlyNumberKey(event) {
     return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
@@ -67,12 +68,13 @@ export class CustomerFacadeComponent implements OnInit {
     this.incomsArrFlag = false;
   }
   public logout(): void {
+    this.customerService.logout(this.token).subscribe();
     this.logginService.logout;
     this.router.navigate(['/login'])
   }
 
   purchaseCoupon() {
-    this.customerService.addCouponToCustomer(this.custId, this.coupId).subscribe(response => {
+    this.customerService.addCouponToCustomer(this.token, this.coupId).subscribe(response => {
       this.coupons = response;
       console.log(this.coupons);
       this.allFalse();
@@ -83,7 +85,7 @@ export class CustomerFacadeComponent implements OnInit {
     })
   }
   getAllCoupons() {
-    this.customerService.getAllCoupons(this.custId).subscribe(response => {
+    this.customerService.getAllCoupons(this.token).subscribe(response => {
       this.coupons = response;
       console.log(this.coupons);
       this.allFalse();
@@ -98,7 +100,7 @@ export class CustomerFacadeComponent implements OnInit {
     })
   }
   findCpouponById() {
-    this.customerService.getCouponById(this.custId, this.coupId).subscribe(
+    this.customerService.getCouponById(this.token, this.coupId).subscribe(
       responce => {
         this.coupon = responce;
         console.log(this.coupon);
@@ -116,7 +118,7 @@ export class CustomerFacadeComponent implements OnInit {
   }
 
   findCpouponByType() {
-    this.customerService.getCouponByType(this.couponType, this.custId).subscribe(
+    this.customerService.getCouponByType(this.couponType, this.token).subscribe(
       responce => {
         this.coupons = responce;
         console.log(this.coupons);
@@ -130,7 +132,7 @@ export class CustomerFacadeComponent implements OnInit {
 
   }
   findCpouponByDate() {
-    this.customerService.getCouponByDate(this.date, this.custId).subscribe(
+    this.customerService.getCouponByDate(this.date, this.token).subscribe(
       responce => {
         this.coupons = responce;
         console.log(this.coupons);
@@ -148,7 +150,7 @@ export class CustomerFacadeComponent implements OnInit {
     )
   }
   findCpouponByPrice() {
-    this.customerService.getCouponByPrice(this.price, this.custId).subscribe(
+    this.customerService.getCouponByPrice(this.price, this.token).subscribe(
       (response) => {
         this.coupons = response;
         console.log(this.coupons);

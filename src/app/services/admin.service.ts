@@ -51,4 +51,8 @@ export class AdminService {
 public getCompIncomes(): Observable<Income[]> {
   return this.httpClient.get<Income[]>(this.Url2 + "allCompIncome");
 }
+
+public logout(token:string):Observable<any>{
+  return this.httpClient.post(this.baseUrl+"logout", token);
+}
 }

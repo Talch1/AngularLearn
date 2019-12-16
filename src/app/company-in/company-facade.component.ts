@@ -232,6 +232,7 @@ export class CompanyFacadeComponent implements OnInit {
   }
 
   public logout(): void {
+    this.companyService.logout(this.token).subscribe();
     this.logginService.logout;
     this.router.navigate(['/login'])
   }

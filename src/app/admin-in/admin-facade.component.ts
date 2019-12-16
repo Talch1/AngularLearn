@@ -19,6 +19,7 @@ export class AdminFacadeComponent implements OnInit {
   custId: number = 2010;
   compId: number = 201;
   incomes: Income[] = [];
+  token:string;
 
   onlyNumberKey(event) {
     return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
@@ -68,6 +69,7 @@ export class AdminFacadeComponent implements OnInit {
   }
 
   public logout(): void {
+    this.adminService.logout(this.token).subscribe();
     this.logginService.logout;
     this.router.navigate(['/login'])
   }

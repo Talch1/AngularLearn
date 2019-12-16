@@ -11,24 +11,30 @@ export class CustomerServiceService {
   constructor(private httpClient: HttpClient) { }
   baseURL = "http://localhost:8080/customer/";
 
-  public addCouponToCustomer( custId: number, coupId: number): Observable<Coupon[]> {
-    return this.httpClient.put<Coupon[]>(this.baseURL + "addCouponToCust/"+ custId, coupId);
-  }
-  public getAllCoupons(custId: number): Observable<Coupon[]> {
 
-    return this.httpClient.get<Coupon[]>(this.baseURL + "getCustCoup/" + custId);
+  public seeAllCoupons(): Observable<Coupon[]> {
+    return this.httpClient.get<Coupon[]>(this.baseURL + "seeAllCoupons");
   }
-  public getCouponById( custId: number,coupId: number): Observable<Coupon> {
-    return this.httpClient.get<Coupon>(this.baseURL + "getCustCoupByID/" + custId + "/" + coupId);
+  public addCouponToCustomer( token: string, coupId: number): Observable<Coupon[]> {
+    return this.httpClient.put<Coupon[]>(this.baseURL + "addCouponToCust/"+ token, coupId);
   }
-  public getCouponByType(type: string, custId: number): Observable<Coupon[]> {
-    return this.httpClient.get<Coupon[]>(this.baseURL + "findCustCoupByType/" + custId + "/" + type);
+  public getAllCoupons(token: string): Observable<Coupon[]> {
+
+    return this.httpClient.get<Coupon[]>(this.baseURL + "getCustCoup/" + token);
   }
-  public getCouponByDate(date: Date, custId: number): Observable<Coupon[]> {
-    return this.httpClient.get<Coupon[]>(this.baseURL + "findCustCoupByDate/" + custId + "/" + date);
+  public getCouponById( token: string,coupId: number): Observable<Coupon> {
+    return this.httpClient.get<Coupon>(this.baseURL + "getCustCoupByID/" + token + "/" + coupId);
   }
-  public getCouponByPrice(price: number, custId: number): Observable<Coupon[]> {
-    return this.httpClient.get<Coupon[]>(this.baseURL + "findCustCoupByPrice/" + custId + "/" + price);
+  public getCouponByType(type: string, token: string): Observable<Coupon[]> {
+    return this.httpClient.get<Coupon[]>(this.baseURL + "findCustCoupByType/" + token + "/" + type);
   }
- 
+  public getCouponByDate(date: Date, token: string): Observable<Coupon[]> {
+    return this.httpClient.get<Coupon[]>(this.baseURL + "findCustCoupByDate/" + token + "/" + date);
+  }
+  public getCouponByPrice(price: number, token: string): Observable<Coupon[]> {
+    return this.httpClient.get<Coupon[]>(this.baseURL + "findCustCoupByPrice/" + token + "/" + price);
+  }
+  public logout(token:string):Observable<any>{
+    return this.httpClient.post(this.baseURL+"logout", token);
+  }
 }

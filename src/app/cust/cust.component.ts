@@ -12,7 +12,11 @@ import { timeout } from 'q';
   styleUrls: ['./cust.component.css']
 })
 export class CustComponent implements OnInit {
-  ngOnInit() { }
+  ngOnInit() { 
+    this.token = this.logginService.token;
+    console.log(this.token);
+  
+  }
 
 
 
@@ -28,6 +32,8 @@ export class CustComponent implements OnInit {
   couponType: string;
   date: Date;
   price: number;
+
+  token:string;
 
   onlyNumberKey(event) {
     return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
@@ -65,10 +71,11 @@ export class CustComponent implements OnInit {
   public logout(): void {
     this.logginService.logout;
     this.router.navigate(['/login'])
+    this.customerService.logout(this.token).subscribe();
   }
 
   purchaseCoupon() {
-    this.customerService.addCouponToCustomer(this.custId, this.coupId).subscribe(response => {
+    this.customerService.addCouponToCustomer(this.token, this.coupId).subscribe(response => {
       this.coupons = response;
       console.log(this.coupons);
       this.allFalse();
@@ -79,7 +86,7 @@ export class CustComponent implements OnInit {
     })
   }
   getAllCoupons() {
-    this.customerService.getAllCoupons(this.custId).subscribe(response => {
+    this.customerService.getAllCoupons(this.token).subscribe(response => {
       this.coupons = response;
       console.log(this.coupons);
       this.allFalse();
@@ -94,7 +101,7 @@ export class CustComponent implements OnInit {
     })
   }
   findCpouponById() {
-    this.customerService.getCouponById(this.custId, this.coupId).subscribe(
+    this.customerService.getCouponById(this.token, this.coupId).subscribe(
       responce => {
         this.coupon = responce;
         console.log(this.coupon);
@@ -112,7 +119,7 @@ export class CustComponent implements OnInit {
   }
 
   findCpouponByType() {
-    this.customerService.getCouponByType(this.couponType, this.custId).subscribe(
+    this.customerService.getCouponByType(this.couponType, this.token).subscribe(
       responce => {
         this.coupons = responce;
         console.log(this.coupons);
@@ -126,7 +133,7 @@ export class CustComponent implements OnInit {
 
   }
   findCpouponByDate() {
-    this.customerService.getCouponByDate(this.date, this.custId).subscribe(
+    this.customerService.getCouponByDate(this.date, this.token).subscribe(
       responce => {
         this.coupons = responce;
         console.log(this.coupons);
@@ -144,7 +151,7 @@ export class CustComponent implements OnInit {
     )
   }
   findCpouponByPrice() {
-    this.customerService.getCouponByPrice(this.price, this.custId).subscribe(
+    this.customerService.getCouponByPrice(this.price, this.token).subscribe(
       (response) => {
         this.coupons = response;
         console.log(this.coupons);
@@ -162,7 +169,22 @@ export class CustComponent implements OnInit {
   }
   addCouponOpen() {
     this.allFalse();
-    this.addCouponOpenFlag = true;
+    this.customerService.seeAllCoupons().subscribe(  (response) => {
+      this.coupons = response;
+      console.log(this.coupons);
+      this.allFalse();
+      this.couponArrFlag = true;
+      this.addCouponOpenFlag = true;
+      if (this.coupons.length == 0) {
+        this.allFalse();
+        this.existAllCoupon=true;
+      }
+    }, err => {
+      this.allFalse();
+    
+    }
+  )
+    
   }
   getAllCouponsOPen() {
     this.allFalse();

@@ -13,7 +13,10 @@ export class CompanyService {
   constructor(private httpClient: HttpClient) { }
   private baseURL = "http://localhost:8080/company/";
   private Url2 = "http://localhost:8080/income/"
- 
+
+  public seeAllCoupons(): Observable<Coupon[]> {
+    return this.httpClient.get<Coupon[]>(this.baseURL + "seeAllCoupons");
+  }
   public addCouponToCompany(token: string, coupId: number): Observable<Coupon[]> {
     return this.httpClient.post<Coupon[]>(this.baseURL + "addCouponToComp/" + token , coupId);
   }
@@ -46,6 +49,9 @@ export class CompanyService {
   }
   public getCustIncome(): Observable<Income[]> {
     return this.httpClient.get<Income[]>(this.Url2 + "allCustIncome");
+  }
+  public logout(token:string):Observable<any>{
+    return this.httpClient.post(this.baseURL+"logout", token);
   }
 
 }

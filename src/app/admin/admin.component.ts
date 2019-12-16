@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LogginService } from '../services/loggin.service';
 import { Router } from '@angular/router';
+import { AdminService } from '../services/admin.service';
 
 
 
@@ -10,10 +11,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
-  constructor(private logginService: LogginService,private router:Router,) { }
+  constructor(private logginService: LogginService,private router:Router,private adminService: AdminService) { }
 
+  token:string;
   
  public logout() : void{
+  this.adminService.logout(this.token).subscribe();
    this.logginService.logout;
    this.router.navigate(['/login'])
  }

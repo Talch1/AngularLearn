@@ -233,14 +233,28 @@ export class CompComponent implements OnInit {
   }
 
   public logout(): void {
+    this.companyService.logout(this.token).subscribe();
     this.logginService.logout;
     this.router.navigate(['/login'])
   }
 
   addCouponOpen() {
     this.allFalse();
-    this.addCouponOpenFlag = true;
-
+    this.companyService.seeAllCoupons().subscribe(  (response) => {
+      this.coupons = response;
+      console.log(this.coupons);
+      this.allFalse();
+      this.couponArrFlag = true;
+      this.addCouponOpenFlag = true;
+      if (this.coupons.length == 0) {
+        this.allFalse();
+        this.exist=true;
+      }
+    }, err => {
+      this.allFalse();
+    
+    }
+  )
   }
   addNewCouponOpen() {
     this.allFalse();
@@ -252,8 +266,7 @@ export class CompComponent implements OnInit {
   }
   deleteCoponByIDOpen() {
     this.allFalse();
-    this.deleteCouponFlag = true;
-
+     this.deleteCouponFlag = true;
   }
   getAllCouponsOPen() {
     this.allFalse();
