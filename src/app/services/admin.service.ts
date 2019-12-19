@@ -13,15 +13,14 @@ export class AdminService {
 
   constructor(private httpClient: HttpClient) { }
 
- public createCustomer(customer:User): Observable<User>{
-  return this.httpClient.post<User>(this.baseUrl +"customerCreate",customer );
+ public createCustomer(customer:User,token:string): Observable<User>{
+  return this.httpClient.post<User>(this.baseUrl +"customerCreate/"+token,customer);
  }
-
+ public deleteCustomer(custId: number ,token:string): Observable<User[]> {
+  return this.httpClient.delete<User[]>(this.baseUrl + "deleteCust/"+custId );
+}
   public createCompany(company: User ): Observable<User> {
     return this.httpClient.post<User>(this.baseUrl + "compnyCreate/",company );
-  }
-  public deleteCustomer(custId: number ): Observable<User[]> {
-    return this.httpClient.delete<User[]>(this.baseUrl + "deleteCust/"+custId );
   }
   public deleteCompany(compId: number ): Observable<User[]> {
     return this.httpClient.delete<User[]>(this.baseUrl + "deleteComp/"+compId );

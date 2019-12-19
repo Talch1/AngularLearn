@@ -10,31 +10,31 @@ export class CustomerServiceService {
 
   constructor(private httpClient: HttpClient) { }
   baseURL = "http://localhost:8080/customer/";
-
+   
 
   public seeAllCoupons(): Observable<Coupon[]> {
     return this.httpClient.get<Coupon[]>(this.baseURL + "seeAllCoupons");
   }
   public addCouponToCustomer( token: string, coupId: number): Observable<Coupon[]> {
-    return this.httpClient.put<Coupon[]>(this.baseURL + "addCouponToCust/"+ token, coupId);
+    return this.httpClient.put<Coupon[]>(this.baseURL + "addCouponToCust/"+ coupId,{},{headers:{token}});
   }
   public getAllCoupons(token: string): Observable<Coupon[]> {
 
-    return this.httpClient.get<Coupon[]>(this.baseURL + "getCustCoup/" + token);
+    return this.httpClient.get<Coupon[]>(this.baseURL + "getCustCoup/", {headers: {token}});
   }
   public getCouponById( token: string,coupId: number): Observable<Coupon> {
-    return this.httpClient.get<Coupon>(this.baseURL + "getCustCoupByID/" + token + "/" + coupId);
+    return this.httpClient.get<Coupon>(this.baseURL + "getCustCoupByID/" +  "/" + coupId,{headers: {token}});
   }
   public getCouponByType(type: string, token: string): Observable<Coupon[]> {
-    return this.httpClient.get<Coupon[]>(this.baseURL + "findCustCoupByType/" + token + "/" + type);
+    return this.httpClient.get<Coupon[]>(this.baseURL + "findCustCoupByType/" + type,{headers: {token}});
   }
   public getCouponByDate(date: Date, token: string): Observable<Coupon[]> {
-    return this.httpClient.get<Coupon[]>(this.baseURL + "findCustCoupByDate/" + token + "/" + date);
+    return this.httpClient.get<Coupon[]>(this.baseURL + "findCustCoupByDate/" + date,{headers: {token}});
   }
   public getCouponByPrice(price: number, token: string): Observable<Coupon[]> {
-    return this.httpClient.get<Coupon[]>(this.baseURL + "findCustCoupByPrice/" + token + "/" + price);
+    return this.httpClient.get<Coupon[]>(this.baseURL + "findCustCoupByPrice/"  + price,{headers: {token}});
   }
   public logout(token:string):Observable<any>{
-    return this.httpClient.post(this.baseURL+"logout", token);
+    return this.httpClient.post(this.baseURL+"logout", {},{headers: {token}});
   }
 }

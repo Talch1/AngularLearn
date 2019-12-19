@@ -66,6 +66,8 @@ export class AdminFacadeComponent implements OnInit {
 
 
   ngOnInit() {
+    this.token = this.logginService.token;
+    console.log(this.token);
   }
 
   public logout(): void {
@@ -76,7 +78,7 @@ export class AdminFacadeComponent implements OnInit {
 
   //********************************************************************************************************************************* */
   createCustomer() {
-    this.adminService.createCustomer(this.user).subscribe(response => {
+    this.adminService.createCustomer(this.user,this.token).subscribe(response => {
       this.user = response;
       console.log(this.user);
       this.allFalse();
@@ -99,7 +101,7 @@ export class AdminFacadeComponent implements OnInit {
 
   }
   deleteCustomerById() {
-    this.adminService.deleteCustomer(this.custId).subscribe(response => {
+    this.adminService.deleteCustomer(this.custId,this.token).subscribe(response => {
       this.users = response;
       console.log(this.users);
       this.allFalse();
