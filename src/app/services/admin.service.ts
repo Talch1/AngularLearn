@@ -14,44 +14,44 @@ export class AdminService {
   constructor(private httpClient: HttpClient) { }
 
  public createCustomer(customer:User,token:string): Observable<User>{
-  return this.httpClient.post<User>(this.baseUrl +"customerCreate/"+token,customer);
+  return this.httpClient.post<User>(this.baseUrl +"customerCreate",customer,{headers: {token}});
  }
  public deleteCustomer(custId: number ,token:string): Observable<User[]> {
-  return this.httpClient.delete<User[]>(this.baseUrl + "deleteCust/"+custId );
+  return this.httpClient.delete<User[]>(this.baseUrl + "deleteCust/"+custId,{headers: {token}} );
 }
-  public createCompany(company: User ): Observable<User> {
-    return this.httpClient.post<User>(this.baseUrl + "compnyCreate/",company );
+  public createCompany(company: User,token:string ): Observable<User> {
+    return this.httpClient.post<User>(this.baseUrl + "compnyCreate",company,{headers: {token}});
   }
-  public deleteCompany(compId: number ): Observable<User[]> {
-    return this.httpClient.delete<User[]>(this.baseUrl + "deleteComp/"+compId );
+  public deleteCompany(compId: number ,token:string): Observable<User[]> {
+    return this.httpClient.delete<User[]>(this.baseUrl + "deleteComp/"+compId ,{headers: {token}});
   }
-  public updateCustomer(custId: number,customer:User ): Observable<User> {
-    return this.httpClient.put<User>(this.baseUrl + "custUpdate/"+custId,customer );
+  public updateCustomer(customer:User,token:string ): Observable<User> {
+    return this.httpClient.put<User>(this.baseUrl + "custUpdate/"+customer.id,customer,{headers: {token}} );
   }
-  public updateCompany(compId: number ,company:User): Observable<User> {
-    return this.httpClient.put<User>(this.baseUrl + "companyUpdate/"+compId,company );
+  public updateCompany(company:User,token:string): Observable<User> {
+    return this.httpClient.put<User>(this.baseUrl + "companyUpdate/"+company.id,company,{headers: {token}});
   }
-  public getCustomer(custId: number): Observable<User> {
-    return this.httpClient.get<User>(this.baseUrl + "getCustByID/"+custId );
+  public getCustomer(custId: number,token:string): Observable<User> {
+    return this.httpClient.get<User>(this.baseUrl + "getCustByID/"+custId ,{headers: {token}});
   }
-  public getCompany(compId: number): Observable<User> {
-    return this.httpClient.get<User>(this.baseUrl + "getCompByID/"+compId);
+  public getCompany(compId: number,token:string): Observable<User> {
+    return this.httpClient.get<User>(this.baseUrl + "getCompByID/"+compId,{headers: {token}});
   }
-  public getAllCustomers(): Observable<User[]> {
-    return this.httpClient.get<User[]>(this.baseUrl + "getCustomers/");
+  public getAllCustomers(token:string): Observable<User[]> {
+    return this.httpClient.get<User[]>(this.baseUrl + "getCustomers",{headers: {token}});
   }
-  public getAllCompanys(): Observable<User[]> {
-    return this.httpClient.get<User[]>(this.baseUrl + "getCompanys/");
+  public getAllCompanys(token:string): Observable<User[]> {
+    return this.httpClient.get<User[]>(this.baseUrl + "getCompanys",{headers: {token}});
 
   }
-  public getAllIncomes(): Observable<Income[]> {
-    return this.httpClient.get<Income[]>(this.Url2 + "allIncome");
+  public getAllIncomes(token:string): Observable<Income[]> {
+    return this.httpClient.get<Income[]>(this.Url2 + "allIncome",{headers: {token}});
 }
-public getCompIncomes(): Observable<Income[]> {
-  return this.httpClient.get<Income[]>(this.Url2 + "allCompIncome");
+public getCompIncomes(token:string): Observable<Income[]> {
+  return this.httpClient.get<Income[]>(this.Url2 + "allCompIncome",{headers: {token}});
 }
 
 public logout(token:string):Observable<any>{
-  return this.httpClient.post(this.baseUrl+"logout", token);
+  return this.httpClient.post(this.baseUrl+"logout",{},{headers: {token}});
 }
 }

@@ -89,7 +89,7 @@ export class AdminFacadeComponent implements OnInit {
     })
   }
   createCompany() {
-    this.adminService.createCompany(this.user).subscribe(response => {
+    this.adminService.createCompany(this.user,this.token).subscribe(response => {
       this.user = response;
       console.log(this.user);
       this.allFalse();
@@ -118,7 +118,7 @@ export class AdminFacadeComponent implements OnInit {
   }
 
   deleteCompanyById() {
-    this.adminService.deleteCompany(this.compId).subscribe(response => {
+    this.adminService.deleteCompany(this.compId,this.token).subscribe(response => {
       this.users = response;
       console.log(this.users);
       this.allFalse();
@@ -134,22 +134,21 @@ export class AdminFacadeComponent implements OnInit {
 
   }
   updateCustomer() {
-    this.adminService.updateCustomer(this.custId, this.user).subscribe(response => {
+    this.adminService.updateCustomer(this.user,this.token).subscribe(response => {
       this.user = response;
       console.log(this.user);
-      this.user.id = this.custId;
+      this.allFalse();
+      this.oneCustFlag = true;
     }, err => {
       this.allFalse();
       this.existId = true;
     })
-    this.allFalse();
-    this.oneCustFlag = true;
+  
   }
   updateCompany() {
-    this.adminService.updateCompany(this.compId, this.user).subscribe(response => {
+    this.adminService.updateCompany(this.user,this.token).subscribe(response => {
       this.user = response;
       console.log(this.user);
-      this.user.id = this.compId;
       this.allFalse();
       this.oneCompFlag = true;
     }, err => {
@@ -159,7 +158,7 @@ export class AdminFacadeComponent implements OnInit {
   }
 
   getCustomer() {
-    this.adminService.getCustomer(this.custId).subscribe(response => {
+    this.adminService.getCustomer(this.custId,this.token).subscribe(response => {
       this.user = response;
       console.log(this.user);
       this.user.id = this.custId;
@@ -173,7 +172,7 @@ export class AdminFacadeComponent implements OnInit {
   }
 
   getCompany() {
-    this.adminService.getCompany(this.compId).subscribe(response => {
+    this.adminService.getCompany(this.compId,this.token).subscribe(response => {
       this.user = response;
       console.log(this.user);
       this.user.id = this.compId;
@@ -187,7 +186,7 @@ export class AdminFacadeComponent implements OnInit {
   }
 
   getAllCustomers() {
-    this.adminService.getAllCustomers().subscribe(response => {
+    this.adminService.getAllCustomers(this.token).subscribe(response => {
       this.users = response;
       console.log(this.users);
       this.allFalse();
@@ -198,7 +197,7 @@ export class AdminFacadeComponent implements OnInit {
 
   }
   getAllCompanys() {
-    this.adminService.getAllCompanys().subscribe(response => {
+    this.adminService.getAllCompanys(this.token).subscribe(response => {
       this.users = response;
       console.log(this.users);
       this.allFalse();
@@ -209,7 +208,7 @@ export class AdminFacadeComponent implements OnInit {
 
   }
   getAllIncome() {
-    this.adminService.getAllIncomes().subscribe(response => {
+    this.adminService.getAllIncomes(this.token).subscribe(response => {
       this.incomes = response;
       console.log(this.incomes);
       this.allFalse();
@@ -224,7 +223,7 @@ export class AdminFacadeComponent implements OnInit {
   }
 
   getCompIncomes() {
-    this.adminService.getCompIncomes().subscribe(response => {
+    this.adminService.getCompIncomes(this.token).subscribe(response => {
       this.incomes = response;
       console.log(this.incomes);
       this.allFalse();
