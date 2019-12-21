@@ -45,10 +45,10 @@ export class AdminService {
 
   }
   public getAllIncomes(token:string): Observable<Income[]> {
-    return this.httpClient.get<Income[]>(this.Url2 + "allIncome",{headers: {token}});
+    return this.httpClient.get<Income[]>(this.Url2 + "anllIncome",{headers: {token}});
 }
-public getCompIncomes(token:string): Observable<Income[]> {
-  return this.httpClient.get<Income[]>(this.Url2 + "allCompIncome",{headers: {token}});
+public getCustIncomes(token:string,custId:number): Observable<Income[]> {
+  return this.httpClient.get<Income[]>(this.Url2 + "allCustIncome/"+ custId,{headers: {token}});
 }
 
 public logout(token:string):Observable<any>{

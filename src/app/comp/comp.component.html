@@ -1,7 +1,7 @@
 <nav>
     <a (click)="logout()">Logout</a>
     <div class="float-right">
-        <button class="btn btn-primary" (click)="getCustIncomes()">Get All Customers incomes</button>
+        <button class="btn btn-primary" (click)="getCompIncomes()">Get All Company incomes</button>
     </div>
 </nav>
 
@@ -175,11 +175,11 @@
         </div>
     </div>
     <div class="form-group row">
-            <div class="col-10">
-                <button type="button" (click)="updateCopon()" class="btn btn-primary"
-                    style="margin-left: 90px;">Update this Coupon </button>
-            </div>
+        <div class="col-10">
+            <button type="button" (click)="updateCopon()" class="btn btn-primary" style="margin-left: 90px;">Update this
+                Coupon </button>
         </div>
+    </div>
 </div>
 
 <div *ngIf="couponByTypeFlag">
@@ -198,10 +198,11 @@
             </select>
         </div>
         <div class="col-7">
-            <button type="button" (click)="findCpouponByType()" class="btn btn-primary" style="margin:0px">Find Coupon By Type </button>
+            <button type="button" (click)="findCpouponByType()" class="btn btn-primary" style="margin:0px">Find Coupon
+                By Type </button>
         </div>
     </div>
-  
+
 </div>
 
 <div *ngIf="couponByDateFlag">
@@ -211,20 +212,22 @@
             <input type="date" class="form-control" placeholder="Please enter Coupon end date" [(ngModel)]="date">
         </div>
         <div class="col-7">
-            <button type="button" (click)="findCpouponByDate()" class="btn btn-primary" style="margin:0px">Find Coupon By End Date Before </button>
+            <button type="button" (click)="findCpouponByDate()" class="btn btn-primary" style="margin:0px">Find Coupon
+                By End Date Before </button>
         </div>
     </div>
-  
+
 </div>
 <div *ngIf="couponByPriceFlag">
     <div class="form-group row">
         <label class="col-2 col-form-label">Coupon Price</label>
         <div class="col-3">
             <input type="number" pInputText (keypress)="onlyNumberKey($event)" maxlength="4" min=1 class="form-control"
-            placeholder="Please enter Coupon  price" [(ngModel)]="price">
+                placeholder="Please enter Coupon  price" [(ngModel)]="price">
         </div>
         <div class="col-7">
-            <button type="button" (click)="  findCpouponByPrice()" class="btn btn-primary" style="margin:0px">Find Coupon By Price Less Than </button>
+            <button type="button" (click)="  findCpouponByPrice()" class="btn btn-primary" style="margin:0px">Find
+                Coupon By Price Less Than </button>
         </div>
     </div>
 </div>

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AdminComponent } from './admin/admin.component';
 import { CustComponent } from './cust/cust.component';
 import { CompComponent } from './comp/comp.component';
 import { LeyoutComponent } from './leyout/leyout.component';
@@ -11,19 +10,14 @@ import { LoginComponent } from './login/login.component';
 import { CompanyGuardService } from './services/company-guarde.service';
 import { AdminGuardService } from './services/admin-guarde.service';
 import { AdminFacadeComponent } from './admin-in/admin-facade.component';
-import { CompanyFacadeComponent } from './company-in/company-facade.component';
-import { CustomerFacadeComponent } from './customer-in/customer-facade.component';
 
 const routes: Routes = [
-{path : "",component:LeyoutComponent},
-{path : "home",component:HomeComponent},
-{path : "admin",canActivate:[AdminGuardService],component:AdminComponent},
-{path : "cust",canActivate:[CustomerGuardService], component:CustComponent},
-{path : "comp",canActivate:[CompanyGuardService],component:CompComponent},
-{path : "login",component:LoginComponent},
-{path : "adminIn",canActivate:[AdminGuardService],component:AdminFacadeComponent},
-{path : "companyIn",canActivate:[AdminGuardService],component:CompanyFacadeComponent},
-{path : "customerIn",canActivate:[AdminGuardService],component:CustomerFacadeComponent},
+  { path: "", component: LeyoutComponent },
+  { path: "home", component: HomeComponent },
+  { path: "cust", canActivate: [CustomerGuardService], component: CustComponent },
+  { path: "comp", canActivate: [CompanyGuardService], component: CompComponent },
+  { path: "login", component: LoginComponent },
+  { path: "adminIn", canActivate: [AdminGuardService], component: AdminFacadeComponent },
 ];
 
 @NgModule({

@@ -7,15 +7,14 @@ import { LogginService } from './loggin.service';
 })
 export class AdminGuardService implements CanActivate {
   public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if(this.logginService.type === 'Admin'&& this.logginService.inLoggedIn){
-    return true
+    if (this.logginService.type === 'Admin' && this.logginService.inLoggedIn) {
+      return true
     }
     this.router.navigate(['/login']);
     return false;
 
   }
 
-
-  public constructor(private logginService : LogginService,private router : Router) {
-   }
+  public constructor(private logginService: LogginService, private router: Router) {
+  }
 }

@@ -11,16 +11,16 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
-  private user = new User;
-  private token:string;
-  private incorrect = false;
+  public user = new User;
+  public token: string;
+  public incorrect = false;
   constructor(private logginService: LogginService, private router: Router) { }
 
   logging() {
     this.logginService.auth(this.user).subscribe(response => {
       this.token = response.body;
       this.logginService.token = this.token;
-      if (this.user.role === 'Customer' && this.token!=null) {
+      if (this.user.role === 'Customer' && this.token != null) {
         this.logginService.type = this.user.role;
         this.logginService.inLoggedIn = true;
         this.router.navigate(["/cust"]);
@@ -33,7 +33,7 @@ export class LoginComponent {
       else if (this.user.role === 'Admin' && this.token != null) {
         this.logginService.type = this.user.role;
         this.logginService.inLoggedIn = true;
-        this.router.navigate(["/admin"]);
+        this.router.navigate(["/adminIn"]);
       }
     }, err => {
       this.incorrect = true;

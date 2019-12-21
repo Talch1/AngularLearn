@@ -15,7 +15,7 @@ export class CustomerFacadeComponent implements OnInit {
 
   ngOnInit() {
   }
- 
+
 
 
   constructor(private logginService: LogginService, private router: Router, private customerService: CustomerServiceService) { }
@@ -30,7 +30,7 @@ export class CustomerFacadeComponent implements OnInit {
   couponType: string;
   date: Date;
   price: number;
-  token:string;
+  token: string;
 
   onlyNumberKey(event) {
     return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
@@ -47,7 +47,7 @@ export class CustomerFacadeComponent implements OnInit {
   existAllCoupon = false;
   existId = false;
   existType = false;
-  existDate =false;
+  existDate = false;
   existPrice = false;
   incomsArrFlag = false;
 
@@ -64,7 +64,7 @@ export class CustomerFacadeComponent implements OnInit {
     this.existId = false;
     this.existType = false;
     this.existDate = false;
-    this.existPrice=false;
+    this.existPrice = false;
     this.incomsArrFlag = false;
   }
   public logout(): void {
@@ -166,25 +166,6 @@ export class CustomerFacadeComponent implements OnInit {
       }
     )
   }
-
-  getCustIncome() {
-    // this.customerService.getCouponByPrice(this.price, this.custId).subscribe(
-    //   (response) => {
-    //     this.coupons = response;
-    //     console.log(this.coupons);
-    //     this.allFalse();
-    //     this.couponArrFlag = true;
-    //     if (this.coupons.length == 0) {
-    //       this.allFalse();
-    //       this.existPrice = true;
-    //     }
-    //   }, err => {
-    //     this.allFalse();
-    //     this.existPrice = true;
-    //   }
-    
-  }
-
 
   //************************************************************************************************************ */
   addCouponOpen() {

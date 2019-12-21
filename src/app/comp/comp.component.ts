@@ -14,7 +14,7 @@ import { Income } from '../beans/Income';
 })
 export class CompComponent implements OnInit {
   constructor(private logginService: LogginService, private router: Router, private companyService: CompanyService) { }
-  coupon: Coupon  = new Coupon(1,"",new Date,new Date,5,"RESTURANS","",10,"");
+  coupon: Coupon = new Coupon(1, "", new Date, new Date, 5, "RESTURANS", "", 10, "");
   coupons: Coupon[];
   token: string;
   compId: number = 201;
@@ -24,13 +24,13 @@ export class CompComponent implements OnInit {
   price: number;
   incomes: Income[] = [];
 
- 
+
   ngOnInit() {
     this.token = this.logginService.token;
     console.log(this.token);
-  
+
   }
- 
+
   onlyNumberKey(event) {
     return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
   }
@@ -166,7 +166,7 @@ export class CompComponent implements OnInit {
       }
     )
   }
-  
+
   findCpouponByType() {
     this.companyService.getCouponByType(this.couponType, this.token).subscribe(
       responce => {
@@ -216,8 +216,8 @@ export class CompComponent implements OnInit {
     )
   }
 
-  getCustIncomes() {
-    this.companyService.getCustIncome().subscribe(response => {
+  getCompIncomes() {
+    this.companyService.getCompIncome(this.token).subscribe(response => {
       this.incomes = response;
       console.log(this.incomes);
       this.allFalse();
@@ -240,7 +240,7 @@ export class CompComponent implements OnInit {
 
   addCouponOpen() {
     this.allFalse();
-    this.companyService.seeAllCoupons().subscribe(  (response) => {
+    this.companyService.seeAllCoupons().subscribe((response) => {
       this.coupons = response;
       console.log(this.coupons);
       this.allFalse();
@@ -248,13 +248,13 @@ export class CompComponent implements OnInit {
       this.addCouponOpenFlag = true;
       if (this.coupons.length == 0) {
         this.allFalse();
-        this.exist=true;
+        this.exist = true;
       }
     }, err => {
       this.allFalse();
-    
+
     }
-  )
+    )
   }
   addNewCouponOpen() {
     this.allFalse();
@@ -266,7 +266,7 @@ export class CompComponent implements OnInit {
   }
   deleteCoponByIDOpen() {
     this.allFalse();
-     this.deleteCouponFlag = true;
+    this.deleteCouponFlag = true;
   }
   getAllCouponsOPen() {
     this.allFalse();

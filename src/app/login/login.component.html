@@ -1,22 +1,22 @@
-<div class="row">
+<button class="row">
   <div class="col">
     <h1>Hello!<br> Please Sign In</h1>
     <h2 *ngIf="incorrect" style="color:red;margin-left: 20px;">Password or login is incorrect </h2>
   </div>
-  <form >
+  <form>
     <div>
-      <input type="text" class="form-control" placeholder="User Name"  name="userName" [(ngModel)]="user.userName">
+      <input type="text" class="form-control" placeholder="User Name" name="userName" [(ngModel)]="user.userName">
       <input type="password" class="form-control" placeholder="Password" name="pass" [(ngModel)]="user.password">
-      <select class="form-control"  name="facade" [(ngModel)]="user.role">
-          <option selected disabled> Select Type </option>
-        <option value="Admin" > Admin </option>
+      <select class="form-control" name="facade" [(ngModel)]="user.role">
+        <option selected disabled> Select Type </option>
+        <option value="Admin"> Admin </option>
         <option value="Company"> Company </option>
         <option value="Customer"> Customer </option>
       </select>
     </div>
-    <button  type="button" class="btn btn-primary" (click)="logging()">Sign in</button>
+    <button type="button" class="btn btn-primary" (click)="logging()">Sign in</button>
   </form>
   <div class="col">
     <img src="./assets/img/coupon.gif">
   </div>
-</div>
+</button>

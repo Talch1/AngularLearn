@@ -11,25 +11,25 @@ import { AdminService } from '../services/admin.service';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
-  constructor(private logginService: LogginService,private router:Router,private adminService: AdminService) { }
+  constructor(private logginService: LogginService, private router: Router, private adminService: AdminService) { }
 
-  token:string;
-  
- public logout() : void{
-  this.adminService.logout(this.token).subscribe();
-   this.logginService.logout;
-   this.router.navigate(['/login'])
- }
+  token: string;
+
+  public logout(): void {
+    this.adminService.logout(this.token).subscribe();
+    this.logginService.logout;
+    this.router.navigate(['/login'])
+  }
   ngOnInit() {
   }
-  toAdmin(){
+  toAdmin() {
     this.router.navigate(['/adminIn'])
   }
-  toCompany(){
+  toCompany() {
     this.router.navigate(['/companyIn'])
   }
-  toCustomer(){
+  toCustomer() {
     this.router.navigate(['/customerIn'])
   }
-  
+
 }

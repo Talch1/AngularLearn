@@ -1,8 +1,11 @@
 <nav>
     <a (click)="logout()">Logout</a>
     <div class="float-right">
-        <button class="btn btn-primary" (click)="getCompIncomes()">Get All Companys incomes</button>
+
         <button class="btn btn-primary" (click)="getAllIncome()">Get All Incomes</button>
+        <button class="btn btn-primary" (click)="getCustIncomesOpen()">Get All Customer incomes</button>
+
+
     </div>
 </nav>
 
@@ -32,6 +35,21 @@
 <br>
 <br>
 <br>
+
+<div *ngIf="incomeOpen">
+    <div class="form-group row">
+        <label class="col-2 col-form-label">Customer Id</label>
+        <div class="col-3">
+            <input type="number" pInputText (keypress)="onlyNumberKey($event)" maxlength="4" min=1 class="form-control"
+                placeholder="Please enter Customer Id" [(ngModel)]="this.custId">
+            <div class="col-7">
+                <button class="btn btn-primary" (click)="getCustIncomes()">Get All Customer incomes</button>
+            </div>
+        </div>
+
+    </div>
+
+</div>
 
 <div *ngIf="createCustFlag">
     <div class="form-group row">
@@ -296,7 +314,7 @@
         </tr>
         <tr *ngFor="let income of incomes">
             <td>{{income.id}}</td>
-            <td>{{income.name}}</td>
+            <td>{{income.userName}}</td>
             <td>{{income.date}}</td>
             <td>{{income.description}}</td>
             <td>{{income.amount}}</td>
