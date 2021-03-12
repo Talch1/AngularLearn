@@ -79,6 +79,7 @@ export class AdminFacadeComponent implements OnInit {
 
   //********************************************************************************************************************************* */
   createCustomer() {
+    this.user.role = "Customer"
     this.adminService.createCustomer(this.user, this.token).subscribe(response => {
       this.user = response;
       console.log(this.user);
@@ -90,6 +91,7 @@ export class AdminFacadeComponent implements OnInit {
     })
   }
   createCompany() {
+    this.user.role = "Company"
     this.adminService.createCompany(this.user, this.token).subscribe(response => {
       this.user = response;
       console.log(this.user);
@@ -118,6 +120,7 @@ export class AdminFacadeComponent implements OnInit {
   }
 
   deleteCompanyById() {
+    
     this.adminService.deleteCompany(this.compId, this.token).subscribe(response => {
       this.users = response;
       console.log(this.users);
@@ -133,6 +136,7 @@ export class AdminFacadeComponent implements OnInit {
     })
   }
   updateCustomer() {
+    this.user.role = "Customer"
     this.adminService.updateCustomer(this.user, this.token).subscribe(response => {
       this.user = response;
       console.log(this.user);
@@ -144,6 +148,7 @@ export class AdminFacadeComponent implements OnInit {
     })
   }
   updateCompany() {
+    this.user.role = "Company"
     this.adminService.updateCompany(this.user, this.token).subscribe(response => {
       this.user = response;
       console.log(this.user);

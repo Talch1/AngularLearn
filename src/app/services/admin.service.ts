@@ -8,8 +8,8 @@ import { Income } from '../beans/Income';
   providedIn: 'root'
 })
 export class AdminService {
-  baseUrl ="http://localhost:8080/admin/"
-  Url2 = "http://localhost:8080/income/"
+  baseUrl ="http://localhost:8081/v1/admin/"
+  Url2 = "http://localhost:8081/v1/income/"
 
   constructor(private httpClient: HttpClient) { }
 
@@ -20,7 +20,7 @@ export class AdminService {
   return this.httpClient.delete<User[]>(this.baseUrl + "deleteCust/"+custId,{headers: {token}} );
 }
   public createCompany(company: User,token:string ): Observable<User> {
-    return this.httpClient.post<User>(this.baseUrl + "compnyCreate",company,{headers: {token}});
+    return this.httpClient.post<User>(this.baseUrl + "companyCreate",company,{headers: {token}});
   }
   public deleteCompany(compId: number ,token:string): Observable<User[]> {
     return this.httpClient.delete<User[]>(this.baseUrl + "deleteComp/"+compId ,{headers: {token}});

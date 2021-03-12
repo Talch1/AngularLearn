@@ -22,7 +22,7 @@ export class LogginService {
   }
   public auth(user: User): Observable<any> {
     console.log(user);
-    return this.httpClient.post("http://localhost:8080/login/logging" + "/" + user.userName + "/" + user.password + "/" + user.role, {},
+    return this.httpClient.post("http://localhost:8081/v1/login/logging" + "/" + user.userName + "/" + user.password + "/" + user.role, {},
       { observe: 'response', responseType: 'text' }
     );
 

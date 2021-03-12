@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class CustomerServiceService {
 
   constructor(private httpClient: HttpClient) { }
-  baseURL = "http://localhost:8080/customer/";
+  baseURL = "http://localhost:8081/v1/customer/";
    
 
   public seeAllCoupons(): Observable<Coupon[]> {

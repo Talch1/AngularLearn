@@ -11,8 +11,8 @@ import { Income } from '../beans/Income';
 export class CompanyService {
 
   constructor(private httpClient: HttpClient) { }
-  private baseURL = "http://localhost:8080/company/";
-  private Url2 = "http://localhost:8080/income/"
+  private baseURL = "http://localhost:8081/v1/company/";
+  private Url2 = "http://localhost:8081/v1/income/"
 
   public seeAllCoupons(): Observable<Coupon[]> {
     return this.httpClient.get<Coupon[]>(this.baseURL + "seeAllCoupons");
